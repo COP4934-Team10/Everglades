@@ -1,5 +1,5 @@
 # step()
-
+This function is called at the end of every turn to report player and game state.
 
 ## Syntax
 ```python

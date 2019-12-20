@@ -2,22 +2,22 @@
 **This class contains the OpenAI Gym and is the Everglades environment.**
 
 ## Variables
-|Type               |Variable                   |                       Description                                 |
-|-------------------|---------------------------|-------------------------------------------------------------------|
-|*Tuple*            |**action_space**           |This defines the range of actions an agent may take.               |
-|*bool*             |**debug**                  |This flag allows the masking of fog of war for debugging purposes. |
-|*EvergladesGame*   |**game**                   |This is an instance of the Everglades game.                        |
-|*int*              |**num_actions_per_turn**   |The number of actions a player may take per turn.                  |
-|*int*              |**num_groups**             |The number of groups per player.                                   |
-|*int*              |**num_nodes**              |The number of nodes in the map.                                    |
-|*int*              |**num_turns**              |The number of turns in a game.                                     |
-|*int*              |**num_units**              |The total number of units per player.                              |
-|*Box*              |**observation_space**      |This defines the boundaries of observation.                        |
-|*list<dict_keys>*  |**pks**                    |The list of keys for the player dictionary.                        |
-|*dict*             |**player_dat**             |This contains the unit groups for each player.                     |
-|*dict*             |**players**                |This contains an instance of the agent class for each player.      |
-|*list<dict_keys>*  |**sorted_pks**             |The sorted list of keys for the player dictionary.                 |
-|*list*             |**unit_classes**           |The types of units in the game.                                    |
+|Variable                   |Type               |                       Description                                                             |
+|---------------------------|-------------------|-----------------------------------------------------------------------------------------------|
+|**action_space**           |*Tuple*            |This defines the range of actions an agent may take.                                           |
+|**debug**                  |*bool*             |This flag allows the masking of fog of war for debugging purposes.                             |
+|**game**                   |*EvergladesGame*   |This is an instance of the Everglades game.                                                    |
+|**num_actions_per_turn**   |*int*              |The number of actions a player may take per turn.                                              |
+|**num_groups**             |*int*              |The number of groups per player.                                                               |
+|**num_nodes**              |*int*              |The number of nodes in the map.                                                                |
+|**num_turns**              |*int*              |The number of turns in a game.                                                                 |
+|**num_units**              |*int*              |The total number of units per player.                                                          |
+|**observation_space**      |*Box*              |This defines the boundaries of observation.                                                    |
+|**pks**                    |*list<dict_keys>*  |The list of keys for the player dictionary.                                                    |
+|**player_dat**             |*dict*             |This contains the unit groups for each player.                                                 |
+|**players**                |*dict*             |The keys are 0 and 1, the values are an instance of the agent class for the respective player. |
+|**sorted_pks**             |*list<dict_keys>*  |The sorted list of keys for the player dictionary.                                             |
+|**unit_classes**           |*list\<string>*    |The types of units in the game.                                                                |
 
 ## Methods
 [**_build_groups()**](../Methods/_build_groups().md)  

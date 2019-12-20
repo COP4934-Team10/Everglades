@@ -7,7 +7,7 @@ _convert_node(int node_num)
 ```
 
 ## Returns
-The corresponding node from player 1's node map.
+The integer ID corresponding to the node from player 1's node map.
 
 ## Parameters
 |Parameter      |Description            |

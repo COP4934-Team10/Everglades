@@ -7,7 +7,7 @@ _build_groups(int player_num)
 ```
 
 ## Returns
-A dict with the unit type as the key and the number of units per group as the value.
+A dict with the group number as the key and the unit name and number of units per group as the value.
 
 ## Parameters
 |Parameter      |Description        |

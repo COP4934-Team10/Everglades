@@ -2,7 +2,7 @@
 **This is the class of the Everglades map.**
 
 ## Variables
-|Type                   |Variable   |Description                        |
-|-----------------------|-----------|-----------------------------------|
-|*string*               |**name**   |The name of the map.               |
-|*list\<EvgMapNode>*    |**nodes**  |The list of nodes within the map.  |
+|Variable   |Type                   |Description                        |
+|-----------|-----------------------|-----------------------------------|
+|**name**   |*string*               |The name of the map.               |
+|**nodes**  |*list\<EvgMapNode>*    |The list of nodes within the map.  |
