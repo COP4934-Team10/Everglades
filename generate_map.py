@@ -170,6 +170,8 @@ def GenerateJsonFile():
                     k = k + 1
                     
                 tmp_node["Connections"] = connections
+
+                #Need to decide how to assign points for each Node
                 tmp_node["ControlPoints"] = 500
                 tmp_node["ID"] = curNodeId
                 tmp_node["Radius"] = 1
@@ -180,7 +182,8 @@ def GenerateJsonFile():
                     tmp_node["Resource"] = "OBSERVE"
                 else:
                     tmp_node["Resource"] = ""
-                
+
+                #Need to decide how to decide base defense
                 tmp_node["StructureDefense"] = 1
 
                 if i == int(size/2) and j == 0:
