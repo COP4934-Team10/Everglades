@@ -1,5 +1,6 @@
 from queue import Queue
 import random
+import json
 
 class Point:
     def __init__(self):
@@ -7,10 +8,14 @@ class Point:
         self.y = 0
 
 #Global Variables
+outputFile = "C:/COP4934-Group10/Everglades/config/RandomMap.json"
+
 size = 7
 nodeDensityWeight = 1.5
 nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
+fortressWeight = 0.3
+watchtowerWeight = 0.7
 
 directionX = [0, 1, 1, 1, 0, -1, -1, -1]
 directionY = [1, 1, 0, -1, -1, -1, 0, 1]
@@ -54,7 +59,15 @@ def GenerateBaseMap():
                 testValue = random.random()
 
                 if testValue <= weight:
-                    map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 1
+                    testValue2 = random.random()
+
+                    if testValue2 < fortressWeight:
+                        map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 2
+                    elif testValue2 > watchtowerWeight:
+                        map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 3
+                    else:
+                        map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 1
+                        
                     newPoint = Point()
                     newPoint.x = currentPoint.x + directionX[(i + offset)%8]
                     newPoint.y = currentPoint.y + directionY[(i + offset)%8]
@@ -107,7 +120,7 @@ def GenerateCenterLine():
         hasConnection = False
         j = 0
         while j < 8:
-            if currentPoint.x + directionX[j] >= 0 and currentPoint.x + directionX[j] < size and currentPoint.y + directionY[j] >= 0 and currentPoint.y + directionY[j] < size and map[currentPoint.x + directionX[j]][currentPoint.y + directionY[j]] == 1:
+            if currentPoint.x + directionX[j] >= 0 and currentPoint.x + directionX[j] < size and currentPoint.y + directionY[j] >= 0 and currentPoint.y + directionY[j] < size and map[currentPoint.x + directionX[j]][currentPoint.y + directionY[j]] > 0:
                 hasConnection = True
                 break
             j = j + 1
@@ -131,8 +144,66 @@ def GenerateCenterLine():
         GenerateBaseMap()
     return;
 
+#Generate Json File
+def GenerateJsonFile():
+    jsonData = {}
+    nodes = []
+
+    i = 0
+    while i < size:
+        j = 0
+        while j < size:
+            if map[i][j] > 0:
+                tmp_node = {}
+                connections = []
+
+                curNodeId = ((i) * size) + j + 1
+                k = 0
+                while k < 8:
+                    if j + directionX[k] >= 0 and j + directionX[k] < size and i + directionY[k] >= 0 and i + directionY[k] < size and map[i + directionY[k]][j + directionX[k]] > 0:
+                        conNodeId = ((i + directionY[k]) * size) + j + directionX[k] + 1
+
+                        tmp_conn = {}
+                        tmp_conn["ConnectedID"] = conNodeId
+                        tmp_conn["Distance"] = 5
+                        connections.append(tmp_conn)
+                    k = k + 1
+                    
+                tmp_node["Connections"] = connections
+                tmp_node["ControlPoints"] = 500
+                tmp_node["ID"] = curNodeId
+                tmp_node["Radius"] = 1
+
+                if map[i][j] == 2:
+                    tmp_node["Resource"] = "DEFENSE"
+                elif map[i][j] == 3:
+                    tmp_node["Resource"] = "OBSERVE"
+                else:
+                    tmp_node["Resource"] = ""
+                
+                tmp_node["StructureDefense"] = 1
+
+                if i == int(size/2) and j == 0:
+                    tmp_node["TeamStart"] = 1
+                elif i == int(size/2) and j == size-1:
+                    tmp_node["TeamStart"] = 2
+                else:
+                    tmp_node["TeamStart"] = 0
+                    
+                nodes.append(tmp_node)
+            j = j + 1
+        i = i + 1
+
+    jsonData["__type"] = "Map:#Everglades_MapJSONDef"
+    jsonData["MapName"] = "Random"
+    jsonData["nodes"] = nodes
+
+    with open(outputFile, 'w', encoding='utf-8') as f:
+              json.dump(jsonData, f, ensure_ascii=False, indent=4)
+
 #Main
 GenerateBaseMap()
+GenerateJsonFile()
 
 for x in map:
     print(*x, sep=" ")
