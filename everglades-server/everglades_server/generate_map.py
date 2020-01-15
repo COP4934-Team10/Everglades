@@ -8,14 +8,14 @@ class Point:
         self.y = 0
 
 #Global Variables
-outputFile = "C:/COP4934-Group10/Everglades/config/RandomMap.json"
+outputFile = "C:/Everglades/config/RandomMap.json"
 
 size = 7
 nodeDensityWeight = 1.5
 nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
-fortressWeight = 0.3
-watchtowerWeight = 0.7
+fortressWeight = 0.2
+watchtowerWeight = 0.8
 
 directionX = [0, 1, 1, 1, 0, -1, -1, -1]
 directionY = [1, 1, 0, -1, -1, -1, 0, 1]
@@ -165,7 +165,7 @@ def GenerateJsonFile():
 
                         tmp_conn = {}
                         tmp_conn["ConnectedID"] = conNodeId
-                        tmp_conn["Distance"] = 5
+                        tmp_conn["Distance"] = 1
                         connections.append(tmp_conn)
                     k = k + 1
                     
@@ -176,22 +176,23 @@ def GenerateJsonFile():
                 tmp_node["ID"] = curNodeId
                 tmp_node["Radius"] = 1
 
+                resource = []
                 if map[i][j] == 2:
-                    tmp_node["Resource"] = "DEFENSE"
+                    resource.append("DEFENSE")
                 elif map[i][j] == 3:
-                    tmp_node["Resource"] = "OBSERVE"
-                else:
-                    tmp_node["Resource"] = ""
+                    resource.append("OBSERVE")
+                
+                tmp_node["Resource"] = resource
 
                 #Need to decide how to decide base defense
                 tmp_node["StructureDefense"] = 1
 
                 if i == int(size/2) and j == 0:
-                    tmp_node["TeamStart"] = 1
-                elif i == int(size/2) and j == size-1:
-                    tmp_node["TeamStart"] = 2
-                else:
                     tmp_node["TeamStart"] = 0
+                elif i == int(size/2) and j == size-1:
+                    tmp_node["TeamStart"] = 1
+                else:
+                    tmp_node["TeamStart"] = -1
                     
                 nodes.append(tmp_node)
             j = j + 1
@@ -205,8 +206,9 @@ def GenerateJsonFile():
               json.dump(jsonData, f, ensure_ascii=False, indent=4)
 
 #Main
-GenerateBaseMap()
-GenerateJsonFile()
+def exec():
+    GenerateBaseMap()
+    GenerateJsonFile()
 
-for x in map:
-    print(*x, sep=" ")
+    for x in map:
+        print(*x, sep=" ")

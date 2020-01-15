@@ -67,6 +67,7 @@ class EvergladesGame:
         #   1) Array sorted by index of evgMap node with corresponding node id
         #   2) Array sorted by node id with corresponding index of evgMap node
         self.map_key1 = np.zeros( len(self.map_dat['nodes']), dtype=np.int )
+        arrayIDs = []
         # Create the map nodes 
         for i, in_node in enumerate(self.map_dat['nodes']):
             # Initialize node
@@ -95,15 +96,29 @@ class EvergladesGame:
             self.map_key1[i] = in_node['ID']
             # Append node to the map
             self.evgMap.nodes.append(node)
+            arrayIDs.append(in_node['ID'])
         # end node creation
         self.map_key2 = np.argsort( self.map_key1 )
 
         # Convert p0 nodes numbering to p1
         # Need method to do this when boards are not hand-designed
-        self.p1_node_map = [0, 11, 8, 9, 10, 5, 6, 7, 2, 3, 4, 1] # DemoMap mapping
+
+        array = []
+
+        #Reverse the node list
+        i = 7
+        while i >= 0:
+            j = 0
+            while j < 7:
+                if i + (7 * j) in arrayIDs:
+                    array.append(i + (7 * j))
+                j = j + 1
+            i = i - 1
+        
+        self.p1_node_map = array
         
         def _convert_node(node_num):
-            return self.p1_node_map[int(node_num)]
+            return self.p1_node_map[list(self.map_key1).index(node_num)]
         
         self._vec_convert_node = np.vectorize(_convert_node)
 
@@ -450,7 +465,7 @@ class EvergladesGame:
         for i, nidx in enumerate(self.map_key2):
             # Flip board so both players think they start at 1
             if player_num == 1:
-                node_id = self._vec_convert_node( self.map_key1[nidx] )
+                node_id = self._vec_convert_node(self.map_key1[nidx])
                 nidx = int(np.squeeze(np.where(self.map_key1 == node_id)))
 
             node = self.evgMap.nodes[nidx]

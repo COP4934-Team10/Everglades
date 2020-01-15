@@ -8,19 +8,22 @@ import pdb
 import numpy as np
 
 from everglades_server import server
+from everglades_server import generate_map
 
 ## Input Variables
 # Agent files must include a class of the same name with a 'get_action' function
 # Do not include './' in file path
-agent0_file = 'agents/all_cycle.py'
+agent0_file = 'agents/random_actions.py'
 #agent1_file = 'agents/same_commands.py'
 agent1_file = 'agents/random_actions.py'
 
-config_dir = '/lhome/lindblot/projects/test/everglades/config/'
-map_file = config_dir + 'DemoMap.json'
+config_dir = '/everglades/config/'
+
+generate_map.exec()
+map_file = config_dir + 'RandomMap.json'
 setup_file = config_dir + 'GameSetup.json'
 unit_file = config_dir + 'UnitDefinitions.json'
-output_dir = '/lhome/lindblot/projects/test/everglades/game_telemetry/'
+output_dir = '/everglades/game_telemetry/'
 
 debug = 1
 
