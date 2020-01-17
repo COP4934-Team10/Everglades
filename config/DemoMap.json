@@ -1,6 +1,8 @@
 {  
    "__type":"Map:#Everglades_MapJSONDef",
-   "MapName":"Default",
+  "MapName": "Default",
+  "Xsize": 3,
+  "Ysize": 3,
    "nodes":[  
       {  
          "Connections":[  

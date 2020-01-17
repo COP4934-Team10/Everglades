@@ -19,7 +19,7 @@ agent1_file = 'agents/random_actions.py'
 
 config_dir = '/everglades/config/'
 
-generate_map.exec()
+generate_map.exec(7)
 map_file = config_dir + 'RandomMap.json'
 setup_file = config_dir + 'GameSetup.json'
 unit_file = config_dir + 'UnitDefinitions.json'

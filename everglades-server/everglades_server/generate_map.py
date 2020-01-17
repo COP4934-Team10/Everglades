@@ -10,8 +10,7 @@ class Point:
 #Global Variables
 outputFile = "C:/Everglades/config/RandomMap.json"
 
-size = 7
-nodeDensityWeight = 1.5
+nodeDensityWeight = 2
 nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
 fortressWeight = 0.2
@@ -20,10 +19,8 @@ watchtowerWeight = 0.8
 directionX = [0, 1, 1, 1, 0, -1, -1, -1]
 directionY = [1, 1, 0, -1, -1, -1, 0, 1]
 
-map = [[0 for x in range(size)] for y in range(size)]
-
 #Generate Base Map
-def GenerateBaseMap():
+def GenerateBaseMap(size, map):
     queue = Queue()
 
     startingPoint = Point()
@@ -102,11 +99,12 @@ def GenerateBaseMap():
             j = j + 1
         i = i + 1
 
-    GenerateCenterLine()
+    if size%2 != 0:
+        GenerateCenterLine(size, map)
     return;
 
 #Generate Center Line
-def GenerateCenterLine():
+def GenerateCenterLine(size, map):
     numNodes = 0
     weight = ((nodeDensityWeight + 2)/8)
     offset = int(random.uniform(0, size - 1))
@@ -141,13 +139,45 @@ def GenerateCenterLine():
         i = i + 1
 
     if numNodes < 2:
-        GenerateBaseMap()
+        GenerateBaseMap(size, map)
     return;
 
 #Generate Json File
-def GenerateJsonFile():
+def GenerateJsonFile(size, map):
     jsonData = {}
     nodes = []
+
+    first_node = {}
+    first_node_connections = []
+    
+    if map[int(size/2) - 1][0] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) * size) + 1
+        tmp_conn1["Distance"] = 1
+        first_node_connections.append(tmp_conn1)
+    if map[int(size/2)][0] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2)) * size) + 1
+        tmp_conn1["Distance"] = 1
+        first_node_connections.append(tmp_conn1)
+    if size%2 != 0 and map[int(size/2) + 1][0] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) * size) + 1
+        tmp_conn1["Distance"] = 1
+        first_node_connections.append(tmp_conn1)
+
+    first_node["Connections"] = first_node_connections
+    first_node["ID"] = 0
+    first_node["Radius"] = 1
+
+    resource1 = []
+    first_node["Resource"] = resource1
+
+    first_node["StructureDefense"] = 1
+    first_node["TeamStart"] = 0
+    first_node["ControlPoints"] = 500
+
+    nodes.append(first_node)
 
     i = 0
     while i < size:
@@ -171,8 +201,6 @@ def GenerateJsonFile():
                     
                 tmp_node["Connections"] = connections
 
-                #Need to decide how to assign points for each Node
-                tmp_node["ControlPoints"] = 500
                 tmp_node["ID"] = curNodeId
                 tmp_node["Radius"] = 1
 
@@ -187,28 +215,64 @@ def GenerateJsonFile():
                 #Need to decide how to decide base defense
                 tmp_node["StructureDefense"] = 1
 
-                if i == int(size/2) and j == 0:
-                    tmp_node["TeamStart"] = 0
-                elif i == int(size/2) and j == size-1:
-                    tmp_node["TeamStart"] = 1
-                else:
-                    tmp_node["TeamStart"] = -1
+                tmp_node["TeamStart"] = -1
+                tmp_node["ControlPoints"] = 100
                     
                 nodes.append(tmp_node)
             j = j + 1
         i = i + 1
 
+    last_node = {}
+    last_node_connections = []
+    
+    if map[int(size/2) - 1][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) * size) + size
+        tmp_conn1["Distance"] = 1
+        last_node_connections.append(tmp_conn1)
+    if map[int(size/2)][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2)) * size) + size
+        tmp_conn1["Distance"] = 1
+        last_node_connections.append(tmp_conn1)
+    if size%2 != 0 and map[int(size/2) + 1][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) * size) + size
+        tmp_conn1["Distance"] = 1
+        last_node_connections.append(tmp_conn1)
+
+    last_node["Connections"] = last_node_connections
+    last_node["ID"] = size*size + 1
+    last_node["Radius"] = 1
+
+    resource1 = []
+    last_node["Resource"] = resource1
+
+    last_node["StructureDefense"] = 1
+    last_node["TeamStart"] = 1
+    last_node["ControlPoints"] = 500
+
+    nodes.append(last_node)
+
     jsonData["__type"] = "Map:#Everglades_MapJSONDef"
     jsonData["MapName"] = "Random"
+    jsonData["Xsize"] = size
+    jsonData["Ysize"] = size
     jsonData["nodes"] = nodes
 
     with open(outputFile, 'w', encoding='utf-8') as f:
               json.dump(jsonData, f, ensure_ascii=False, indent=4)
 
 #Main
-def exec():
-    GenerateBaseMap()
-    GenerateJsonFile()
-
+def exec(size):
+    map = [[0 for x in range(size)] for y in range(size)]
+    
+    GenerateBaseMap(size, map)
+    GenerateJsonFile(size, map)
+    
+    print('--------------------Random Map---------------------')
+        
     for x in map:
-        print(*x, sep=" ")
+        print(*x, sep="\t")
+    
+    print('---------------------------------------------------')

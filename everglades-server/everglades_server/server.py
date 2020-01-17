@@ -59,6 +59,9 @@ class EvergladesGame:
         with open(map_file) as fid:
             self.map_dat = json.load(fid)
 
+        Xsize = self.map_dat['Xsize']
+        Ysize = self.map_dat['Ysize']
+
         # Initialize map
         self.evgMap = EvgMap(self.map_dat['MapName'])
 
@@ -105,15 +108,22 @@ class EvergladesGame:
 
         array = []
 
+        array.append(0)
+
         #Reverse the node list
-        i = 7
-        while i >= 0:
-            j = 0
-            while j < 7:
-                if i + (7 * j) in arrayIDs:
-                    array.append(i + (7 * j))
-                j = j + 1
-            i = i - 1
+        i = 0
+        while i < Ysize:
+            j = Xsize
+            while j > 0:
+                if j + (Xsize * i) in arrayIDs:
+                    array.append(j + (Xsize * i))
+                j = j - 1
+            i = i + 1
+
+        array.append(Ysize*Xsize + 1)
+
+        print(self.map_key1)
+        print(array)
         
         self.p1_node_map = array
         
