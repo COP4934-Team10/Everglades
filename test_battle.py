@@ -4,6 +4,7 @@ import importlib
 import gym
 import gym_everglades
 import pdb
+import sys
 
 import numpy as np
 
@@ -13,9 +14,15 @@ from everglades_server import generate_map
 ## Input Variables
 # Agent files must include a class of the same name with a 'get_action' function
 # Do not include './' in file path
-agent0_file = 'agents/random_actions.py'
+if len(sys.argv) > 1:
+    agent0_file = 'agents/' + sys.argv[1]
+else:
+    agent0_file = 'agents/random_actions'
 #agent1_file = 'agents/same_commands.py'
-agent1_file = 'agents/random_actions.py'
+if len(sys.argv) > 2:
+    agent1_file = 'agents/' + sys.argv[2]
+else:
+    agent1_file = 'agents/random_actions'
 
 config_dir = '/everglades/config/'
 
