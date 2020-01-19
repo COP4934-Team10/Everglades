@@ -4,11 +4,11 @@ import time
 import json
 
 class random_actions:
-    def __init__(self, action_space, player_num):
+    def __init__(self, action_space, player_num, map_name):
         self.action_space = action_space
         self.num_groups = 12
         
-        with open('/everglades/config/RandomMap.json') as fid:
+        with open('/everglades/config/' + map_name) as fid:
             self.map_dat = json.load(fid)
 
         self.nodes_array = []

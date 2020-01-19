@@ -18,16 +18,22 @@ if len(sys.argv) > 1:
     agent0_file = 'agents/' + sys.argv[1]
 else:
     agent0_file = 'agents/random_actions'
-#agent1_file = 'agents/same_commands.py'
+    
 if len(sys.argv) > 2:
     agent1_file = 'agents/' + sys.argv[2]
 else:
     agent1_file = 'agents/random_actions'
 
-config_dir = '/everglades/config/'
+if len(sys.argv) > 3:
+    map_name = sys.argv[3] + '.json'
+else:
+    map_name = 'DemoMap.json'
 
-generate_map.exec(7)
-map_file = config_dir + 'RandomMap.json'
+if map_name == 'RandomMap.json':
+    generate_map.exec(7)
+    
+config_dir = '/everglades/config/'  
+map_file = config_dir + map_name
 setup_file = config_dir + 'GameSetup.json'
 unit_file = config_dir + 'UnitDefinitions.json'
 output_dir = '/everglades/game_telemetry/'
@@ -48,9 +54,9 @@ env = gym.make('everglades-v0')
 players = {}
 names = {}
 
-players[0] = agent0_class(env.num_actions_per_turn, 0)
+players[0] = agent0_class(env.num_actions_per_turn, 0, map_name)
 names[0] = agent0_class.__name__
-players[1] = agent1_class(env.num_actions_per_turn, 1)
+players[1] = agent1_class(env.num_actions_per_turn, 1, map_name)
 names[1] = agent1_class.__name__
 
 observations = env.reset(
