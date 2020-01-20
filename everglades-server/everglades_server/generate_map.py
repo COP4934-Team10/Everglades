@@ -152,22 +152,22 @@ def GenerateJsonFile(size, map):
     
     if map[int(size/2) - 1][0] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) * size) + 1
+        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) + 2)
         tmp_conn1["Distance"] = 1
         first_node_connections.append(tmp_conn1)
     if map[int(size/2)][0] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2)) * size) + 1
+        tmp_conn1["ConnectedID"] = ((int(size/2)) + 2)
         tmp_conn1["Distance"] = 1
         first_node_connections.append(tmp_conn1)
     if size%2 != 0 and map[int(size/2) + 1][0] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) * size) + 1
+        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) + 2)
         tmp_conn1["Distance"] = 1
         first_node_connections.append(tmp_conn1)
 
     first_node["Connections"] = first_node_connections
-    first_node["ID"] = 0
+    first_node["ID"] = 1
     first_node["Radius"] = 1
 
     resource1 = []
@@ -179,19 +179,19 @@ def GenerateJsonFile(size, map):
 
     nodes.append(first_node)
 
-    i = 0
-    while i < size:
-        j = 0
-        while j < size:
+    j = 0
+    while j < size:
+        i = 0
+        while i < size:
             if map[i][j] > 0:
                 tmp_node = {}
                 connections = []
 
-                curNodeId = ((i) * size) + j + 1
+                curNodeId = ((j) * size) + i + 2
                 k = 0
                 while k < 8:
                     if j + directionX[k] >= 0 and j + directionX[k] < size and i + directionY[k] >= 0 and i + directionY[k] < size and map[i + directionY[k]][j + directionX[k]] > 0:
-                        conNodeId = ((i + directionY[k]) * size) + j + directionX[k] + 1
+                        conNodeId = ((j + directionX[k]) * size) + i + directionY[k] + 2
 
                         tmp_conn = {}
                         tmp_conn["ConnectedID"] = conNodeId
@@ -219,30 +219,30 @@ def GenerateJsonFile(size, map):
                 tmp_node["ControlPoints"] = 100
                     
                 nodes.append(tmp_node)
-            j = j + 1
-        i = i + 1
+            i = i + 1
+        j = j + 1
 
     last_node = {}
     last_node_connections = []
     
     if map[int(size/2) - 1][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) * size) + size
+        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) + 1) + (2 * size) + 1
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
     if map[int(size/2)][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2)) * size) + size
+        tmp_conn1["ConnectedID"] = ((int(size/2)) + 1) + (2 * size) + 2
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
     if size%2 != 0 and map[int(size/2) + 1][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) * size) + size
+        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) + 1) + (2 * size) + 1
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
 
     last_node["Connections"] = last_node_connections
-    last_node["ID"] = size*size + 1
+    last_node["ID"] = size*size + 2
     last_node["Radius"] = 1
 
     resource1 = []

@@ -30,7 +30,7 @@ else:
     map_name = 'DemoMap.json'
 
 if map_name == 'RandomMap.json':
-    generate_map.exec(7)
+    generate_map.exec(3)
     
 config_dir = '/everglades/config/'  
 map_file = config_dir + map_name

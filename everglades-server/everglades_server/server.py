@@ -108,19 +108,19 @@ class EvergladesGame:
 
         array = []
 
-        array.append(0)
+        array.append(Ysize*Xsize + 2)
 
         #Reverse the node list
-        i = 0
-        while i < Ysize:
-            j = Xsize
-            while j > 0:
-                if j + (Xsize * i) in arrayIDs:
-                    array.append(j + (Xsize * i))
-                j = j - 1
-            i = i + 1
+        i = Xsize - 1
+        while i >= 0:
+            j = 0
+            while j < Ysize:
+                if j + (Ysize * i) + 1 in arrayIDs:
+                    array.append(j + (Ysize * i) + 1)
+                j = j + 1
+            i = i - 1
 
-        array.append(Ysize*Xsize + 1)
+        array.append(1)
 
         print(self.map_key1)
         print(array)
@@ -852,7 +852,7 @@ class EvergladesGame:
         hdr = '0,player,group,start,destination,status'
         self.output['GROUP_MoveUpdate'] = [hdr]
 
-        hdr = '0,player,node,faction,controlvalue,controlled'
+        hdr = '0,node,faction,controlvalue,controlled'
         self.output['NODE_ControlUpdate'] = [hdr]
 
         hdr = '0,player,nodes,knowledge,controller,percent'
