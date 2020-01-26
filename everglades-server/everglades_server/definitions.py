@@ -36,14 +36,15 @@ class EvgGroup:
     def __init__(self, **kwargs):
         self.groupID = kwargs.get('groupID',-1)
         self.mapGroupID = kwargs.get('mapGroupID',-1)
-        self.mapUnitID = kwargs.get('mapUnitID',-1)
         self.location = kwargs.get('location',-1)
         self.ready = False
         self.moving = False
         self.destroyed = False
         self.distance_remaining = 0
+        self.mapUnitID = []
         self.travel_destination = -1
         self.units = []
+        self.count = 0
         self.pathIndex = 0
 
 class EvgUnitDefinition:

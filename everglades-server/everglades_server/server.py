@@ -190,6 +190,10 @@ class EvergladesGame:
         # Cumulative unit number for output
         map_units = 1
 
+        # Two lists for displaying unit types and counts for a group for output purposes
+        out_count = []
+        out_type = []
+
         for player in players:
             assert(player in self.team_starts), 'Given player number not included in map configuration file starting locations'
             start_node_idx = self.team_starts[player]
@@ -197,41 +201,58 @@ class EvergladesGame:
 
             self.players[player] = EvgPlayer(player)
             for i, gid in enumerate(player_dat[player]['unit_config']):
-                in_type, in_count = player_dat[player]['unit_config'][gid]
-                in_type = in_type.lower()
 
-                # Input validation
-                assert(in_type in self.unit_names), 'Group type not in unit type config file'
-                assert(in_count <= 100), 'Invalid group size allocation'
-                # TODO: create a cost counter to make sure the total unit allocation is correct
-
-                unit_id = self.unit_names[in_type]
                 newGroup = EvgGroup(
                         groupID = gid,
                         location = start_node_idx,
-                        mapGroupID = map_gid,
-                        mapUnitID = map_units
+                        mapGroupID = map_gid
                 )
-                outtype = in_type[0].upper() + in_type[1:]
+
+                # Each group has a list of tuples for their unit_type and amount, so check each tuple
+                for pair in player_dat[player]['unit_config'][gid]:
+                    in_type, in_count = pair
+                    in_type = in_type.lower()
+
+                    # Input validation
+                    assert(in_type in self.unit_names), 'Group type not in unit type config file'
+                    assert(in_count <= 100), 'Invalid group size allocation'
+                    # TODO: create a cost counter to make sure the total unit allocation is correct
+
+                    # This variable was not used
+                    #unit_id = self.unit_names[in_type]
+
+                    out_type.append(in_type)
+                    out_count.append(in_count)
+
+                    newUnit = EvgUnit(
+                            unitType = in_type,
+                            count = in_count
+                    )
+
+                    newGroup.count += in_count
+                    newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
+                    newGroup.units.append(newUnit)
+
+                    newGroup.mapUnitID.append(map_units)
+                    map_units += in_count
+                # End Unit loop
+
                 # BUG - will only work if there is one unit type per group; fine for now
                 outstr = '{:.6f},{},{},{},[{}],[{}],[{}]'.format(self.current_turn,
                                                                  player,
                                                                  map_gid,
                                                                  start_node_idx,
-                                                                 outtype,
-                                                                 map_units,
-                                                                 in_count
+                                                                 out_type,
+                                                                 newGroup.mapUnitID,
+                                                                 out_count
                 )
                 self.output['GROUP_Initialization'].append(outstr)
                 map_gid += 1
-                map_units += in_count
 
-                newUnit = EvgUnit(
-                        unitType = in_type,
-                        count = in_count
-                )
-                newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
-                newGroup.units.append(newUnit)
+                # Empty the out_count and out_type lists to be refilled by a new group
+                del out_count[:]
+                del out_type[:]
+
                 self.players[player].groups.append(newGroup)                    
                 self.evgMap.nodes[map_node_idx].groups[player].append(i)
             # end group loop
@@ -394,29 +415,19 @@ class EvergladesGame:
             print('Node {}'.format( self.evgMap.nodes[nidx].ID ) )
             print('\t{}'.format( self.evgMap.nodes[nidx].resource) )
             print('\t% Controlled: {}'.format( self.evgMap.nodes[nidx].controlState ) )
-            counts = []
-            cnt = 0
-            for gid in self.evgMap.nodes[nidx].groups[0]:
-                if self.players[0].groups[gid].moving == False:
-                    cnt += self.players[0].groups[gid].units[0].count
-                    counts.append(gid)
-            print('\tPlayer 0 units: {}'.format(cnt) )
-            for gid in counts:
-                print('\t\ttype: {}'.format(self.players[0].groups[gid].units[0].unitType))
-                print('\t\tavg health: {}'.format(np.average(self.players[0].groups[gid].units[0].unitHealth)))
-                print('\t\t{}'.format(self.players[0].groups[gid].units[0].unitHealth))
 
-            counts = []
-            cnt = 0
-            for gid in self.evgMap.nodes[nidx].groups[1]:
-                if self.players[1].groups[gid].moving == False:
-                    cnt += self.players[1].groups[gid].units[0].count
-                    counts.append(gid)
-            print('\tPlayer 1 units: {}'.format(cnt) )
-            for gid in counts:
-                print('\t\ttype: {}'.format(self.players[1].groups[gid].units[0].unitType))
-                print('\t\tavg health: {}'.format(np.average(self.players[1].groups[gid].units[0].unitHealth)))
-                print('\t\t{}'.format(self.players[1].groups[gid].units[0].unitHealth))
+            for i, player in enumerate(self.players):
+                counts = []
+                cnt = 0
+                for gid in self.evgMap.nodes[nidx].groups[i]:
+                    if self.players[i].groups[gid].moving == False:
+                        cnt += self.players[i].groups[gid].count
+                        counts.append(gid)
+                print('\tPlayer {} units: {}'.format(i, cnt) )
+                for gid in counts:
+                    print('\t\ttype: {}'.format([x.unitType for x in self.players[i].groups[gid].units]))
+                    print('\t\tavg health: {:.2f}'.format(np.average(np.hstack([x.unitHealth for x in self.players[i].groups[gid].units]))))
+                    print('\t\t{}'.format([y for x in self.players[i].groups[gid].units for y in x.unitHealth]))
         print()
 
     def board_state(self, player_num):
@@ -551,6 +562,7 @@ class EvergladesGame:
             player_gids = {}
             counts = {}
             tgt_gids = {}
+            counts_units = {}
 
             # Determine which players occupy this node
             for player in self.team_starts:
@@ -558,6 +570,7 @@ class EvergladesGame:
                 if len(node.groups[player]) > 0:
                     player_gids[player] = []
                     counts[player] = []
+                    counts_units[player] = {}
 
                     # Build a list of groups that are available for combat
                     for gid in node.groups[player]:
@@ -565,8 +578,15 @@ class EvergladesGame:
                         if self.players[player].groups[gid].moving == False:
                             player_gids[player].append(gid)
                             # BUG - if group consists of different units combat is not applied to all
-                            unit = self.players[player].groups[gid].units[0]
-                            count = np.sum( unit.unitHealth > 0 )
+                            count = 0
+                            counts_units[player][gid] = []
+
+                            for i, unit in enumerate(self.players[player].groups[gid].units):
+                                for j in range(len(unit.unitHealth)):
+                                    if unit.unitHealth[j] > 0 :
+                                        counts_units[player][gid].append(i)
+                                        count += 1
+
                             counts[player].append(count)
 
                     # Remove empty list to make combat application work
@@ -596,14 +616,15 @@ class EvergladesGame:
                     nulled_ids[pid] = {}
                     #pdb.set_trace()
                     for i, gid in enumerate(player_gids[pid]):
-                        unittype = self.players[pid].groups[gid].units[0]
                         nulled_ids[pid][i] = []
                         for j in range(counts[pid][i]):
-                                uid = np.random.randint(opp_player_units)
-                                if uid in infliction[pid]:
-                                    infliction[pid][uid] += unittype.definition.damage
-                                else:
-                                    infliction[pid][uid] = unittype.definition.damage
+                            unittype_idx = counts_units[pid][gid][j]
+                            unittype = self.players[pid].groups[gid].units[unittype_idx]
+                            uid = np.random.randint(opp_player_units)
+                            if uid in infliction[pid]:
+                                infliction[pid][uid] += unittype.definition.damage
+                            else:
+                                infliction[pid][uid] = unittype.definition.damage
                 # end player loop
                 #pdb.set_trace()
             
@@ -628,7 +649,8 @@ class EvergladesGame:
                                 # Determine the opposing unit that was affected
                                 tgt_gid = player_gids[opp_pid][tgt_group]
                                 group = self.players[opp_pid].groups[tgt_gid]
-                                tgt_unit = self.players[opp_pid].groups[tgt_gid].units[0]
+                                tgt_unit_type_idx = counts_units[opp_pid][tgt_gid][tgt_idx]
+                                tgt_unit = group.units[tgt_unit_type_idx]
                                 tgt_armor = tgt_unit.definition.health
                                 tgt_cntrl = 1 if node.controlledBy == opp_pid else 0
             
@@ -645,22 +667,27 @@ class EvergladesGame:
                                 if (len(nulled_ids[opp_pid][tgt_group]) > 0):
                                     #pdb.set_trace()
                                     tgt_idx -= len(nulled_ids[opp_pid][tgt_group])
+
+                                for unit in group.units:
+                                    if tgt_idx >= np.sum(unit.unitHealth > 0):
+                                        tgt_idx -= np.sum(unit.unitHealth > 0)
                                 tgt_unit_idx = np.argwhere( tgt_unit.unitHealth > 0 )[tgt_idx]
                                 tgt_unit.unitHealth[tgt_unit_idx] -= loss
 
                                 outgroup = group.mapGroupID
-                                outunit = group.mapUnitID + 1 + tgt_unit_idx
+                                outunit = group.mapUnitID[tgt_unit_type_idx] + tgt_unit_idx
 
                                 # Remove from node groups if dead
                                 if tgt_unit.unitHealth[tgt_unit_idx] <= 0:
                                     outhealth = 0.
                                     tgt_unit.unitHealth[tgt_unit_idx] = 0
                                     tgt_unit.count -= 1
+                                    group.count -= 1
                                     # Does not append the original tgt_idx, but we're
                                     # fine because the tgt_idxs were sorted.
                                     nulled_ids[opp_pid][tgt_group].append(tgt_idx)
                                     # Disband the group
-                                    if tgt_unit.count == 0:
+                                    if group.count == 0:
                                         #pdb.set_trace()
                                         self.players[opp_pid].groups[tgt_gid].destroyed = True
                                         pop_idx = node.groups[opp_pid].index(tgt_gid)

@@ -65,7 +65,7 @@ class EvergladesEnv(gym.Env):
         self.player_dat = {}
         for i in self.pks:
             self.player_dat[i] = {}
-            self.player_dat[i]['unit_config'] = self._build_groups(i)
+            self.player_dat[i]['unit_config'] = self.players[i].unit_config
 
         # Initialize game
         self.game = server.EvergladesGame(
@@ -113,18 +113,19 @@ class EvergladesEnv(gym.Env):
 
         return observation_space
 
-    def _build_groups(self, player_num):
-        unit_configs = {}
+    # This function is obsolete when agents supply group configurations.
+    #def _build_groups(self, player_num):
+    #    unit_configs = {}
 
-        # In the future, get group assignments from the agent as a kwarg in .reset()
-        num_units_per_group = int(self.num_units / self.num_groups)
-        for i in range(self.num_groups):
-            unit_type = self.unit_classes[i % len(self.unit_classes)]
-            if i == self.num_groups - 1:
-                unit_configs[i] = (unit_type, self.num_units - sum([c[1] for c in unit_configs.values()]))
-            else:
-                unit_configs[i] = (unit_type, num_units_per_group)
-        return unit_configs
+    #    #In the future, get group assignments from the agent as a kwarg in .reset()
+    #    num_units_per_group = int(self.num_units / self.num_groups)
+    #    for i in range(self.num_groups):
+    #        unit_type = self.unit_classes[i % len(self.unit_classes)]
+    #        if i == self.num_groups - 1:
+    #            unit_configs[i] = (unit_type, self.num_units - sum([c[1] for c in unit_configs.values()]))
+    #        else:
+    #            unit_configs[i] = (unit_type, num_units_per_group)
+    #    return unit_configs
 
     def _build_observations(self):
         observations = {}
