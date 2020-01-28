@@ -242,7 +242,7 @@ class EvergladesGame:
                 newGroup.speed.sort()
 
                 # BUG - will only work if there is one unit type per group; fine for now
-                outstr = '{:.6f},{},{},{},[{}],[{}],[{}]'.format(self.current_turn,
+                outstr = '{:.6f},{},{},{},{},{},{}'.format(self.current_turn,
                                                                  player,
                                                                  map_gid,
                                                                  start_node_idx,
@@ -673,8 +673,10 @@ class EvergladesGame:
                                     tgt_idx -= len(nulled_ids[opp_pid][tgt_group])
 
                                 for unit in group.units:
-                                    if tgt_idx >= np.sum(unit.unitHealth > 0):
-                                        tgt_idx -= np.sum(unit.unitHealth > 0)
+                                    if tgt_idx < np.sum(unit.unitHealth > 0):
+                                        break
+                                    tgt_idx -= np.sum(unit.unitHealth > 0)
+                                
                                 tgt_unit_idx = np.argwhere( tgt_unit.unitHealth > 0 )[tgt_idx]
                                 tgt_unit.unitHealth[tgt_unit_idx] -= loss
 
