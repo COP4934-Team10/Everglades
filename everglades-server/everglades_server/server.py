@@ -233,9 +233,13 @@ class EvergladesGame:
                     newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
                     newGroup.units.append(newUnit)
 
+                    newGroup.speed.append(newUnit.definition.speed)
                     newGroup.mapUnitID.append(map_units)
                     map_units += in_count
                 # End Unit loop
+
+                # Make group.speed[0] the slowest
+                newGroup.speed.sort()
 
                 # BUG - will only work if there is one unit type per group; fine for now
                 outstr = '{:.6f},{},{},{},[{}],[{}],[{}]'.format(self.current_turn,
@@ -683,6 +687,10 @@ class EvergladesGame:
                                     tgt_unit.unitHealth[tgt_unit_idx] = 0
                                     tgt_unit.count -= 1
                                     group.count -= 1
+
+                                    if tgt_unit.count == 0:
+                                        group.speed.remove(tgt_unit.definition.speed)
+
                                     # Does not append the original tgt_idx, but we're
                                     # fine because the tgt_idxs were sorted.
                                     nulled_ids[opp_pid][tgt_group].append(tgt_idx)
@@ -739,7 +747,7 @@ class EvergladesGame:
                     elif group.moving:
                         # Apply amount moved
                         # BUG - if group consists of different unit types, it won't move properly
-                        group.distance_remaining -= group.units[0].definition.speed
+                        group.distance_remaining -= group.speed[0]
 
                         # Get information for adjustments
                         start_idx = int( np.squeeze(np.where(self.map_key1 == group.location)) )

@@ -44,6 +44,7 @@ class EvgGroup:
         self.mapUnitID = []
         self.travel_destination = -1
         self.units = []
+        self.speed = []
         self.count = 0
         self.pathIndex = 0
 
