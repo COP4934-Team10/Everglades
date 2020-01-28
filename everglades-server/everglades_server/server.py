@@ -221,8 +221,6 @@ class EvergladesGame:
                     # This variable was not used
                     #unit_id = self.unit_names[in_type]
 
-                    out_type.append(in_type)
-                    out_count.append(in_count)
 
                     newUnit = EvgUnit(
                             unitType = in_type,
@@ -233,6 +231,10 @@ class EvergladesGame:
                     newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
                     newGroup.units.append(newUnit)
 
+                    in_type = in_type.capitalize()
+                    out_type.append(in_type)
+                    out_count.append(in_count)
+
                     newGroup.speed.append(newUnit.definition.speed)
                     newGroup.mapUnitID.append(map_units)
                     map_units += in_count
@@ -241,14 +243,17 @@ class EvergladesGame:
                 # Make group.speed[0] the slowest
                 newGroup.speed.sort()
 
+                outtype = '[{}]'.format('; '.join(map(str, out_type)))
+                mapUnitID = '[{}]'.format('; '.join(map(str, newGroup.mapUnitID)))
+                outcount = '[{}]'.format('; '.join(map(str, out_count)))
                 # BUG - will only work if there is one unit type per group; fine for now
                 outstr = '{:.6f},{},{},{},{},{},{}'.format(self.current_turn,
                                                                  player,
                                                                  map_gid,
                                                                  start_node_idx,
-                                                                 out_type,
-                                                                 newGroup.mapUnitID,
-                                                                 out_count
+                                                                 outtype,
+                                                                 mapUnitID,
+                                                                 outcount
                 )
                 self.output['GROUP_Initialization'].append(outstr)
                 map_gid += 1
