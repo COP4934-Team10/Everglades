@@ -781,7 +781,7 @@ class EvergladesGame:
                             outstr = '{:.6f},{},{},{},{},{}'.format(
                                     self.current_turn,
                                     player,
-                                    group.groupID,
+                                    group.mapGroupID,
                                     self.evgMap.nodes[start_idx].ID,
                                     self.evgMap.nodes[end_idx].ID,
                                     'IN_TRANSIT'
