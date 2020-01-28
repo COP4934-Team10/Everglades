@@ -322,7 +322,7 @@ class EvergladesGame:
                     outstr = '{:.6f},{},{},{},{},{}'.format(
                             self.current_turn,
                             player,
-                            self.players[player].groups[gid].groupID,
+                            self.players[player].groups[gid].mapGroupID,
                             self.players[player].groups[gid].location,
                             nid,
                             'RDY_TO_MOVE'
