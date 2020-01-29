@@ -316,7 +316,12 @@ class EvergladesGame:
                         test3 = True
                         distance = conn.distance
                         break
-                if test1 and test2 and test3:
+                # Ensure group is alive
+                test4 = True
+                if self.players[player].groups[gid].destroyed == True:
+                    test4 = False
+
+                if test1 and test2 and test3 and test4:
                     used_swarms.append(gid)
                     #print('good move')
                     outstr = '{:.6f},{},{},{},{},{}'.format(
