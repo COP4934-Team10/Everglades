@@ -115,8 +115,8 @@ class EvergladesGame:
         while i >= 0:
             j = 0
             while j < Ysize:
-                if j + (Ysize * i) + 1 in arrayIDs:
-                    array.append(j + (Ysize * i) + 1)
+                if j + (Ysize * i) + 2 in arrayIDs:
+                    array.append(j + (Ysize * i) + 2)
                 j = j + 1
             i = i - 1
 
@@ -296,6 +296,7 @@ class EvergladesGame:
 
             # Verfiy each swarm gets commanded only once
             used_swarms = []
+            moves = []
             # group id, node id
             for gid, nid in action.astype(int):
                 if player == 1:
@@ -324,15 +325,16 @@ class EvergladesGame:
                 if test1 and test2 and test3 and test4:
                     used_swarms.append(gid)
                     #print('good move')
-                    outstr = '{:.6f},{},{},{},{},{}'.format(
-                            self.current_turn,
-                            player,
-                            self.players[player].groups[gid].mapGroupID,
-                            self.players[player].groups[gid].location,
-                            nid,
-                            'RDY_TO_MOVE'
-                    )
-                    self.output['GROUP_MoveUpdate'].append(outstr) 
+                    
+
+                    tempMove = MovementTurn()
+                    tempMove.currentTurn = self.current_turn
+                    tempMove.player = player
+                    tempMove.gid = gid
+                    tempMove.location = self.players[player].groups[gid].location
+                    tempMove.nid = nid
+
+                    moves.append(tempMove)
 
                     self.players[player].groups[gid].ready = True
                     self.players[player].groups[gid].moving = False
@@ -342,6 +344,19 @@ class EvergladesGame:
         # end player loop
 
         self.combat()
+        
+        for move in moves:
+            if self.players[move.player].groups[move.gid].destroyed == False:
+                    outstr = '{:.6f},{},{},{},{},{}'.format(
+                        move.currentTurn,
+                        move.player,
+                        self.players[move.player].groups[move.gid].mapGroupID,
+                        move.location,
+                        move.nid,
+                        'RDY_TO_MOVE'
+                    )
+                    self.output['GROUP_MoveUpdate'].append(outstr)
+        
         self.movement()
         self.capture()
         self.build_knowledge_output()

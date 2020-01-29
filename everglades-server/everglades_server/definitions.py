@@ -64,3 +64,11 @@ class EvgUnit:
         self.unitHealth = np.ones(self.count) * 100.
         # Set null values for type, health, damage, speed, control, and cost
         self.definition = EvgUnitDefinition()
+
+class MovementTurn:
+    def __init__(self, **kwargs):
+        self.currentTurn = kwargs.get('currentTurn',-1)
+        self.player = kwargs.get('player',-1)
+        self.gid = kwargs.get('gid',-1)
+        self.location = kwargs.get('location',-1)
+        self.nid = kwargs.get('nid',-1)
