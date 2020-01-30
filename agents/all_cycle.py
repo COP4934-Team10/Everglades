@@ -76,7 +76,7 @@ class all_cycle:
         }
         
         self.grouplen = NUM_GROUPS
-        self.group_num = 1
+        self.group_num = 0
         self.node_num = 2
     # end __init__
 
