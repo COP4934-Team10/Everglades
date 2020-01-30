@@ -831,9 +831,10 @@ class EvergladesGame:
                         # Discount in-transit groups
                         if self.players[pid].groups[gid].moving == False:
                             ctr += 1
-                            count = self.players[pid].groups[gid].units[0].count
-                            xer = self.players[pid].groups[gid].units[0].definition.control
-                            points[pid] += count * xer 
+                            for unit in self.players[pid].groups[gid].units
+                                count = unit.count
+                                xer = unit.definition.control
+                                points[pid] += count * xer 
                     if ctr >= 1:
                         controllers.append(pid)
 
