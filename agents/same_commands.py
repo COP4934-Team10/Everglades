@@ -6,19 +6,19 @@ import pdb
 # Specialized imports
 import numpy as np
 
-NODE_CONNECTIONS = {
-    1: [2, 4],
-    2: [1, 3, 5],
-    3: [2, 4, 5, 6, 7],
-    4: [1, 3, 7],
-    5: [2, 3, 8, 9],
-    6: [3, 9],
-    7: [3, 4, 9, 10],
-    8: [5, 9, 11],
-    9: [5, 6, 7, 8, 10],
-    10: [7, 9, 11],
-    11: [8, 10]
-}
+#NODE_CONNECTIONS = {
+#    1: [2, 4],
+#    2: [1, 3, 5],
+#    3: [2, 4, 5, 6, 7],
+#    4: [1, 3, 7],
+#    5: [2, 3, 8, 9],
+#    6: [3, 9],
+#    7: [3, 4, 9, 10],
+#    8: [5, 9, 11],
+#    9: [5, 6, 7, 8, 10],
+#    10: [7, 9, 11],
+#    11: [8, 10]
+#}
 
 
 NUM_GROUPS = 12
@@ -31,13 +31,20 @@ ENV_MAP = {
 }
 
 class same_commands:
-    def __init__(self, action_space, player_num):
+    def __init__(self, action_space, player_num, map_name):
         self.action_space = action_space
         self.num_groups = NUM_GROUPS
 
-        self.num_nodes = len(NODE_CONNECTIONS)
-        self.num_actions = action_space
+        with open('/everglades/config/' + map_name) as fid:
+            self.map_dat = json.load(fid)
 
+        self.nodes_array = []
+        for i, in_node in enumerate(self.map_dat['nodes']):
+            self.nodes_array.append(in_node['ID'])
+
+        self.num_nodes = len(self.map_dat['nodes'])
+
+        self.num_actions = action_space
         self.shape = (self.num_actions, 2)
 
         self.first_turn = True
