@@ -552,11 +552,11 @@ class EvergladesGame:
         idx = 0
         state[idx] = self.current_turn
         idx += 1
-        unit_types = []
         for group in player.groups:
             # Build unit statistics
             units_alive = 0
             health = 0
+            unit_types = []
             for unit in group.units:
                 units_alive += np.sum( unit.unitHealth > 0 )
                 health += np.sum( unit.unitHealth )
@@ -1025,36 +1025,38 @@ class EvergladesGame:
 
                     for opp_gid in node.groups[opp_pid]:
                         opp_group = self.players[opp_pid].groups[opp_gid]
-                        in_ut = opp_group.units[0].unitType
-                        ut = in_ut[0].upper() + in_ut[1:]
-                        uc = opp_group.units[0].count
-                        if opp_group.moving == False:
-                            # Append as group staying put
-                            if -1 in opp_k[nid]:
-                                opp_k[nid][-1]['unitTypes'].append(ut)
-                                opp_k[nid][-1]['unitCount'].append(uc)
-
-                            else:
-                                opp_k[nid][-1] = {'unitTypes':[ut],
-                                                  'unitCount':[uc],
-                                                  'status': 0
-                                                 }
-                            # end key existence check
-                        else:
-                            # Check for knowledge of destination
-                            opp_dst = opp_group.travel_destination
-                            dst_idx = nodes.index(opp_dst)
-                            # Check knowledge of node id
-                            if knowledge[dst_idx] > 0:
-                                if dst_idx in opp_k[nid]:
-                                    opp_k[nid][dst_idx]['unitTypes'].append(ut)
-                                    opp_k[nid][dst_idx]['unitCount'].append(uc)
+                        
+                        for unit in opp_group.units:
+                            in_ut = unit.unitType
+                            ut = in_ut[0].upper() + in_ut[1:]
+                            uc = unit.count
+                            if opp_group.moving == False:
+                                # Append as group staying put
+                                if -1 in opp_k[nid]:
+                                    opp_k[nid][-1]['unitTypes'].append(ut)
+                                    opp_k[nid][-1]['unitCount'].append(uc)
 
                                 else:
-                                    opp_k[nid][dst_idx] = {'unitTypes':[ut],
-                                                           'unitCount':[uc],
-                                                           'status': 0
-                                                          }
+                                    opp_k[nid][-1] = {'unitTypes':[ut],
+                                                      'unitCount':[uc],
+                                                      'status': 0
+                                                     }
+                                # end key existence check
+                            else:
+                                # Check for knowledge of destination
+                                opp_dst = opp_group.travel_destination
+                                dst_idx = nodes.index(opp_dst)
+                                # Check knowledge of node id
+                                if knowledge[dst_idx] > 0:
+                                    if dst_idx in opp_k[nid]:
+                                        opp_k[nid][dst_idx]['unitTypes'].append(ut)
+                                        opp_k[nid][dst_idx]['unitCount'].append(uc)
+
+                                    else:
+                                        opp_k[nid][dst_idx] = {'unitTypes':[ut],
+                                                               'unitCount':[uc],
+                                                               'status': 0
+                                                              }
                         # end group knowledge addition
                     # end group loop
                     if not bool(opp_k[nid]):
