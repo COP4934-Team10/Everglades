@@ -552,6 +552,7 @@ class EvergladesGame:
         idx = 0
         state[idx] = self.current_turn
         idx += 1
+        unit_types = []
         for group in player.groups:
             # Build unit statistics
             units_alive = 0
@@ -559,6 +560,7 @@ class EvergladesGame:
             for unit in group.units:
                 units_alive += np.sum( unit.unitHealth > 0 )
                 health += np.sum( unit.unitHealth )
+                unit_types.append(self.unit_names[unit.unitType.lower()])
 
             location = group.location
             # Flip board so both players think they start at 1
@@ -566,8 +568,17 @@ class EvergladesGame:
                 location = int( self._vec_convert_node(location) )
 
             state[idx] = location
-            # Following line assumes one unit type per group; not necessarily true
-            state[idx+1] = self.unit_names[ group.units[0].unitType.lower() ]
+
+            # Remember that self.unit_names is an integer corresponding with the unit type
+            # 0 - Controller, 1 - Striker, 2 - Tank, etc.
+            # For player state, the group's unit composition needs to be a single integer representation
+            # Unit types should be in descending order to preserve any zeros
+            unit_types.sort(reverse = True)
+
+            # Convert the list to a string and then to an integer
+            unit_types = int(''.join([str(digit) for digit in unit_types]))
+            # Fixed to allow mixed units
+            state[idx+1] = unit_types
             state[idx+2] = (health * 1.) / units_alive if (units_alive > 0) else 0
             state[idx+3] = 1 if group.moving else 0
             state[idx+4] = units_alive
@@ -831,7 +842,7 @@ class EvergladesGame:
                         # Discount in-transit groups
                         if self.players[pid].groups[gid].moving == False:
                             ctr += 1
-                            for unit in self.players[pid].groups[gid].units
+                            for unit in self.players[pid].groups[gid].units:
                                 count = unit.count
                                 xer = unit.definition.control
                                 points[pid] += count * xer 
