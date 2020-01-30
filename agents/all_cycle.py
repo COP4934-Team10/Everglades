@@ -5,6 +5,7 @@ import pdb
 
 # Specialized imports
 import numpy as np
+import json
 #import gym
 #import gym_everglades
 
@@ -104,7 +105,7 @@ class all_cycle:
             actions[i] = [self.group_num, self.node_num]
             #self.group_num = ((self.group_num-1) + 1) % self.grouplen + 1
             self.group_num = (self.group_num + 1) % self.grouplen 
-            nodetest = ((self.node_num-1) + 1) % self.nodelen + 1
+            nodetest = ((self.node_num-1) + 1) % self.num_nodes + 1
             self.node_num = nodetest if self.group_num == 0 else self.node_num
         return actions
 
