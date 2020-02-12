@@ -1,7 +1,6 @@
 {
    "__type":"Units",
    "units":[
-    {
         {
             "Name": "Controller",
             "Health": 2,
@@ -26,6 +25,5 @@
             "Control": 1,
             "Cost": 1
         }
-    },
-  ]
+    ]
 }
