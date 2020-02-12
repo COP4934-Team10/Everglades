@@ -227,17 +227,17 @@ def GenerateJsonFile(size, map):
     
     if map[int(size/2) - 1][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) - 1) + 1) + (2 * size) + 1
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) - 1) + 2
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
     if map[int(size/2)][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2)) + 1) + (2 * size) + 2
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2)) + 2
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
     if size%2 != 0 and map[int(size/2) + 1][size-1] > 0:
         tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((int(size/2) + 1) + 1) + (2 * size) + 1
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) + 1) + 2
         tmp_conn1["Distance"] = 1
         last_node_connections.append(tmp_conn1)
 
