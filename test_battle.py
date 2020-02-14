@@ -27,10 +27,10 @@ else:
 if len(sys.argv) > 3:
     map_name = sys.argv[3] + '.json'
 else:
-    map_name = 'DemoMap.json'
+    map_name = 'RandomMap.json'
 
 if map_name == 'RandomMap.json':
-    generate_map.exec(3)
+    generate_map.exec(7)
     
 config_dir = '/everglades/config/'  
 map_file = config_dir + map_name

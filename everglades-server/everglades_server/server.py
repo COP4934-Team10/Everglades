@@ -935,6 +935,12 @@ class EvergladesGame:
         hdr = '0,player1,player2'
         self.output['PLAYER_Tags'] = [hdr]
 
+        hdr = 'nodes'
+        self.output['MAP_Nodes'] = [hdr]
+        
+        for node in self.p1_node_map:
+            self.output['MAP_Nodes'].append(str(node))
+
     def build_knowledge_output(self):
         players = np.array( list(self.players.keys()) )
 

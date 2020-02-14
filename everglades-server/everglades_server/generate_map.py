@@ -10,7 +10,7 @@ class Point:
 #Global Variables
 outputFile = "C:/Everglades/config/RandomMap.json"
 
-nodeDensityWeight = 2
+nodeDensityWeight = 1
 nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
 fortressWeight = 0.2
