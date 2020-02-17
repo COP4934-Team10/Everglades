@@ -8,7 +8,7 @@ class Point:
         self.y = 0
 
 #Global Variables
-outputFile = "C:/Everglades/config/RandomMap.json"
+outputFile = "/Everglades/config/RandomMap.json"
 
 nodeDensityWeight = 1
 nodeCreatedWeight = 0.5
