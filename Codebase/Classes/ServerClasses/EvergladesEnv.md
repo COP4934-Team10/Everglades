@@ -20,10 +20,10 @@
 |**unit_classes**           |*list\<string>*    |The types of units in the game.                                                                |
 
 ## Methods
-[**_build_groups()**](../Methods/_build_groups().md)  
-[**_build_observations()**](../Methods/_build_observations().md)  
-[**_build_observation_space()**](../Methods/_build_observation_space().md)  
-[**close()**](../Methods/close().md)  
-[**render()**](../Methods/render().md)  
-[**reset()**](../Methods/reset().md)  
-[**step()**](../Methods/step().md)  
+[**_build_groups()**](../../Methods/ServerMethods/_build_groups().md)  
+[**_build_observations()**](../../Methods/ServerMethods/_build_observations().md)  
+[**_build_observation_space()**](../../Methods/ServerMethods/_build_observation_space().md)  
+[**close()**](../../Methods/ServerMethods/close().md)  
+[**render()**](../../Methods/ServerMethods/render().md)  
+[**reset()**](../../Methods/ServerMethods/reset().md)  
+[**step()**](../../Methods/ServerMethods/step().md)  
