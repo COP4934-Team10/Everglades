@@ -65,7 +65,7 @@
 ## Events
 [**AddHUD**](../../Events/AddHUD.md)  
 [**AddUnit**](../../Events/AddUnit.md)  
-[**ArrivedEvent**](../../Events/ArrivedEvent.md)  
+[**ArrivedEvent**](../../Events/ArrivedEvent_EvergladesGameMode.md)  
 [**DebugWinner**](../../Events/DebugWinner.md)  
 [**EndMatch**](../../Events/EndMatch.md)  
 [**Event BeginPlay**](../../Events/BeginPlay_EvergladesGameMode.md)  
@@ -88,7 +88,7 @@
 [**TickCam**](../../Events/TickCam.md)  
 [**ToggleCamAI**](../../Events/ToggleCamAI.md)  
 [**ToggleMap**](../../Events/ToggleMap.md)  
-[**ToggleSimplifiedMap**](../../Events/ToggleSimplifiedMap.md)  
+[**ToggleSimplifiedMap**](../../Events/ToggleSimplifiedMap_EvergladesGameMode.md)  
 [**TurnPauseToggle**](../../Events/TurnPauseToggle.md)  
 [**TurnTimeout**](../../Events/TurnTimeout.md)  
 [**UpdateCamAI**](../../Events/UpdateCamAI.md)  

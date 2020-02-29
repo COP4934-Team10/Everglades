@@ -1,13 +1,23 @@
-# 
+# HUD_UnitLoss
 
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
-**Parent Class** &nbsp; &nbsp;  
+**Parent Class** &nbsp; &nbsp; User Widget  
 
 ## Variables
-|Variable   |Type   |Description    |
-|-----------|-------|---------------|
-|****|**||
+|Variable       |Type               |Description    |
+|---------------|-------------------|---------------|
+|**Loss**       |*WidgetAnimation*  ||
+|**UnitText**   |*TextBlock*        ||
 
-## Methods
-[****]()  
+## Functions
+**None**
+
+## Events
+[**SetUnitLoss**](../../Events/SetUnitLoss.md)  
+
+## Event Dispatchers
+**None**
+
+## Macros
+**None**

@@ -30,7 +30,7 @@
 **None**  
 
 ## Events
-[**Event Construct**](../../Events/Construct.md)  
+[**Event Construct**](../../Events/Construct_LargeMap_Zone.md)  
 [**SetTargetNode**](../../Events/SetTargetNode.md)  
 [**UpdateMap**](../../Events/UpdateMap_HUD_LargeMap_Zone.md)  
 

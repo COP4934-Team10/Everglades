@@ -1,13 +1,25 @@
-# 
+# HUD_MiniMap_Zone
 
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
-**Parent Class** &nbsp; &nbsp;  
+**Parent Class** &nbsp; &nbsp; User Widget  
 
 ## Variables
-|Variable   |Type   |Description    |
-|-----------|-------|---------------|
-|****|**||
+|Variable       |Type                       |Description    |
+|---------------|---------------------------|---------------|
+|**Blue**       |*Image*                    ||
+|**MaterialRef**|*MaterialInstanceDynamic*  ||
+|**Neutral**    |*Image*                    ||
+|**Red**        |*Image*                    ||
 
-## Methods
-[****]()  
+## Functions
+**None** 
+
+## Events
+[**Event Construct**](../../Events/Construct_MiniMap_Zone.md)  
+
+## Event Dispatchers
+**None**
+
+## Macros
+**None**
