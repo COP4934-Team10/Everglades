@@ -1,17 +1,16 @@
 # ArenaCam
-
+Is this class used?
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; Actor  
 
 ## Variables
-|Variable   |Type               |Description    |
-|-----------|-------------------|---------------|
-|**Camera** |*CameraComponent*  ||
+|Variable   |Type               |Description                        |
+|-----------|-------------------|-----------------------------------|
+|**Camera** |*CameraComponent*  |A camera viewpoint and settings.   |
 
 ## Functions
-[**ConstructionScript**](../../Methods/ClientMethods/ConstructionScript_ArenaCam.md)  
-[**IsActorInView**](../../Methods/ClientMethods/IsActorInView.md)  
+[**IsActorInView**](../../Methods/ClientMethods/IsActorInView.md) may not work  
 
 ## Events
 **None**

@@ -5,47 +5,47 @@
 **Parent Class** &nbsp; &nbsp; GameModeBase  
 
 ## Variables
-|Variable                   |Type                               |Description    |
-|---------------------------|-----------------------------------|---------------|
-|**ActiveGroups**           |*Array\<SwarmGroup*\>              ||
-|**AITimer**                |*Timer Handle*                     ||
-|**CamTargetGroup**         |*SwarmGroup*                       ||
-|**CurrentFocusGroup**      |*SwarmGroup*                       ||
-|**CurrentFocusGroupID**    |*Integer*                          ||
-|**CurrentTurn**            |*Integer*                          ||
-|**DefaultSceneRoot**       |*SceneComponent*                   ||
-|**DefaultViewTarget**      |*Actor*                            ||
-|**Events**                 |*Evg Events*                       ||
-|**EventsCompleted**        |*Integer*                          ||
-|**EventsSent**             |*Integer*                          ||
-|**FolderName**             |*String*                           ||
-|**GameResultString**       |*String*                           ||
-|**GameStateRef**           |*EvergladesGameState*              ||
-|**HUDRandomRef**           |*SpectatorHUD_Random*              ||
-|**HUDRef**                 |*SpectatorHUD*                     ||
-|**ImagesRemaining**        |*Integer*                          ||
-|**ImageURLs**              |*Array\<String\>*                  ||
-|**LoadingIndex**           |*Integer*                          ||
-|**MainMenuRef**            |*MainMenu*                         ||
-|**MapNodes**               |*Integer*                          ||
-|**MapVisible**             |*Boolean*                          ||
-|**MatchStarted**           |*Boolean*                          ||
-|**NodeCombat**             |*Array\<NodeCombatState\>*         ||
-|**NodeControl**            |*Array\<Float\>*                   ||
-|**NodePoints**             |*Array\<NodePoint\>*               ||
-|**NumUnits**               |*Array\<Integer\>*                 ||
-|**P0_TurnImages**          |*Map\<Integer, Texture2DDynamic\>* ||
-|**P1Score**                |*Integer*                          ||
-|**P1_TurnImages**          |*Map\<Integer, Texture2DDynamic\>* ||
-|**P2Score**                |*Integer*                          ||
-|**SimplifiedMap**          |*Boolean*                          ||
-|**SimplifiedMapSequence**  |*LevelSequenceActor*               ||
-|**SpectatorPawn**          |*EvergladesSpectatorPawn*          ||
-|**TurnComplete**           |*Boolean*                          ||
-|**TurnImages**             |*Array\<Texture2DDynamic\>*        ||
-|**Units**                  |*Array\<SwarmUnit\>*               ||
-|**UseCamAI**               |*Boolean*                          ||
-|**UsingFollow**            |*Boolean*                          ||
+|Variable                   |Type                               |Description                                                                                |
+|---------------------------|-----------------------------------|-------------------------------------------------------------------------------------------|
+|**ActiveGroups**           |*Array\<SwarmGroup*\>              |The player groups in the game.                                                             |
+|**AITimer**                |*Timer Handle*                     |A reference used to clear the timer. The timer is used for repeated calls to UpdateCamAI.  |
+|**CamTargetGroup**         |*SwarmGroup*                       |The swarm for the TrackSwarm camera to follow.                                             |
+|**CurrentFocusGroup**      |*SwarmGroup*                       |The swarm for the ArenaCam to follow.                                                      |
+|**CurrentFocusGroupID**    |*Integer*                          |The ID of the swarm for the ArenaCam to follow.                                            |
+|**CurrentTurn**            |*Integer*                          |The number of the current turn.                                                            |
+|**DefaultSceneRoot**       |*SceneComponent*                   |The default root component.                                                                |
+|**DefaultViewTarget**      |*Actor*                            |The Actor the player is looking at.                                                        |
+|**Events**                 |*Evg Events*                       |This contains the events described in the telemetry files.                                 |
+|**EventsCompleted**        |*Integer*                          |The number of events completed.                                                            |
+|**EventsSent**             |*Integer*                          |The number of events that have been processed.                                             |
+|**FolderName**             |*String*                           |The name of the match to run.                                                              |
+|**GameResultString**       |*String*                           |A string stating the match winner and final scores for each player.                        |
+|**GameStateRef**           |*EvergladesGameState*              |A reference to the Everglades game state.                                                  |
+|**HUDRandomRef**           |*SpectatorHUD_Random*              |A reference to *SpectatorHUD_Random*.                                                      |
+|**HUDRef**                 |*SpectatorHUD*                     |A reference to *SpectatorHUD*.                                                             |
+|**ImagesRemaining**        |*Integer*                          |                                                                                           |
+|**ImageURLs**              |*Array\<String\>*                  |The addresses and names of image files from the match folder.                              |
+|**LoadingIndex**           |*Integer*                          |The index in the *ImageURLs* array.                                                        |
+|**MainMenuRef**            |*MainMenu*                         |A reference to the *MainMenu* widget.                                                      |
+|**MapNodes**               |*Integer*                          |                                                                                           |
+|**MapVisible**             |*Boolean*                          |This states whether the large map has been toggled and is visible.                         |
+|**MatchStarted**           |*Boolean*                          |This states whether the match has begun.                                                   |
+|**NodeCombat**             |*Array\<NodeCombatState\>*         |                                                                                           |
+|**NodeControl**            |*Array\<Float\>*                   |The percentages of nodes that Player 1 and Player 2 control.                               |
+|**NodePoints**             |*Array\<NodePoint\>*               |An array of nodes (i.e. *NodePoint* objects)                                               |
+|**NumUnits**               |*Array\<Integer\>*                 |The amount of each player's active units.                                                  |
+|**P0_TurnImages**          |*Map\<Integer, Texture2DDynamic\>* |A map of Player 1's turn number to an image.                                               |
+|**P1Score**                |*Integer*                          |Player 1's score.                                                                          |
+|**P1_TurnImages**          |*Map\<Integer, Texture2DDynamic\>* |A map of Player 2's turn number to an image.                                               |
+|**P2Score**                |*Integer*                          |Player 2's score.                                                                          |
+|**SimplifiedMap**          |*Boolean*                          |This is set based on the *SimplifiedMap* checkbox on the UI.                               |
+|**SimplifiedMapSequence**  |*LevelSequenceActor*               |This is a reference to the *SimplifiedMap* level sequence.                                 |
+|**SpectatorPawn**          |*EvergladesSpectatorPawn*          |A reference to *EvergladesSpectatorPawn* object.                                           |
+|**TurnComplete**           |*Boolean*                          |This states whether the turn is finished.                                                  |
+|**TurnImages**             |*Array\<Texture2DDynamic\>*        |                                                                                           |
+|**Units**                  |*Array\<SwarmUnit\>*               |A collection of swarm units.                                                               |
+|**UseCamAI**               |*Boolean*                          |This is used to toggle between free cam and AI cam.                                        |
+|**UsingFollow**            |*Boolean*                          |This indicates if the camera is tracking a swarm.                                          |
 
 ## Functions
 [**CalculateNodeControl**](../../Methods/ClientMethods/CalculateNodeControl.md)  

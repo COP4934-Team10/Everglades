@@ -1,6 +1,6 @@
-# 
+# IsActorInView
 
-Target is **.  
+Target is *ArenaCam*.  
 
 ## Node
 

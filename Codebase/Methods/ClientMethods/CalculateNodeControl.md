@@ -1,6 +1,7 @@
-# 
+# CalculateNodeControl
+Calculates the percentage of the map that each player controls.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
@@ -8,9 +9,6 @@ Target is **.
 |Name   |Type   |Description    |
 |-------|-------|---------------|
 |**In** |*Exec* |Execution pin. |
-|****|**||
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**
