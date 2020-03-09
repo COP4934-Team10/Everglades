@@ -1,16 +1,12 @@
-# 
+# TurnPauseToggle
+Pauses game playback when pause button or **p** key is pressed.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,15 @@
-# 
+# Event Tick
+This event is called every frame and is responsible for checking and processing
+each turn of the Everglades game.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name               |Type   |Description                        |
+|-------------------|-------|-----------------------------------|
+|**DeltaSeconds**   |*Float*|Elapsed time since previous tick.  |

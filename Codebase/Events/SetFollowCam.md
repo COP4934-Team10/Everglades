@@ -1,16 +1,14 @@
-# 
+# SetFollowCam
+Camera follows groups that are in transit.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description            |
+|-----------|-----------|-----------------------|
+|**GroupID**|*Integer*  |The ID of the group.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,15 @@
-# 
+# SetFocusGroup
+Sets the group on which the camera should focus.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name               |Type       |Description                                                                    |
+|-------------------|-----------|-------------------------------------------------------------------------------|
+|**NewFocusGroup**  |*Integer*  |The ID of the group.                                                           |
+|**Override**       |*Boolean*  |Focus on group even if group hasn't changed. Used when toggling camera modes.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

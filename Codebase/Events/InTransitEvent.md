@@ -1,16 +1,15 @@
-# 
+# InTransitEvent
+Event called every turn to process movements of groups that are in transit.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description            |
+|---------------|-----------|-----------------------|
+|**SwarmID**    |*Integer*  |The group's ID.        |
+|**TargetNode** |*Integer*  |The target node's ID.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

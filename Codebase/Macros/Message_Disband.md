@@ -1,16 +1,19 @@
-# 
+# Message_Disband
+Parses data from array of strings regarding the disbanding
+of groups.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description        |
+|-----------|-----------|-------------------|
+|**Inputs** |*String*   |Group disband data.|
+
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name       |Type       |Description                    |
+|-----------|-----------|-------------------------------|
+|**Group**  |*Integer*  |The ID of the disbanding group.|
+|**Player** |*Integer*  |The ID of the owning player.   |

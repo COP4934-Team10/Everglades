@@ -1,16 +1,13 @@
-# 
+# TurnTimeout
+Sets *TurnComplete* to true when *EventsSent* and *EventsCompleted* are both zero 
+(i.e., there are no events to process).  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

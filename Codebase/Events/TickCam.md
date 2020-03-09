@@ -1,16 +1,14 @@
-# 
+# TickCam
+Changes camera location every tick.  
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name               |Type   |Description                        |
+|-------------------|-------|-----------------------------------|
+|**DeltaSeconds**   |*Float*|Elapsed time since previous tick.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

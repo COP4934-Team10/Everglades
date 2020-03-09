@@ -1,16 +1,10 @@
-# 
-
-Target is **.  
+# ImageLoadComplete
+After images are loaded, fires *RunLevel* event in *MainMenu*.
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

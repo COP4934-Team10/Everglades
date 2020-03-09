@@ -1,6 +1,7 @@
-# 
+# Message_CombatEvent
+Does nothing.....
 
-Target is **.  
+Target is *EvergladesGameMode*.  
 
 ## Node
 
