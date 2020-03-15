@@ -1,16 +1,14 @@
-# 
+# On ComponentBeginOverlap(Sphere)
+Calls *GroupEntered* macro when an actor enters the node's *Sphere*.  
 
-Target is **.  
+Target is *NodeControlDome*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type   |Description            |
+|---------------|-------|-----------------------|
+|**Other Actor**|*Actor*|The overlapping actor. |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

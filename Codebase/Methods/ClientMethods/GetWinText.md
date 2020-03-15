@@ -1,16 +1,14 @@
-# 
+# GetWinText
+*This will never be called.*  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
 |Name   |Type   |Description    |
 |-------|-------|---------------|
-|****|**||
+|**ReturnValue**|*Text* ||

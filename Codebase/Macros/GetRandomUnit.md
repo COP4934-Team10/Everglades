@@ -1,16 +1,14 @@
-# 
+# GetRandomUnit
+Selects a random unit from *GroupUnits*.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name       |Type       |Description    |
+|-----------|-----------|---------------|
+|**Output** |*SwarmUnit*||

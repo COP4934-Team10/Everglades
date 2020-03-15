@@ -1,16 +1,13 @@
-# 
+# ConstructionScript
+After the node is constructed, sets the node's color, the value of *MaxControlPoints*, the
+value of *NeutralControlPoints*, and the value of *ArenaWidth*.  
 
-Target is **.  
+Target is *NodePoint*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

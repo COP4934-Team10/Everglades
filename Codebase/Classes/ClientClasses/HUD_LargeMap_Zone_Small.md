@@ -1,31 +1,31 @@
 # HUD_LargeMap_Zone_Small
-
+A node's 2D representation on the random large map.
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
-**Parent Class** &nbsp; &nbsp;  
+**Parent Class** &nbsp; &nbsp; UserWidget  
 
 ## Variables
-|Variable                   |Type                       |Description    |
-|---------------------------|---------------------------|---------------|
-|**CurrentControlRatio**    |*Float*                    ||
-|**FillEdge**               |*Image*                    ||
-|**InnerDynamicMaterial**   |*MaterialInstanceDynamic*  ||
-|**InnerRing_Blue**         |*Image*                    ||
-|**InnerRing_Red**          |*Image*                    ||
-|**InnerRing_White**        |*Image*                    ||
-|**LetterHousing**          |*Image*                    ||
-|**M_FillCircle_Inner**     |*Image*                    ||
-|**M_FillCircle_Outer**     |*Image*                    ||
-|**MinimapZoneRef**         |*HUD_MiniMap_Zone*         ||
-|**NodeDisplayID**          |*TextBlock*                ||
-|**NodeID**                 |*Integer*                  ||
-|**OuterDynamicMaterial**   |*MaterialInstanceDynamic*  ||
-|**OuterRing_Blue**         |*Image*                    ||
-|**OuterRing_Red**          |*Image*                    ||
-|**OuterRing_White**        |*Image*                    ||
-|**TargetNode**             |*NodePoint*                ||
-|**ZoneType_Defense**       |*Image*                    ||
-|**ZoneType_Watchtower**    |*Image*                    ||
+|Variable                   |Type                       |Description                                                            |
+|---------------------------|---------------------------|-----------------------------------------------------------------------|
+|**CurrentControlRatio**    |*Float*                    |Current interpolated control value of the node for the current frame.  |
+|**FillEdge**               |*Image*                    |Image separates the color filling the ring from the previous color.    |
+|**InnerDynamicMaterial**   |*MaterialInstanceDynamic*  |Dynamic material for node's inner ring.                                |
+|**InnerRing_Blue**         |*Image*                    |A blue inner ring.                                                     |
+|**InnerRing_Red**          |*Image*                    |A red inner ring.                                                      |
+|**InnerRing_White**        |*Image*                    |A white inner ring.                                                    |
+|**LetterHousing**          |*Image*                    |The housing for the *NodeDisplayID*.                                   |
+|**M_FillCircle_Inner**     |*Image*                    |Image used for dynamic material of inner ring.                         |
+|**M_FillCircle_Outer**     |*Image*                    |Image used for dynamic material of outer ring.                         |
+|**MinimapZoneRef**         |*HUD_MiniMap_Zone*         |A reference to the minimap.                                            |
+|**NodeDisplayID**          |*TextBlock*                |The displayed ID of the node.                                          |
+|**NodeID**                 |*Integer*                  |The ID of the node.                                                    |
+|**OuterDynamicMaterial**   |*MaterialInstanceDynamic*  |Dynamic material for the node's outer ring.                            |
+|**OuterRing_Blue**         |*Image*                    |A blue outer ring.                                                     |
+|**OuterRing_Red**          |*Image*                    |A red outer ring.                                                      |
+|**OuterRing_White**        |*Image*                    |A white outer ring.                                                    |
+|**TargetNode**             |*NodePoint*                |The current node in question.                                          |
+|**ZoneType_Defense**       |*Image*                    |Image denotes fortress.                                                |
+|**ZoneType_Watchtower**    |*Image*                    |Image denotes watchtower.                                              |
 
 ## Functions
 **None**  

@@ -1,16 +1,14 @@
-# 
+# UpdateMap
+Calls *UpdateMap* in *HUD_LargeMap_Zone* every tick to update the map.  
 
-Target is **.  
+Target is *HUD_LargeMap*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type   |Description                        |
+|---------------|-------|-----------------------------------|
+|**DeltaTime**  |*Float*|The time since the previous tick.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

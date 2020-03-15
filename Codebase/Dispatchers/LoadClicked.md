@@ -1,16 +1,14 @@
-# 
+# LoadClicked
+Bound to *LoadLevel* event in *MainMenu*, it is for loading the selected telemetry folder.  
 
-Target is **.  
+Target is *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description                                |
+|---------------|-----------|-------------------------------------------|
+|**FolderName** |*String*   |The name of the telemetry folder to open.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,12 @@
-# 
+# HideControlNodes
+Makes nodes invisible in the world.  
 
-Target is **.  
+Target is *NodeControlDome*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

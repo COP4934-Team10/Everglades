@@ -1,16 +1,14 @@
-# 
+# GetNeutralControlPoints
+Gets the control point value for neutral nodes.  
 
-Target is **.  
+Target is *EvergladesMacroLibrary*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name               |Type       |Description                                                |
+|-------------------|-----------|-----------------------------------------------------------|
+|**ControlPoints**  |*Integer*  |The amount of points awarded for contolling a neutral node.|

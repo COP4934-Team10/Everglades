@@ -1,16 +1,12 @@
-# 
+# Event BeginPlay
+Initializes the spectator pawn when the game starts.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,15 @@
-# 
+# HideNodes
+Given a collection of IDs of nodes being used in the Everglades match,
+turns off visibility for nodes that are not being used.  
 
-Target is **.  
+Target is *HUD_largeMap_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type               |Description                            |
+|-----------|-------------------|---------------------------------------|
+|**Nodes**  |*Array\<Integer\>* |The IDs of nodes used in this match.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

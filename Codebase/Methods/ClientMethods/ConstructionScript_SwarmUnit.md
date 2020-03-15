@@ -1,16 +1,12 @@
-# 
+# ConstructionScript
+The default construction script with no additions.  
 
-Target is **.  
+Target is *SwarmUnit*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

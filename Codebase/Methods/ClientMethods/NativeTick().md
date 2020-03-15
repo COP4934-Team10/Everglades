@@ -1,5 +1,6 @@
 # NativeTick()
-Override function for *NativeTick()*. This allows multiple Everglades game runs to be completed.  
+Override function for *NativeTick()*. This allows multiple Everglades game runs to be completed and 
+creates related output such as calling the *AddResults* event in the *StartRunWidget* blueprint.  
 
 ## Syntax
 ```cpp

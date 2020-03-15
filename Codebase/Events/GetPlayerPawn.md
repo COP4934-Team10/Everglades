@@ -1,16 +1,13 @@
-# 
+# GetPlayerPawn
+Used to get player pawn and cast to *EvergladesSpectatorPawn*, but will repeat
+the event should the casting fail.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

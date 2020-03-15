@@ -1,16 +1,15 @@
-# 
+# ProcessStandingOrder
+If *StandingOrder* is "RdyMove", "InTransit", or "Arrived", it calls *IncrementalMove* macro and
+sets *OrderProcessed* to true. Sets to false otherwise.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name               |Type       |Description                            |
+|-------------------|-----------|---------------------------------------|
+|**OrderProcessed** |*Boolean*  |Whether the order has been processed.  |

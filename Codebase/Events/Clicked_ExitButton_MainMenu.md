@@ -1,16 +1,12 @@
-# 
+# On Clicked(ExitButton)
+Quits the game.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

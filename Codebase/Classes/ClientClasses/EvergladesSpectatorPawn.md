@@ -5,16 +5,16 @@
 **Parent Class** &nbsp; &nbsp; SpectatorPawn  
 
 ## Variables
-|Variable                       |Type                   |Description    |
-|-------------------------------|-----------------------|---------------|
-|**CamTarget**                  |*Actor*                ||
-|**CurrentState**               |*SpectatorState*       ||
-|**DEBUG_CurrentArenaTarget**   |*Integer*              ||
-|**GameModeRef**                |*EvergladesGameMode*   ||
-|**Look**                       |*Boolean*              ||
-|**LookSpeed**                  |*Float*                ||
-|**MoveSpeed**                  |*Float*                ||
-|**OrbitDirection**             |*Vector*               ||
+|Variable                       |Type                   |Description                                                                |
+|-------------------------------|-----------------------|---------------------------------------------------------------------------|
+|**CamTarget**                  |*Actor*                |The swarm the camera tracks.                                               |
+|**CurrentState**               |*SpectatorState*       |Current camera view (free, trackswarm, arena).                             |
+|**DEBUG_CurrentArenaTarget**   |*Integer*              |The current node the camera should be viewing.                             |
+|**GameModeRef**                |*EvergladesGameMode*   |A reference to the game mode.                                              |
+|**Look**                       |*Boolean*              |Whether the user is controlling the view (free cam, right mouse button).   |
+|**LookSpeed**                  |*Float*                |The speed at which the camera moves to look at something (in free cam).    |
+|**MoveSpeed**                  |*Float*                |The speed at which the user translates the camera (free cam).              |
+|**OrbitDirection**             |*Vector*               |The direction for the camera to rotate.                                    |
 
 ## Functions
 [**ConstructionScript**](../../Methods/ClientMethods/ConstructionScript_EvergladesSpectatorPawn.md)  

@@ -1,16 +1,15 @@
-# 
+# ChangeParent
+Called from *ProcessTransferUnitsUpdate* in *EvergladesGameMode*, this removes the unit
+from one group and adds it to another.  
 
-Target is **.  
+Target is *SwarmUnit*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type           |Description                                    |
+|---------------|---------------|-----------------------------------------------|
+|**NewParent**  |*SwarmGroup*   |The new group to which the unit will belong.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

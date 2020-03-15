@@ -1,16 +1,15 @@
-# 
+# ToggleSwarmVisibility
+Toggles between swarms and cube depending on the value of *SimplifiedMap* variable from
+*EvergladesGameMode*.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description                        |
+|-----------|-----------|-----------------------------------|
+|**Visible**|*Boolean*  |Whether the unit should be visible.|
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

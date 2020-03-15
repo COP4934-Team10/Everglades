@@ -1,16 +1,14 @@
-# 
+# GetRandomAttacker 
+Selects a random group from *PotentialAttackers*.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name       |Type           |Description            |
+|-----------|---------------|-----------------------|
+|**Output** |*SwarmGroup*   |The attacking group.   |

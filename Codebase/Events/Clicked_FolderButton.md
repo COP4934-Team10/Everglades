@@ -1,16 +1,13 @@
-# 
+# On Clicked(FolderButton)
+Calls the load folder dispatcher passing the name of the telemetry folder that was on the
+button.  
 
-Target is **.  
+Target is *TelemetryEntryWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

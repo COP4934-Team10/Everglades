@@ -1,16 +1,14 @@
-# 
+# InputAxis_Forward
+Moves spectator pawn forward or backward in local space depending on *AxisValue*.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description                            |
+|---------------|-------|---------------------------------------|
+|**AxisValue**  |*Float*|Current value of the *Forward* axis.   |

@@ -1,16 +1,13 @@
-# 
+# ReloadTelemetryFolders
+Called from the *RunClicked* event in *MainMenu, it clears *FilesScrollBox* and then 
+repopulates it with *TelemetryEntryWidget* widgets.  
 
-Target is **.  
+Target is *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

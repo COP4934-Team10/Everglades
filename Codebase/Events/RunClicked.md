@@ -1,16 +1,13 @@
-# 
+# RunClicked
+Called after matches have finished running on the servers, it hides the *StartRunWidget*
+and makes the *TelemetryLoader* widget visible.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

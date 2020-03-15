@@ -1,16 +1,13 @@
-# 
+# Event BeginPlay
+Called when the unit begins play, it sets the random position relative to the group
+as well as using the *HoverIdle* animation.  
 
-Target is **.  
+Target is *SwarmUnit*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

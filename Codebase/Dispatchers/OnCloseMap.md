@@ -1,16 +1,13 @@
-# 
+# OnCloseMap
+Called when *Btn_Close* is clicked. Bound to *HideMap* event in *SpectatorHUD*.
+Ultimately hides the large map.  
 
-Target is **.  
+Target is *HUD_LargeMap* or *HUD_LargeMap_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

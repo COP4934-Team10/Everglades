@@ -1,16 +1,16 @@
-# 
+# InitializeBlankGroup
+Creates an empty group.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description                                |
+|---------------|-----------|-------------------------------------------|
+|**ID**         |*Integer*  |The group's ID.                            |
+|**PlayerID**   |*Integer*  |The player's ID.                           |
+|**StartNode**  |*Integer*  |Node location where group will be created. |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,16 @@
-# 
+# GetGroupIndicator
+Given a group ID, gets the associated *HUD_GroupIndicator*.  
 
-Target is **.  
+Target is *HUD_LargeMap* or *HUD_LargeMap_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name   |Type       |Description            |
+|-------|-----------|-----------------------|
+|**ID** |*Integer*  |The ID of the group.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name       |Type                   |Description                    |
+|-----------|-----------------------|-------------------------------|
+|**Group**  |*HUD_GroupIndicator*   |Icon that represents a group.  |

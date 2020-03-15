@@ -1,16 +1,14 @@
-# 
+# BackToMainMenu
+Calls animations that return to main menu.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description                                                                |
+|-----------|-----------|---------------------------------------------------------------------------|
+|**Source** |*Integer*  |Whether *StartRunWidget* (1) or *TelemetryLoaderWidget*(0) was cancelled.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

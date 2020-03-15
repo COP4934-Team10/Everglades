@@ -1,16 +1,12 @@
-# 
+# On Clicked(MV_Toggle)
+Sets the visibility of the machine vision panel.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,14 @@
-# 
-
-Target is **.  
+# BuildDebugString
+Creates a string for debugging that contains the player ID, group ID, group health, and standing order.  
+ 
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description        |
+|---------------|-------|-------------------|
+|**ReturnValue**|*Text* |The debug string.  |

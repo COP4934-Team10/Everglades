@@ -1,16 +1,12 @@
-# 
+# On Clicked(RunServer_Button)
+Runs animations that make the *StartRunWidget* appear.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

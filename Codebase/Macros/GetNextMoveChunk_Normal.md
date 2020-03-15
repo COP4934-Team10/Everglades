@@ -1,16 +1,15 @@
-# 
+# GetNextMoveChunk_Normal
+Calculates a new position based on the group's current position and the group's speed.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type       |Description                    |
+|---------------|-----------|-------------------------------|
+|**MovementDir**|*Vector*   |Only outputs (0, 0, 0).        |
+|**Position**   |*Vector*   |The new position of the group. |

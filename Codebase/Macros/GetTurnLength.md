@@ -1,16 +1,14 @@
-# 
+# GetTurnLength
+Returns the length of a turn.  
 
-Target is **.  
+Target is *EvergladesMacroLibrary*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description            |
+|---------------|-------|-----------------------|
+|**TurnLength** |*Float*|The length of one turn.|

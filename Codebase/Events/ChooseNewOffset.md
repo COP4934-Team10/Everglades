@@ -1,16 +1,13 @@
-# 
+# ChooseNewOffset
+This is called by a timer and it selects a random position within a bounding box around
+the unit's parent group to use as a target location for a new position.  
 
-Target is **.  
+Target is *SwarmUnit*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

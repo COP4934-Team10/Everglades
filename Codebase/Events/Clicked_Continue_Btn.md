@@ -1,16 +1,12 @@
-# 
+# On Clicked(Continue_BTN)
+Shows *ServersRunningIntro* animation in reverse and calls *ServersFinished* dispatcher.  
 
-Target is **.  
+Target is *StartRunWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

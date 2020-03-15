@@ -1,16 +1,12 @@
-# 
+# HideMap
+When map is closed, calls *ToggleMap* in *EvergladesGameMode*.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

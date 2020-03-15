@@ -1,16 +1,13 @@
-# 
+# On Clicked(Btn_Pause)
+Calls *TurnPauseToggle* in *EvergladesGameMode* and sets *Btn_Pause* to
+*PauseButtonStyle* or *PlayButtonStyle*.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

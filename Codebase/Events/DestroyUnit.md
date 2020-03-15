@@ -1,16 +1,15 @@
-# 
+# DestroyUnit
+Called from *SetNewHP* event in *SwarmUnit*, calls functions from other blueprints to remove
+the unit from play.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description            |
+|-----------|-----------|-----------------------|
+|**Unit**   |*SwarmUnit*|The unit to destroy.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

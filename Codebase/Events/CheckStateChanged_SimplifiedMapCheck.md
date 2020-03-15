@@ -1,16 +1,15 @@
-# 
+# On Check State Change(SimplifiedMapCheck)
+Sets the *SimplifiedMap* variable in *EvergladesGameMode* to **True** or **False** according to 
+the *SimplifiedMapCheck* checkbox.  
 
-Target is **.  
+Target is *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type       |Description                |
+|---------------|-----------|---------------------------|
+|**IsChecked**  |*Boolean*  |Whether the box is checked.|

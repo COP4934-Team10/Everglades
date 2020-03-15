@@ -1,16 +1,15 @@
-# 
+# Event Tick
+Called every frame, this checks if the trackswarm mode has a valid target to look at.
+If not, it switches to free cam.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name               |Type   |Description                        |
+|-------------------|-------|-----------------------------------|
+|**DeltaSeconds**   |*Float*|The time since the previous tick.  |

@@ -1,16 +1,12 @@
-# 
+# CalcHealth
+Bound to *AttackCompleted* dispatcher and calls *CalculateGroupHealth* macro. **Not called**  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

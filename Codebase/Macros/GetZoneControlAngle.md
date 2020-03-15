@@ -1,16 +1,14 @@
-# 
+# GetZoneControlAngle
+Used to calculate the angle for the *ZoneControl_Fill* image.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name       |Type   |Description                |
+|-----------|-------|---------------------------|
+|**Angle**  |*Float*|An angle from -90.0 to 90.0|

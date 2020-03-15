@@ -1,16 +1,13 @@
-# 
+# Event Construct
+Called after *MainMenu* is constructed. It initializes the main menu by binding some
+events to dispatchers and setting the visibility of some widgets.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

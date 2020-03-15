@@ -1,16 +1,12 @@
-# 
+# On Clicked(CancelButton)
+Plays *Telemetry_Intro* animation in reverse and calls *CancelClicked* dispatcher.  
 
-Target is **.  
+Target is *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

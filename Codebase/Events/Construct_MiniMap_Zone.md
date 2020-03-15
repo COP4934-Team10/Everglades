@@ -1,16 +1,13 @@
-# 
+# Event Construct
+After the *HUD_MiniMap_Zone* or *HUD_MiniMap_Zone_Small* is constructed, 
+this event is called and sets the material for *MaterialRef*.  
 
-Target is **.  
+Target is *HUD_MiniMap_Zone* or *HUD_MiniMap_Zone_Small*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,12 @@
-# 
+# Event BeginPlay
+Binds *AddGroup* and *RemoveGroup* events to *GroupEntered* and *GroupLeft* dispatchers, respectively.  
 
-Target is **.  
+Target is *NodePoint*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

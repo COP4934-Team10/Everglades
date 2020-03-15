@@ -1,16 +1,12 @@
-# 
+# RefreshNode
+Called from *EvergladesGameMode*. Does nothing.
 
-Target is **.  
+Target is *NodePoint*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

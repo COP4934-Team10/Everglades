@@ -1,16 +1,13 @@
-# 
+# EventCompleted
+Called when *InTransit* and *RdyToMove* events are completed. Bound to the *OnEventCompleted*
+event in *EvergladesGameMode*.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,13 @@
-# 
+# On Clicked(ReturnMenu)
+Sets *FolderName* from *EvergladesGameInstance* to empty text and opens
+the *DefaultMap* level.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

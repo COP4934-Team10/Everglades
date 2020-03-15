@@ -1,16 +1,13 @@
-# 
+# Event BeginPlay
+When *SwarmGroup* enters play, creates a dynamic material instance saved to *SimplifiedMat*
+to be used if *SimplifiedMap* is **True**.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

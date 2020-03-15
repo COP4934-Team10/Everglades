@@ -1,16 +1,15 @@
-# 
+# RemoveGroupIndicator
+Removes the *HUD_GroupIndicator* from the *GroupIndicators* array and from the
+map.  
 
-Target is **.  
+Target is *HUD_LargeMap* or *HUD_LargeMap_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description            |
+|-----------|-----------|-----------------------|
+|**GroupID**|*Integer*  |The ID of the group.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

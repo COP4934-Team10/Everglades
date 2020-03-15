@@ -1,13 +1,24 @@
 # EvergladesGameState
+Normally, this makes the game state and certain data available to all players
+connected to the client. However, this appears to do nothing.  
 
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
-**Parent Class** &nbsp; &nbsp;  
+**Parent Class** &nbsp; &nbsp; GameStateBase  
 
 ## Variables
-|Variable   |Type   |Description    |
-|-----------|-------|---------------|
-|****|**||
+|Variable           |Type       |Description            |
+|-------------------|-----------|-----------------------|
+|**TargetFolder**   |*String*   |*Variable is not used.*|
 
-## Methods
-[****]()  
+## Functions
+**None**
+
+## Events
+**None**
+
+## Event Dispatchers
+**None**
+
+## Macros
+**None**

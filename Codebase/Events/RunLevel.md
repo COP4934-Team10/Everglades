@@ -1,16 +1,13 @@
-# 
+# RunLevel
+After images have finished loading, this hides the *MainMenu* and calls both
+*AddHUD* and *RunEvents* from *EvergladesGameMode*.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

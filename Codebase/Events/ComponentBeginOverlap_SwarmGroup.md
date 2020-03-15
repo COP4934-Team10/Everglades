@@ -1,16 +1,14 @@
-# 
+# OnComponentBeginOverlap
+Adds overlapping groups to the *PotentialAttackers* array.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type   |Description            |
+|---------------|-------|-----------------------|
+|**OtherActor** |*Actor*|The overlapping actor. |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,12 @@
-# 
+# ToggleLargeMap
+Sets the visibility of the random large map.  
 
-Target is **.  
+Target is *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -57,14 +57,14 @@
 [**GetNode**](../../Methods/ClientMethods/GetNode.md)  
 [**GetNumPlayerUnits**](../../Methods/ClientMethods/GetNumPlayerUnits.md)  
 [**GetTeamMV**](../../Methods/ClientMethods/GetTeamMV.md)  
-[**GetUnit**](../../Methods/ClientMethods/GetUnit.md)  
+[**GetUnit**](../../Methods/ClientMethods/GetUnit_GameMode.md)  
 [**LogMapData**](../../Methods/ClientMethods/LogMapData.md)  
 [**RemoveGroup**](../../Methods/ClientMethods/RemoveGroup.md)  
 [**RemovePlayerUnit**](../../Methods/ClientMethods/RemovePlayerUnit.md)  
 
 ## Events
 [**AddHUD**](../../Events/AddHUD.md)  
-[**AddUnit**](../../Events/AddUnit.md)  
+[**AddUnit**](../../Events/AddUnit_GameMode.md)  
 [**ArrivedEvent**](../../Events/ArrivedEvent_EvergladesGameMode.md)  
 [**DebugWinner**](../../Events/DebugWinner.md)  
 [**EndMatch**](../../Events/EndMatch.md)  

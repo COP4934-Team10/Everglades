@@ -1,16 +1,14 @@
-# 
+# InputAxis_Mouse_Vert
+Adjusts pitch of spectator up or down depending on *AxisValue*.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description                                |
+|---------------|-------|-------------------------------------------|
+|**AxisValue**  |*Float*|Current value of the *Mouse_Vert* axis.    |

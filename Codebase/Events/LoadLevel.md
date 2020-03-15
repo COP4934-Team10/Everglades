@@ -1,16 +1,14 @@
-# 
+# LoadLevel
+Calls *LoadEvents* event from *EvergladesGameMode* and makes the *LoadingCanvas* visible.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description                                |
+|---------------|-----------|-------------------------------------------|
+|**FolderName** |*String*   |The name of the telemetry folder being run.|
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

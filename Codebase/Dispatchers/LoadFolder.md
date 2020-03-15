@@ -1,16 +1,14 @@
-# 
+# LoadFolder
+Bound to the *LoadTelemetry* event in *TelemetryLoaderWidget*.  
 
-Target is **.  
+Target is *TelemetryEntryWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description                                |
+|---------------|-----------|-------------------------------------------|
+|**FolderName** |*String*   |The name of the telemetry folder to load.  |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

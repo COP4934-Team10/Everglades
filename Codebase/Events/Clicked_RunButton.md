@@ -1,16 +1,14 @@
-# 
+# On Clicked(RunButton)
+Shows *RunServerIntro* animation in reverse, calls  *RunClicked* dispatcher, shows
+*ServerRunningIntro*, calls *StartRun* function from *evgUserWidget* C++ parent class,
+hides *SettingsPanel*, and shows *LoadingPanel*.  
 
-Target is **.  
+Target is *StartRunWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

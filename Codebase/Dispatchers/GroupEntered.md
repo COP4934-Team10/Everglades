@@ -1,16 +1,15 @@
-# 
+# GroupEntered
+Dispatcher called when a group enters the node. Bound to *AddGroup* event
+in *NodePoint*.  
 
-Target is **.  
+Target is *NodeControlDome*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type           |Description                        |
+|-----------|---------------|-----------------------------------|
+|**Group**  |*SwarmGroup*   |The group that entered the node.   |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

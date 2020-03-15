@@ -1,16 +1,15 @@
-# 
+# GetTargetLocation
+Gets a world location for a unit by adding the *TargetLocation* relative position to the
+parent group's world position.  
 
-Target is **.  
+Target is *SwarmUnit*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type       |Description                        |
+|---------------|-----------|-----------------------------------|
+|**ReturnValue**|*Vector*   |The unit's position in the world.  |

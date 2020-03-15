@@ -1,16 +1,15 @@
-# 
+# AttackUnit
+Gets a random group to attack the target unit. *Not called*  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description                    |
+|-----------|-----------|-------------------------------|
+|**NewHP**  |*Float*    |Attacked unit's new hitpoints. |
+|**Unit**   |*SwarmUnit*|The attacked unit.             |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

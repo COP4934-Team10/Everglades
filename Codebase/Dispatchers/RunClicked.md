@@ -1,16 +1,12 @@
-# 
+# RunClicked
+Bound to *RunTransition* event in *MainMenu* it performs an animation.  
 
-Target is **.  
+Target is *StartRunWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

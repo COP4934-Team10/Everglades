@@ -1,16 +1,12 @@
-# 
+# ConstructionScript
+This instantiates the node's mesh components and adds them to the *MyMaterials* array.  
 
-Target is **.  
+Target is *NodeControlDome*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

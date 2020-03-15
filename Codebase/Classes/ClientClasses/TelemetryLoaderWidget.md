@@ -1,23 +1,23 @@
 # TelemetryLoaderWidget
-
+This widget is used for displaying and loading the telemetry files.  
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; User Widget  
 
 ## Variables
-|Variable               |Type               |Description    |
-|-----------------------|-------------------|---------------|
-|**CancelButton**       |*Button*           ||
-|**FileListHousing**    |*Image*            ||
-|**FilesScrollBox**     |*ScrollBox*        ||
-|**Folders**            |*Array\<String\>*  ||
-|**GraphicalHelper**    |*Image*            ||
-|**Housing**            |*Image*            ||
-|**LoadButton**         |*Button*           ||
-|**OpenButton**         |*Button*           ||
-|**REF_Telemetry**      |*Image*            ||
-|**SimplifiedMapCheck** |*CheckBox*         ||
-|**Telemetry_Intro**    |*WidgetAnimation*  ||
+|Variable               |Type               |Description                                |
+|-----------------------|-------------------|-------------------------------------------|
+|**CancelButton**       |*Button*           |The "back" button.                         |
+|**FileListHousing**    |*Image*            |A black background for the listed files.   |
+|**FilesScrollBox**     |*ScrollBox*        |A scroll box for the listed files          |
+|**Folders**            |*Array\<String\>*  |The available telemetry folders.           |
+|**GraphicalHelper**    |*Image*            |An aesthetic hexagon image.                |
+|**Housing**            |*Image*            |A dark background image.                   |
+|**LoadButton**         |*Button*           |The "Load" button.**Unused*                |
+|**OpenButton**         |*Button*           |The "Open Folder" button.                  |
+|**REF_Telemetry**      |*Image*            |A reference image for this widget.         |
+|**SimplifiedMapCheck** |*CheckBox*         |The "SimplifiedMap" checkbox.              |
+|**Telemetry_Intro**    |*WidgetAnimation*  |An animation for this widget.              |
 
 ## Functions
 **None**

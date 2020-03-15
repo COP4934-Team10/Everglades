@@ -1,16 +1,13 @@
-# 
+# AddedToViewport
+Plays the *Fade* (in reverse) and *MainMenu_Intro* animations after the *MainMenu*
+widget is added to the viewport by *EvergladesGameMode*.  
 
-Target is **.  
+Target is *MainMenu*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

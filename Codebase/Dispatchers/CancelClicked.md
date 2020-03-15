@@ -1,16 +1,14 @@
-# 
+# CancelClicked
+Bound to *BackToMainMenu* event in *MainMenu*, goes back to the main menu.  
 
-Target is **.  
+Target is *StartRunWidget* or *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name       |Type       |Description                                                                                |
+|-----------|-----------|-------------------------------------------------------------------------------------------|
+|**Source** |*Integer*  |Represents which cancel button was clicked, in *StartRunWidget* or *TelemetryLoaderWidget*.|
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

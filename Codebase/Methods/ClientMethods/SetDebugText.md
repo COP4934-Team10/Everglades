@@ -1,16 +1,13 @@
-# 
+# SetDebugText
+Calls *GetTextFaceDirection* and *BuildDebugString* macros to set the text for
+*TextRender* for debugging purposes.  
 
-Target is **.  
+Target is *SwarmGroup*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

@@ -1,16 +1,13 @@
-# 
+# ServersFinished
+Bound to *RunClicked* event in *MainMenu*, which hides *StartRunWidget*
+and shows *TelemetryLoaderWidget*.  
 
-Target is **.  
+Target is *StartRunWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

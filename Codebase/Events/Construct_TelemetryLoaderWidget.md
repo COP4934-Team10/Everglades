@@ -1,16 +1,13 @@
-# 
+# Event Construct
+Called when this widget is constructed, it creates a *TelemetryEntryWidget* object for
+each telemetry folder name and adds it to the *FilesScrollBox*.  
 
-Target is **.  
+Target is *TelemetryLoaderWidget*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

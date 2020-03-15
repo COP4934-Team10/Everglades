@@ -1,16 +1,15 @@
-# 
+# SetUnitLoss
+Sets the text and plays the animation associated with a player losing units during a 
+bout of combat.  
 
-Target is **.  
+Target is *HUD_UnitLoss*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+|Name           |Type       |Description                        |
+|---------------|-----------|-----------------------------------|
+|**UnitsLost**  |*Integer*  |The amount of units a player lost. |
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+**None**

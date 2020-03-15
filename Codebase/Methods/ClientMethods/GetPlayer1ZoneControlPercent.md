@@ -1,16 +1,14 @@
-# 
+# GetPlayer1ZoneControlPercent
+Bound to *Player1ZoneControl*, it rotates *ZoneControl_Fill*.  
 
-Target is **.  
+Target is *SpectatorHUD* or *SpectatorHUD_Random*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description    |
+|---------------|-------|---------------|
+|**ReturnValue**|*Float*|The number 0.0.|

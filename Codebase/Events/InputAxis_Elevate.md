@@ -1,16 +1,14 @@
-# 
+# InputAxis_Elevate
+Moves spectator pawn up or down in world space depending on *AxisValue*.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description                            |
+|---------------|-------|---------------------------------------|
+|**AxisValue**  |*Float*|Current value of the *Elevate* axis.   |

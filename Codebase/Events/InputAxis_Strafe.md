@@ -1,16 +1,14 @@
-# 
+# InputAxis_Strafe
+Moves spectator pawn left or right in local space depending on *AxisValue*.  
 
-Target is **.  
+Target is *EvergladesSpectatorPawn*.  
 
 ## Node
 
 ## Inputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|**In** |*Exec* |Execution pin. |
-|****|**||
+**None**
 
 ## Outputs
-|Name   |Type   |Description    |
-|-------|-------|---------------|
-|****|**||
+|Name           |Type   |Description                            |
+|---------------|-------|---------------------------------------|
+|**AxisValue**  |*Float*|Current value of the *Strafe* axis.    |
