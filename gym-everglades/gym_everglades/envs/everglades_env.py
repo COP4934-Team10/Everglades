@@ -7,6 +7,7 @@ import everglades_server.server as server
 
 import numpy as np
 import pdb
+import json
 
 class EvergladesEnv(gym.Env):
 
@@ -54,6 +55,7 @@ class EvergladesEnv(gym.Env):
         config_dir = kwargs.get('config_dir')
         map_file = kwargs.get('map_file')
         unit_file = kwargs.get('unit_file')
+        group_file = kwargs.get('group_file')
         output_dir = kwargs.get('output_dir')
         player_names = kwargs.get('pnames')
         self.debug = kwargs.get('debug',False)
@@ -65,12 +67,41 @@ class EvergladesEnv(gym.Env):
         self.player_dat = {}
         for i in self.pks:
             self.player_dat[i] = {}
+            
+            # The commented code below can be used to allow the individual agents to specify their
+            # unit configurations if the agent specifies a dictionary with group number as key
+            # and an array of tuples as values. The tuples consist of ('UnitType', count). The
+            # format would be:
+            # self.unit_configs = {1: [('Striker', 5), ('Tank', 3)], 2:........}
+            # Just make sure to comment out the code from the json file load unil the
+            # Initialize game call. Also, uncomment the _build_groups function, which
+            # provides a default configuration if the agent does not specify one.
+
             # Check if agent provided unit configuration and, if so, use it.
-            #  If not, use default.
-            if hasattr(self.players[i], 'unit_config'):
-                self.player_dat[i]['unit_config'] = self.players[i].unit_config
-            else:
-                self.player_dat[i]['unit_config'] = self._build_groups(i)
+            ## If not, use default.
+            #if hasattr(self.players[i], 'unit_config'):
+            #    self.player_dat[i]['unit_config'] = self.players[i].unit_config
+            #else:
+            #    self.player_dat[i]['unit_config'] = self._build_groups(i)
+
+            # Load in groups from json configuration file
+            with open(group_file) as fid:
+                group_dat = json.load(fid)
+            
+            # Dict to hold unit configurations for player with the gid as the key
+            self.player_dat[i]['unit_config'] = {}
+
+            # Loop through each group in the file
+            for gid, group in enumerate(group_dat['groups']):
+                # A list to hold (unitType, count) tuples for each group
+                unitsInGroup = []
+                
+                # Loop through each unit type and add to list
+                for unitType in group['units']:
+                    pair = (unitType['Type'], unitType['Count'])
+                    unitsInGroup.append(pair)
+                # Add the group to the player's unit configuration
+                self.player_dat[i]['unit_config'][gid] = unitsInGroup
 
         # Initialize game
         self.game = server.EvergladesGame(
@@ -119,17 +150,17 @@ class EvergladesEnv(gym.Env):
         return observation_space
 
 
-    def _build_groups(self, player_num):
-        unit_configs = {}
+    #def _build_groups(self, player_num):
+    #    unit_configs = {}
 
-        num_units_per_group = int(self.num_units / self.num_groups)
-        for i in range(self.num_groups):
-            unit_type = self.unit_classes[i % len(self.unit_classes)]
-            if i == self.num_groups - 1:
-                unit_configs[i] = [(unit_type, self.num_units - sum([c[0][1] for c in unit_configs.values()]))]
-            else:
-                unit_configs[i] = [(unit_type, num_units_per_group)]
-        return unit_configs
+    #    num_units_per_group = int(self.num_units / self.num_groups)
+    #    for i in range(self.num_groups):
+    #        unit_type = self.unit_classes[i % len(self.unit_classes)]
+    #        if i == self.num_groups - 1:
+    #            unit_configs[i] = [(unit_type, self.num_units - sum([c[0][1] for c in unit_configs.values()]))]
+    #        else:
+    #            unit_configs[i] = [(unit_type, num_units_per_group)]
+    #    return unit_configs
 
     def _build_observations(self):
         observations = {}

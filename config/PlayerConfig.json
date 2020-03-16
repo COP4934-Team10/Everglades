@@ -1,53 +1,149 @@
 {  
    "__type":"PlayerConfig",
-   "groups":[
-      {
-         "units":[
-            {
-               "Type":"Controller",
-               "Count":10
-            },
-            {
-               "Type":"Striker",
-               "Count":10
-            },
-            {
-               "Type":"Tank",
-               "Count":10
-            }
-         ]
-      },
-      {
-         "units":[
-            {
-               "Type":"Striker",
-               "Count":20
-            },
-            {
-               "Type":"Tank",
-               "Count":10
-            }
-         ]
-      },
-      {
-         "units":[
-            {
-               "Type":"Striker",
-               "Count":20
-            },
-            {
-               "Type":"Tank",
-               "Count":10
-            }
-         ]
-      },
-      {
-         "units":[
-            {
-               "Type":"Controller",
-               "Count":10
-            }
-         ]
-      }
-  ]
+    "groups": [
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 4
+                },
+                {
+                    "Type": "Striker",
+                    "Count": 6
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 6
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 4
+                },
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 4
+                },
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units":[
+                {
+                    "Type":"Striker",
+                    "Count": 4
+                },
+                {
+                    "Type":"Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units":[
+                {
+                    "Type":"Striker",
+                    "Count": 4
+                },
+                {
+                    "Type":"Tank",
+                    "Count": 4
+                }
+            ]
+        },
+        {
+            "units":[
+                {
+                    "Type":"Controller",
+                    "Count": 4
+                }
+            ]
+        }
+    ]
 }

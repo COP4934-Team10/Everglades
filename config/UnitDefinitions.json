@@ -24,6 +24,14 @@
             "Speed": 1,
             "Control": 1,
             "Cost": 1
-        }
+        },
+        {
+            "Name": "Recon",
+            "Health": 1,
+            "Damage": 1,
+            "Speed": 3,
+            "Control": 1,
+            "Cost": 1
+        } 
     ]
 }
