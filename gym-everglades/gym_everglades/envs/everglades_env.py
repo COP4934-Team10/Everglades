@@ -163,7 +163,7 @@ class EvergladesEnv(gym.Env):
             low=np.concatenate([[1], control_point_state_low, group_state_low, sensor_state_low]),
             high=np.concatenate([[self.num_turns + 1], control_point_state_high, group_state_high, sensor_state_high])
         )
-        print(observation_space)
+
         pdb.set_trace()
 
         return observation_space
@@ -187,10 +187,12 @@ class EvergladesEnv(gym.Env):
         for player in self.players:
             board_state = self.game.board_state(player)
             player_state = self.game.player_state(player)
+            sensor_state = self.game.sensor_state(player)
 
-            state = np.zeros(board_state.shape[0] + player_state.shape[0] - 1)
+            state = np.zeros(board_state.shape[0] + player_state.shape[0] + sensor_state.shape[0] - 2)
             state[0:board_state.shape[0]] = board_state
-            state[board_state.shape[0]:] = player_state[1:]
+            state[board_state.shape[0]:player_state[1:].shape[0]] = player_state[1:]
+            state[player_state[1:].shape[0]:sensor_state[1:].shape[0]] = sensor_state[1:]
 
             observations[player] = state
 
