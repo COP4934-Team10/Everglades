@@ -145,25 +145,26 @@ class EvergladesEnv(gym.Env):
         group_state_low = np.tile(group_low, self.num_groups)
         group_state_high = np.tile(group_high, self.num_groups)
 
-        # Boundaries for the IR sensor observations. The amount of each unit type is the amount that the recon unit has sensed of each
-        # unit.
-        sensor_low = np.array([1, 1, 0, 0, 0, 0]) # source node, target node, amount of each unit type in order of unit_classes indexing (0-controller, 1-striker, etc.)
-        print(sensor_low)
-        pdb.set_trace()
-
-        sensor_high = 
-
         control_point_portion_low = np.array([0, 0, -100, -1])  # is fortress, is watchtower, percent controlled, num opp units
         control_point_portion_high = np.array([1, 1, 100, self.num_units])
 
         control_point_state_low = np.tile(control_point_portion_low, self.num_nodes)
         control_point_state_high = np.tile(control_point_portion_high, self.num_nodes)
 
+        # Boundaries for the IR sensor observations. The amount of each unit type is the amount that the recon unit has sensed of each
+        # unit.
+        sensor_low = np.concatenate([np.array([1, 1]), np.tile(0, len(self.unit_classes))]) # source node, target node, amount of each unit type in order of unit_classes indexing (0-controller, 1-striker, etc.)
+        sensor_high = np.concatenate([np.array([self.num_nodes, self.num_nodes]), np.tile(self.num_units, len(self.unit_classes))])
+
+        sensor_state_low = np.tile(sensor_low, self.num_groups)
+        sensor_state_high = np.tile(sensor_high, self.num_groups)
+
         observation_space = Box(
-            low=np.concatenate([[1], control_point_state_low, group_state_low]),
-            high=np.concatenate([[self.num_turns + 1], control_point_state_high, group_state_high])
+            low=np.concatenate([[1], control_point_state_low, group_state_low, sensor_state_low]),
+            high=np.concatenate([[self.num_turns + 1], control_point_state_high, group_state_high, sensor_state_high])
         )
-        #pdb.set_trace()
+        print(observation_space)
+        pdb.set_trace()
 
         return observation_space
 
