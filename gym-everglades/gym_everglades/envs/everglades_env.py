@@ -18,7 +18,13 @@ class EvergladesEnv(gym.Env):
         self.num_groups = 12
         self.num_nodes = 11
         self.num_actions_per_turn = 7
-        self.unit_classes = ['controller', 'striker', 'tank']
+        self.unit_classes = ['controller', 'striker', 'tank', 'recon']
+        
+        # With 4 types of units, a group containing all 4 would have the maximum value
+        # for this part of the observation space. If each unit is designated by index, then
+        # this integer would be 3210
+        self.unit_config_high = 3210
+        
 
         # Define the action space
         self.action_space = Tuple((Discrete(self.num_groups), Discrete(self.num_nodes + 1)) * self.num_actions_per_turn)
@@ -55,7 +61,7 @@ class EvergladesEnv(gym.Env):
         config_dir = kwargs.get('config_dir')
         map_file = kwargs.get('map_file')
         unit_file = kwargs.get('unit_file')
-        group_file = kwargs.get('group_file')
+        player_file = kwargs.get('player_file')
         output_dir = kwargs.get('output_dir')
         player_names = kwargs.get('pnames')
         self.debug = kwargs.get('debug',False)
@@ -85,14 +91,14 @@ class EvergladesEnv(gym.Env):
             #    self.player_dat[i]['unit_config'] = self._build_groups(i)
 
             # Load in groups from json configuration file
-            with open(group_file) as fid:
-                group_dat = json.load(fid)
+            with open(player_file) as fid:
+                playerConfig_dat = json.load(fid)
             
             # Dict to hold unit configurations for player with the gid as the key
             self.player_dat[i]['unit_config'] = {}
 
             # Loop through each group in the file
-            for gid, group in enumerate(group_dat['groups']):
+            for gid, group in enumerate(playerConfig_dat['groups']):
                 # A list to hold (unitType, count) tuples for each group
                 unitsInGroup = []
                 
@@ -102,6 +108,10 @@ class EvergladesEnv(gym.Env):
                     unitsInGroup.append(pair)
                 # Add the group to the player's unit configuration
                 self.player_dat[i]['unit_config'][gid] = unitsInGroup
+
+            # Get sensor settings
+            self.player_dat[i]['sensor_config'] = playerConfig_dat['sensor'][0]
+            
 
         # Initialize game
         self.game = server.EvergladesGame(
@@ -129,11 +139,19 @@ class EvergladesEnv(gym.Env):
         pass
 
     def _build_observation_space(self):
-        group_low = np.array([1, 0, 0, 0, 0])  # node loc, class, avg health, in transit, num units rem
-        group_high = np.array([self.num_nodes, len(self.unit_classes), 100, 1, self.num_units])
+        group_low = np.array([1, 0, 0, 0, 0])  # node loc, classes, avg health, in transit, num units rem
+        group_high = np.array([self.num_nodes, self.unit_config_high, 100, 1, self.num_units])
 
         group_state_low = np.tile(group_low, self.num_groups)
         group_state_high = np.tile(group_high, self.num_groups)
+
+        # Boundaries for the IR sensor observations. The amount of each unit type is the amount that the recon unit has sensed of each
+        # unit.
+        sensor_low = np.array([1, 1, 0, 0, 0, 0]) # source node, target node, amount of each unit type in order of unit_classes indexing (0-controller, 1-striker, etc.)
+        print(sensor_low)
+        pdb.set_trace()
+
+        sensor_high = 
 
         control_point_portion_low = np.array([0, 0, -100, -1])  # is fortress, is watchtower, percent controlled, num opp units
         control_point_portion_high = np.array([1, 1, 100, self.num_units])

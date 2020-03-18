@@ -155,12 +155,12 @@ class EvergladesGame:
         for in_type in self.unit_dat['units']:
             # Initialize new unit type
             unit_type = EvgUnitDefinition(
-                    name = in_type['Name'],
-                    health = in_type['Health'],
-                    damage = in_type['Damage'],
-                    speed = in_type['Speed'],
-                    control = in_type['Control'],
-                    cost = in_type['Cost']
+                name = in_type['Name'],
+                health = in_type['Health'],
+                damage = in_type['Damage'],
+                speed = in_type['Speed'],
+                control = in_type['Control'],
+                cost = in_type['Cost']
             )
             self.unit_types.append(unit_type)
             #pdb.set_trace()
@@ -172,6 +172,15 @@ class EvergladesGame:
     def game_init(self, player_dat):
         """ 
         """ 
+
+        # If unit type is Recon, we need to change the speed value to decrease
+        # as the range value increases. An explicit mapping of range to speed would be:
+        # (1, 3), (2, 2), (3, 1).
+        for i in player_dat.keys():
+            for unit in self.unit_types:
+                if unit.unitType == "Recon":
+                    unit.speed = 4 - player_dat[i]['sensor_config']['range']
+        
         # Open up connections
         # Wait for two players
         # Assign player numbers

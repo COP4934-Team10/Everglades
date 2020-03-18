@@ -36,7 +36,7 @@ config_dir = '/everglades/config/'
 map_file = config_dir + map_name
 setup_file = config_dir + 'GameSetup.json'
 unit_file = config_dir + 'UnitDefinitions.json'
-group_file = config_dir + 'PlayerConfig.json'
+player_file = config_dir + 'PlayerConfig.json'
 output_dir = '/everglades/game_telemetry/'
 
 debug = 1
@@ -65,7 +65,7 @@ observations = env.reset(
         config_dir = config_dir,
         map_file = map_file,
         unit_file = unit_file,
-        group_file = group_file,
+        player_file = player_file,
         output_dir = output_dir,
         pnames = names,
         debug = debug

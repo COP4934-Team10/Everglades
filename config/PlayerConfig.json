@@ -114,36 +114,42 @@
             ]
         },
         {
-            "units":[
+            "units": [
                 {
-                    "Type":"Striker",
+                    "Type": "Striker",
                     "Count": 4
                 },
                 {
-                    "Type":"Tank",
+                    "Type": "Tank",
                     "Count": 4
                 }
             ]
         },
         {
-            "units":[
+            "units": [
                 {
-                    "Type":"Striker",
+                    "Type": "Striker",
                     "Count": 4
                 },
                 {
-                    "Type":"Tank",
+                    "Type": "Tank",
                     "Count": 4
                 }
             ]
         },
         {
-            "units":[
+            "units": [
                 {
-                    "Type":"Controller",
+                    "Type": "Controller",
                     "Count": 4
                 }
             ]
+        }
+    ],
+    "sensor": [
+        {
+            "range": 1,
+            "mode": "passive"
         }
     ]
 }
