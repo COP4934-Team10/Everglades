@@ -744,20 +744,23 @@ class EvergladesGame:
         state = np.zeros( ((2 + len(self.unit_types)) * len(self.players[enemy_num].groups)) + 1)
         state[0] = self.current_turn
         index = 1
+        
         # Parse sensedUnits entries to create state output
         for key in sensedUnits:
-            state[index] = key[0] # the enemy group's source node
-            state[index + 1] = key[1] # the enemy group's destination node
+            # Player 0 gets nodes as-is.
+            if player_num == 0:
+                state[index] = key[0] # the enemy group's source node
+                state[index + 1] = key[1] # the enemy group's destination node
+            # Flip board so second player thinks they start at 1
+            if player_num == 1:
+                state[index] = int( self._vec_convert_node(key[0] ) )
+                state[index + 1] = int( self._vec_convert_node(key[1] ) )
             # Loop through each unit type to access their index in the sensedUnits entry
             for i in range(2, (len(self.unit_types) + 2)):
                 state[index + i] = sensedUnits[key][i - 2] # controller, striker, tank, recon, ...
             index += 6
         
-        print(state)
-        if self.current_turn == 149:
-            print("STOP!!!!!!!!!!!!!")
-            pdb.set_trace()
-        
+        #print(state)
         return state
 
 
