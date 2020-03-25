@@ -676,14 +676,14 @@ class EvergladesGame:
                 # We must also check if the player's group is travelling the other direction.
                 for groupID in groupNodes:
                     # Get the group's recon unit's range and mode.
-                    for unit in player.groups[groupID - 1].units:
+                    for unit in player.groups[groupID].units:
                         if unit.unitType == 'recon':
                             tempMode = unit.definition.mode
                             sensorRange = unit.definition.range
 
                     # Check if the enemy group has recon units in active mode and if they can be sensed
-                    if enemyMode == "active" and (player.groups[groupID - 1].location == sourceID or
-                                                    player.groups[groupID - 1].location == destinationID):
+                    if enemyMode == "active" and (player.groups[groupID].location == sourceID or
+                                                    player.groups[groupID].location == destinationID):
                         reconSensed = True
                         if sensorMode != "active":
                             sensorMode = tempMode
@@ -697,7 +697,7 @@ class EvergladesGame:
                     if (sourceID, destinationID) == groupNodes[groupID]:
                         # Check that the enemy group is in sensor range. If so, we have sensed the enemy group using
                         # this group's recon unit(s) sensor mode.
-                        if abs(player.groups[groupID - 1].distance_remaining - enemyGroup.distance_remaining) <= sensorRange:
+                        if abs(player.groups[groupID].distance_remaining - enemyGroup.distance_remaining) <= sensorRange:
                             groupSensed = True
                             sensorMode = tempMode
 
@@ -717,7 +717,7 @@ class EvergladesGame:
                                 path2Length = self.evgMap.nodes[destinationID - 1].connections[index].distance
                         avgLength = (path1Length + path2Length)/2
                         
-                        if abs(avgLength - (player.groups[groupID - 1].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:
+                        if abs(avgLength - (player.groups[groupID].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:
                             groupSensed = True
                             sensorMode = tempMode
                 
@@ -742,7 +742,7 @@ class EvergladesGame:
 
         # Build up sensor_state output
         state = np.zeros( ((2 + len(self.unit_types)) * len(self.players[enemy_num].groups)) + 1)
-        state[0] = self.current_turn + 1
+        state[0] = self.current_turn
         index = 1
         # Parse sensedUnits entries to create state output
         for key in sensedUnits:

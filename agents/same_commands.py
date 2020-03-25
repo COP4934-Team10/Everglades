@@ -53,6 +53,11 @@ class same_commands:
         self.player_num = player_num
         #print('player_num: {}'.format(player_num))
 
+        # Types:
+        #   0 - Controller
+        #   1 - Striker
+        #   2 - Tank
+        #   3 - Recon
         self.unit_config = {
             0: [('controller',1), ('striker', 5)],# 6
             1: [('controller',3), ('striker', 3), ('tank', 3)],# 15
@@ -68,6 +73,11 @@ class same_commands:
             11: [('controller', 20), ('striker', 8), ('tank', 2)]# 100
         }
 
+        # Recon sensor settings
+        self.sensor_config = {
+            "range": 3,
+            "mode": "passive"
+        }
     # end __init__
 
     def get_action(self, obs):

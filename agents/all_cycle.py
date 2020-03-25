@@ -59,7 +59,7 @@ class all_cycle:
         #   0 - Controller
         #   1 - Striker
         #   2 - Tank
-
+        #   3 - Recon
         self.unit_config = {
             0: [('controller',1), ('striker', 5)],# 6
             1: [('controller',3), ('striker', 3), ('tank', 3)],# 15
@@ -75,6 +75,12 @@ class all_cycle:
             11: [('controller', 20), ('striker', 8), ('tank', 2)]# 100
         }
         
+        # Recon sensor settings
+        self.sensor_config = {
+            "range": 3,
+            "mode": "passive"
+        }
+
         self.grouplen = NUM_GROUPS
         self.group_num = 0
         self.node_num = 2

@@ -20,21 +20,32 @@ class random_actions:
 
         self.shape = (self.num_actions, 2)
 
+        # Types:
+        #   0 - Controller
+        #   1 - Striker
+        #   2 - Tank
+        #   3 - Recon
         self.unit_config = {
-            0: [('controller',1), ('striker', 5)],# 6
-            1: [('controller',3), ('striker', 3), ('tank', 3)],# 15
+            0: [('controller',1), ('striker', 4), ('recon', 1)],# 6
+            1: [('controller',2), ('striker', 2), ('tank', 3), ('recon', 2)],# 15
             2: [('tank',5)],# 20
-            3: [('controller', 2), ('tank', 4)],# 26
-            4: [('striker', 10)],# 36
-            5: [('controller', 4), ('striker', 2)],# 42
-            6: [('striker', 4)],# 46
-            7: [('controller', 1), ('striker', 2), ('tank', 3)],# 52
-            8: [('controller', 3)],# 55
-            9: [('controller', 2), ('striker', 4)],# 61
+            3: [('controller', 2), ('tank', 1), ('recon', 3)],# 26
+            4: [('striker', 5), ('recon', 5)],# 36
+            5: [('controller', 3), ('striker', 2), ('recon', 1)],# 42
+            6: [('striker', 3), ('recon', 1)],# 46
+            7: [('controller', 1), ('striker', 2), ('tank', 2), ('recon', 1)],# 52
+            8: [('controller', 1), ('recon', 2)],# 55
+            9: [('controller', 1), ('striker', 3), ('recon', 2)],# 61
             10: [('striker', 9)],# 70
-            11: [('controller', 20), ('striker', 8), ('tank', 2)]# 100
+            11: [('controller', 10), ('striker', 8), ('tank', 2), ('recon', 10)]# 100
         }
 
+        # Recon sensor settings
+        self.sensor_config = {
+            "range": 3,
+            "mode": "active"
+        }
+    # end __init__
     def get_action(self, obs):
         #print('!!!!!!! Observation !!!!!!!!')
         #print(obs)
