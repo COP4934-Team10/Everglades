@@ -7,11 +7,11 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 4,
+                    "ConnectedID": 5,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 5,
+                    "ConnectedID": 6,
                     "Distance": 1
                 }
             ],
@@ -25,29 +25,11 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 5,
+                    "ConnectedID": 6,
                     "Distance": 1
                 },
-                {
-                    "ConnectedID": 10,
-                    "Distance": 1
-                }
-            ],
-            "ID": 4,
-            "Radius": 1,
-            "Resource": [],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
                 {
                     "ConnectedID": 13,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 4,
                     "Distance": 1
                 }
             ],
@@ -61,15 +43,15 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 15,
-                    "Distance": 1
-                },
-                {
                     "ConnectedID": 13,
                     "Distance": 1
+                },
+                {
+                    "ConnectedID": 5,
+                    "Distance": 1
                 }
             ],
-            "ID": 7,
+            "ID": 6,
             "Radius": 1,
             "Resource": [],
             "StructureDefense": 1,
@@ -79,27 +61,9 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 17,
+                    "ConnectedID": 21,
                     "Distance": 1
                 },
-                {
-                    "ConnectedID": 16,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 4,
-                    "Distance": 1
-                }
-            ],
-            "ID": 10,
-            "Radius": 1,
-            "Resource": [],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
                 {
                     "ConnectedID": 19,
                     "Distance": 1
@@ -109,7 +73,7 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 7,
+                    "ConnectedID": 6,
                     "Distance": 1
                 }
             ],
@@ -125,26 +89,6 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 22,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 7,
-                    "Distance": 1
-                }
-            ],
-            "ID": 15,
-            "Radius": 1,
-            "Resource": [
-                "DEFENSE"
-            ],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
-                {
                     "ConnectedID": 17,
                     "Distance": 1
                 },
@@ -153,14 +97,40 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 10,
+                    "ConnectedID": 23,
                     "Distance": 1
                 }
             ],
             "ID": 16,
             "Radius": 1,
+            "Resource": [],
+            "StructureDefense": 1,
+            "TeamStart": -1,
+            "ControlPoints": 100
+        },
+        {
+            "Connections": [
+                {
+                    "ConnectedID": 18,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 24,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 23,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 16,
+                    "Distance": 1
+                }
+            ],
+            "ID": 17,
+            "Radius": 1,
             "Resource": [
-                "DEFENSE"
+                "OBSERVE"
             ],
             "StructureDefense": 1,
             "TeamStart": -1,
@@ -169,7 +139,11 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 25,
+                    "ConnectedID": 19,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 26,
                     "Distance": 1
                 },
                 {
@@ -177,15 +151,11 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 16,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 10,
+                    "ConnectedID": 17,
                     "Distance": 1
                 }
             ],
-            "ID": 17,
+            "ID": 18,
             "Radius": 1,
             "Resource": [],
             "StructureDefense": 1,
@@ -199,7 +169,7 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 25,
+                    "ConnectedID": 18,
                     "Distance": 1
                 },
                 {
@@ -219,7 +189,27 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 15,
+                    "ConnectedID": 22,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 13,
+                    "Distance": 1
+                }
+            ],
+            "ID": 21,
+            "Radius": 1,
+            "Resource": [
+                "OBSERVE"
+            ],
+            "StructureDefense": 1,
+            "TeamStart": -1,
+            "ControlPoints": 100
+        },
+        {
+            "Connections": [
+                {
+                    "ConnectedID": 21,
                     "Distance": 1
                 }
             ],
@@ -233,7 +223,7 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 25,
+                    "ConnectedID": 24,
                     "Distance": 1
                 },
                 {
@@ -253,6 +243,44 @@
                     "Distance": 1
                 }
             ],
+            "ID": 23,
+            "Radius": 1,
+            "Resource": [],
+            "StructureDefense": 1,
+            "TeamStart": -1,
+            "ControlPoints": 100
+        },
+        {
+            "Connections": [
+                {
+                    "ConnectedID": 32,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 31,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 30,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 23,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 16,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 17,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 18,
+                    "Distance": 1
+                }
+            ],
             "ID": 24,
             "Radius": 1,
             "Resource": [],
@@ -263,45 +291,15 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 26,
-                    "Distance": 1
-                },
-                {
                     "ConnectedID": 33,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 31,
+                    "ConnectedID": 32,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 24,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 17,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 19,
-                    "Distance": 1
-                }
-            ],
-            "ID": 25,
-            "Radius": 1,
-            "Resource": [],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
-                {
-                    "ConnectedID": 33,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 25,
+                    "ConnectedID": 18,
                     "Distance": 1
                 },
                 {
@@ -323,7 +321,7 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 38,
+                    "ConnectedID": 23,
                     "Distance": 1
                 },
                 {
@@ -333,8 +331,34 @@
             ],
             "ID": 30,
             "Radius": 1,
+            "Resource": [],
+            "StructureDefense": 1,
+            "TeamStart": -1,
+            "ControlPoints": 100
+        },
+        {
+            "Connections": [
+                {
+                    "ConnectedID": 32,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 30,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 23,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 24,
+                    "Distance": 1
+                }
+            ],
+            "ID": 31,
+            "Radius": 1,
             "Resource": [
-                "DEFENSE"
+                "OBSERVE"
             ],
             "StructureDefense": 1,
             "TeamStart": -1,
@@ -343,11 +367,11 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 38,
+                    "ConnectedID": 33,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 30,
+                    "ConnectedID": 31,
                     "Distance": 1
                 },
                 {
@@ -355,11 +379,11 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 25,
+                    "ConnectedID": 26,
                     "Distance": 1
                 }
             ],
-            "ID": 31,
+            "ID": 32,
             "Radius": 1,
             "Resource": [],
             "StructureDefense": 1,
@@ -373,7 +397,7 @@
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 25,
+                    "ConnectedID": 32,
                     "Distance": 1
                 },
                 {
@@ -393,7 +417,27 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 43,
+                    "ConnectedID": 36,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 41,
+                    "Distance": 1
+                }
+            ],
+            "ID": 35,
+            "Radius": 1,
+            "Resource": [
+                "OBSERVE"
+            ],
+            "StructureDefense": 1,
+            "TeamStart": -1,
+            "ControlPoints": 100
+        },
+        {
+            "Connections": [
+                {
+                    "ConnectedID": 35,
                     "Distance": 1
                 }
             ],
@@ -407,29 +451,7 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 46,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 30,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 31,
-                    "Distance": 1
-                }
-            ],
-            "ID": 38,
-            "Radius": 1,
-            "Resource": [],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
-                {
-                    "ConnectedID": 49,
+                    "ConnectedID": 48,
                     "Distance": 1
                 },
                 {
@@ -438,6 +460,10 @@
                 },
                 {
                     "ConnectedID": 33,
+                    "Distance": 1
+                },
+                {
+                    "ConnectedID": 35,
                     "Distance": 1
                 }
             ],
@@ -453,45 +479,7 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 49,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 36,
-                    "Distance": 1
-                }
-            ],
-            "ID": 43,
-            "Radius": 1,
-            "Resource": [
-                "DEFENSE"
-            ],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
-                {
-                    "ConnectedID": 47,
-                    "Distance": 1
-                },
-                {
-                    "ConnectedID": 38,
-                    "Distance": 1
-                }
-            ],
-            "ID": 46,
-            "Radius": 1,
-            "Resource": [],
-            "StructureDefense": 1,
-            "TeamStart": -1,
-            "ControlPoints": 100
-        },
-        {
-            "Connections": [
-                {
-                    "ConnectedID": 46,
+                    "ConnectedID": 48,
                     "Distance": 1
                 },
                 {
@@ -509,15 +497,15 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 41,
+                    "ConnectedID": 47,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 43,
+                    "ConnectedID": 41,
                     "Distance": 1
                 }
             ],
-            "ID": 49,
+            "ID": 48,
             "Radius": 1,
             "Resource": [],
             "StructureDefense": 1,
@@ -527,11 +515,11 @@
         {
             "Connections": [
                 {
-                    "ConnectedID": 46,
+                    "ConnectedID": 47,
                     "Distance": 1
                 },
                 {
-                    "ConnectedID": 47,
+                    "ConnectedID": 48,
                     "Distance": 1
                 }
             ],

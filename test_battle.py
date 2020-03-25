@@ -27,7 +27,7 @@ else:
 if len(sys.argv) > 3:
     map_name = sys.argv[3] + '.json'
 else:
-    map_name = 'RandomMap.json'
+    map_name = 'DemoMap.json'
 
 if map_name == 'RandomMap.json':
     generate_map.exec(7)
@@ -39,7 +39,7 @@ unit_file = config_dir + 'UnitDefinitions.json'
 player_file = config_dir + 'PlayerConfig.json'
 output_dir = '/everglades/game_telemetry/'
 
-debug = 1
+debug = 0
 
 ## Specific Imports
 agent0_name, agent0_extension = os.path.splitext(agent0_file)

@@ -13,7 +13,11 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 6
+                    "Count": 5
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -25,7 +29,11 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 4
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -37,7 +45,11 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 4
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -45,55 +57,11 @@
             "units": [
                 {
                     "Type": "Controller",
-                    "Count": 4
-                }
-            ]
-        },
-        {
-            "units": [
-                {
-                    "Type": "Controller",
-                    "Count": 4
+                    "Count": 3
                 },
                 {
-                    "Type": "Striker",
-                    "Count": 4
-                },
-                {
-                    "Type": "Tank",
-                    "Count": 4
-                }
-            ]
-        },
-        {
-            "units": [
-                {
-                    "Type": "Striker",
-                    "Count": 4
-                },
-                {
-                    "Type": "Tank",
-                    "Count": 4
-                }
-            ]
-        },
-        {
-            "units": [
-                {
-                    "Type": "Striker",
-                    "Count": 4
-                },
-                {
-                    "Type": "Tank",
-                    "Count": 4
-                }
-            ]
-        },
-        {
-            "units": [
-                {
-                    "Type": "Controller",
-                    "Count": 4
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -109,7 +77,11 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 4
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -121,7 +93,11 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 4
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -133,7 +109,23 @@
                 },
                 {
                     "Type": "Tank",
-                    "Count": 4
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         },
@@ -142,14 +134,70 @@
                 {
                     "Type": "Controller",
                     "Count": 4
+                },
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Striker",
+                    "Count": 4
+                },
+                {
+                    "Type": "Tank",
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "units": [
+                {
+                    "Type": "Controller",
+                    "Count": 3
+                },
+                {
+                    "Type": "Recon",
+                    "Count": 1
                 }
             ]
         }
     ],
     "sensor": [
         {
-            "range": 1,
-            "mode": "passive"
+            "range": 3,
+            "mode": "active"
         }
     ]
 }

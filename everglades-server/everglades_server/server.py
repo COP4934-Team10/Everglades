@@ -95,7 +95,6 @@ class EvergladesGame:
                 node.connection_idxs.append(conn.destID)
             # end connection creation
             node.connection_idxs = np.array(node.connection_idxs).astype(np.int)
-            
             self.map_key1[i] = in_node['ID']
             # Append node to the map
             self.evgMap.nodes.append(node)
@@ -124,7 +123,7 @@ class EvergladesGame:
 
         print(self.map_key1)
         print(array)
-        
+
         self.p1_node_map = array
         
         def _convert_node(node_num):
@@ -175,11 +174,13 @@ class EvergladesGame:
 
         # If unit type is Recon, we need to change the speed value to decrease
         # as the range value increases. An explicit mapping of range to speed would be:
-        # (1, 3), (2, 2), (3, 1).
+        # (1, 3), (2, 2), (3, 1). Also, set the mode and range.
         for i in player_dat.keys():
             for unit in self.unit_types:
                 if unit.unitType == "Recon":
-                    unit.speed = 4 - player_dat[i]['sensor_config']['range']
+                    unit.mode = player_dat[i]['sensor_config']['mode']
+                    unit.range = player_dat[i]['sensor_config']['range']
+                    unit.speed = 4 - unit.range
         
         # Open up connections
         # Wait for two players
@@ -229,7 +230,6 @@ class EvergladesGame:
 
                     # This variable was not used
                     #unit_id = self.unit_names[in_type]
-
 
                     newUnit = EvgUnit(
                             unitType = in_type,
@@ -539,7 +539,8 @@ class EvergladesGame:
 
             idx += 4
         # end per-node state build
-        #pdb.set_trace()
+        # pdb.set_trace()
+
 
         return state
 
@@ -551,7 +552,7 @@ class EvergladesGame:
          |        0 : turn number
          |    Indices 1-5: node states. Repeats for number of nodes, starting at 6
          |        1 : location as node number (int)
-         |        2 : unit type
+         |        2 : unit types
          |        3 : average group health [0-100]
          |        4 : boolean 'is group moving'
          |        5 : number of units alive (int)
@@ -599,6 +600,166 @@ class EvergladesGame:
             pdb.set_trace()
 
         return state
+
+
+    def sensor_state(self, player_num):
+        """ 
+         |  Return the state of the player's IR sensors. Return shall be a numpy array
+         |  with the following index values:
+         |    Index 0
+         |        0 : turn number
+         |    Indices 1-N: sensed units. Repeats for N number of groups
+         |        1 : source location as node number (int)
+         |        2 : destination location as a node number (int)
+                  Within each group, after the first two elements, the amount of each unit type that was sensed.
+                  Repeats for the amount of unit types. Currently:
+         |            3 : amount of controllers [0-100]
+         |            4 : amount of strikers [0-100]
+         |            5 : amount of tanks [0-100]
+         |            6 : amount of recons [0-100]
+        """ 
+        player = self.players[player_num]
+
+        # Get enemy player ID. Only works with two players of IDs 0 and 1
+        if (player_num):
+            enemy_num = 0
+        else:
+            enemy_num = 1
+
+        enemyPlayer = self.players[enemy_num]
+
+        # A dictionary with tuple keys representing source and destination node IDs. The
+        # values are a list of the sensed enemy unit counts [controller, striker, tank, recon] 
+        # with those source and destination nodes. This will be used to construct the final output.
+        # Note that if a group was sensed, but not the unit, the count for that unit in the list will be zero.
+        sensedUnits = {}
+        # A dictionary with group IDs as the key and tuples of (node.ID, node.ID) as values.
+        groupNodes = {}
+
+        # Collect groupIDs that contain recon units, their locations, and their destinations.
+        for group in player.groups:
+            for unit in group.units:
+                if unit.unitType == 'recon' and unit.count > 0:
+                    groupNodes[group.groupID] = (group.location, group.travel_destination)
+        
+        # Loop through enemy player's groups
+        for enemyGroup in enemyPlayer.groups:
+            # Can only sense enemy groups that are travelling
+            if enemyGroup.moving == True:
+                # Is the enemyGroup sensed?
+                groupSensed = False
+                # Are the recon units in the group sensed at any distance because they are in active mode?
+                reconSensed = False
+
+                # An array to hold the count of units in the enemyGroup
+                enemyUnits = np.zeros(len(self.unit_types), dtype=int)
+                # The mode of the recon unit(s). If there are no recon units, default will be "none".
+                enemyMode = "none"
+                # Loop through the  enemyGroup's units to fill the enemyUnits array
+                for unit in enemyGroup.units:
+                    enemyUnits[self.unit_names[unit.unitType]] = unit.count
+                    # While looping, get the mode of the recon unit(s) if any
+                    if unit.unitType == 'recon':
+                        enemyMode = unit.definition.mode
+
+                # Find the enemy group's location and destination nodes
+                sourceID = enemyGroup.location
+                destinationID = enemyGroup.travel_destination
+
+                # Default values for player's mode and range. These will be changed if there is a recon
+                # unit that can detect the enemy group.
+                sensorMode = "none"
+                sensorRange = 0
+
+                # Check if the enemyGroup is travelling between two nodes that the player's group
+                # is also between or if the enemyGroup has recons in active mode that can be sensed.
+                # We must also check if the player's group is travelling the other direction.
+                for groupID in groupNodes:
+                    # Get the group's recon unit's range and mode.
+                    for unit in player.groups[groupID - 1].units:
+                        if unit.unitType == 'recon':
+                            tempMode = unit.definition.mode
+                            sensorRange = unit.definition.range
+
+                    # Check if the enemy group has recon units in active mode and if they can be sensed
+                    if enemyMode == "active" and (player.groups[groupID - 1].location == sourceID or
+                                                    player.groups[groupID - 1].location == destinationID):
+                        reconSensed = True
+                        if sensorMode != "active":
+                            sensorMode = tempMode
+
+                    # If we are in 'active' mode and have detected the enemy group, we have detected all the enemy group's
+                    # units and can break.
+                    if groupSensed and sensorMode == "active":
+                        break
+
+                    # If this occurs, the enemy group is travelling the same direction.
+                    if (sourceID, destinationID) == groupNodes[groupID]:
+                        # Check that the enemy group is in sensor range. If so, we have sensed the enemy group using
+                        # this group's recon unit(s) sensor mode.
+                        if abs(player.groups[groupID - 1].distance_remaining - enemyGroup.distance_remaining) <= sensorRange:
+                            groupSensed = True
+                            sensorMode = tempMode
+
+                    # If this occurs, the enemy group is travelling the opposite direction.
+                    if (destinationID, sourceID) == groupNodes[groupID]:
+                        # Check that the enemy group is in sensor range. This is more difficult because the 'to' and 'from' travel paths
+                        # are not necessarily the same length. Thus, a mean travel path length will be used to calculate whether
+                        # the enemy's group is in range.
+
+                        # Connection_idxs are one-indexed while the node array is zero-indexed. So account
+                        # for that.
+                        for index, connectionID in enumerate(self.evgMap.nodes[sourceID - 1].connection_idxs):
+                            if connectionID == destinationID:
+                                path1Length = self.evgMap.nodes[sourceID - 1].connections[index].distance
+                        for index, connectionID in enumerate(self.evgMap.nodes[destinationID - 1].connection_idxs):
+                            if connectionID == sourceID:
+                                path2Length = self.evgMap.nodes[destinationID - 1].connections[index].distance
+                        avgLength = (path1Length + path2Length)/2
+                        
+                        if abs(avgLength - (player.groups[groupID - 1].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:
+                            groupSensed = True
+                            sensorMode = tempMode
+                
+                # Decide which unit counts from the enemyUnits array are going to be needed according to the above information
+                # If we sensed anything, add to the sensedUnits dictionary.
+                if groupSensed or reconSensed:
+                    sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)] = np.zeros(len(enemyUnits))
+
+                    # Loop through the enemyUnits array. Works with current configuration of [controller, striker, tank, recon].
+                    for index, count in enumerate(enemyUnits):
+                        # If we are in passive mode, only conrollers and strikers are sensed, unless we detected some enemy
+                        # recons that were in active mode.
+                        if sensorMode == "passive":
+                            if index == 0 or index == 1:
+                                sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
+                            if index == 3 and reconSensed:
+                                sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
+                        
+                        # If we are in active mode, all unit types are sensed
+                        if sensorMode == "active":
+                            sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
+
+        # Build up sensor_state output
+        state = np.zeros( ((2 + len(self.unit_types)) * len(self.players[enemy_num].groups)) + 1)
+        state[0] = self.current_turn + 1
+        index = 1
+        # Parse sensedUnits entries to create state output
+        for key in sensedUnits:
+            state[index] = key[0] # the enemy group's source node
+            state[index + 1] = key[1] # the enemy group's destination node
+            # Loop through each unit type to access their index in the sensedUnits entry
+            for i in range(2, (len(self.unit_types) + 2)):
+                state[index + i] = sensedUnits[key][i - 2] # controller, striker, tank, recon, ...
+            index += 6
+        
+        print(state)
+        if self.current_turn == 149:
+            print("STOP!!!!!!!!!!!!!")
+            pdb.set_trace()
+        
+        return state
+
 
     def combat(self):
         ## Apply combat
@@ -813,7 +974,6 @@ class EvergladesGame:
                                     'ARRIVED'
                             )
                             self.output['GROUP_MoveUpdate'].append(outstr) 
-
                             self.evgMap.nodes[start_idx].groups[player].remove(group.groupID)
                             self.evgMap.nodes[end_idx].groups[player].append(group.groupID)
                             group.distance_remaining = 0
