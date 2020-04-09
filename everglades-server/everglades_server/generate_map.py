@@ -10,11 +10,12 @@ class Point:
 #Global Variables
 outputFile = "/Everglades/config/RandomMap.json"
 
-nodeDensityWeight = 1
+nodeDensityWeight = 2
 nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
 fortressWeight = 0.2
 watchtowerWeight = 0.8
+nodeDistance = 1
 
 directionX = [0, 1, 1, 1, 0, -1, -1, -1]
 directionY = [1, 1, 0, -1, -1, -1, 0, 1]
@@ -64,7 +65,7 @@ def GenerateBaseMap(size, map):
                         map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 3
                     else:
                         map[currentPoint.x + directionX[(i + offset)%8]][currentPoint.y + directionY[(i + offset)%8]] = 1
-                        
+                    
                     newPoint = Point()
                     newPoint.x = currentPoint.x + directionX[(i + offset)%8]
                     newPoint.y = currentPoint.y + directionY[(i + offset)%8]
@@ -147,23 +148,24 @@ def GenerateJsonFile(size, map):
     jsonData = {}
     nodes = []
 
+    #Generate P0 Base Node
     first_node = {}
     first_node_connections = []
     
     if map[int(size/2) - 1][0] > 0:
         tmp_conn1 = {}
         tmp_conn1["ConnectedID"] = ((int(size/2) - 1) + 2)
-        tmp_conn1["Distance"] = 1
+        tmp_conn1["Distance"] = nodeDistance
         first_node_connections.append(tmp_conn1)
     if map[int(size/2)][0] > 0:
         tmp_conn1 = {}
         tmp_conn1["ConnectedID"] = ((int(size/2)) + 2)
-        tmp_conn1["Distance"] = 1
+        tmp_conn1["Distance"] = nodeDistance
         first_node_connections.append(tmp_conn1)
     if size%2 != 0 and map[int(size/2) + 1][0] > 0:
         tmp_conn1 = {}
         tmp_conn1["ConnectedID"] = ((int(size/2) + 1) + 2)
-        tmp_conn1["Distance"] = 1
+        tmp_conn1["Distance"] = nodeDistance
         first_node_connections.append(tmp_conn1)
 
     first_node["Connections"] = first_node_connections
@@ -178,7 +180,39 @@ def GenerateJsonFile(size, map):
     first_node["ControlPoints"] = 500
 
     nodes.append(first_node)
+    
+    #Generate P1 Base Node
+    last_node = {}
+    last_node_connections = []
+    
+    if map[int(size/2) - 1][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) - 1) + 2
+        tmp_conn1["Distance"] = nodeDistance
+        last_node_connections.append(tmp_conn1)
+    if map[int(size/2)][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2)) + 2
+        tmp_conn1["Distance"] = nodeDistance
+        last_node_connections.append(tmp_conn1)
+    if size%2 != 0 and map[int(size/2) + 1][size-1] > 0:
+        tmp_conn1 = {}
+        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) + 1) + 2
+        tmp_conn1["Distance"] = nodeDistance
+        last_node_connections.append(tmp_conn1)
 
+    last_node["Connections"] = last_node_connections
+    last_node["ID"] = size*size + 2
+    last_node["Radius"] = 1
+
+    resource1 = []
+    last_node["Resource"] = resource1
+
+    last_node["StructureDefense"] = 1
+    last_node["TeamStart"] = 1
+    last_node["ControlPoints"] = 500
+
+    #Generate Json for all center nodes
     j = 0
     while j < size:
         i = 0
@@ -186,19 +220,40 @@ def GenerateJsonFile(size, map):
             if map[i][j] > 0:
                 tmp_node = {}
                 connections = []
+                connected_to_base = 0
 
                 curNodeId = ((j) * size) + i + 2
+
+                #Add Connection to P0 Base
+                for firstNodeConnection in first_node_connections:
+                    if firstNodeConnection["ConnectedID"] == curNodeId:
+                        tmp_conn = {}
+                        tmp_conn["ConnectedID"] = 1
+                        tmp_conn["Distance"] = nodeDistance
+                        connections.append(tmp_conn)
+                        connected_to_base = 1
+
+                #Add Connections
                 k = 0
                 while k < 8:
                     if j + directionX[k] >= 0 and j + directionX[k] < size and i + directionY[k] >= 0 and i + directionY[k] < size and map[i + directionY[k]][j + directionX[k]] > 0:
                         conNodeId = ((j + directionX[k]) * size) + i + directionY[k] + 2
-
+                        
                         tmp_conn = {}
                         tmp_conn["ConnectedID"] = conNodeId
-                        tmp_conn["Distance"] = 1
+                        tmp_conn["Distance"] = nodeDistance
                         connections.append(tmp_conn)
                     k = k + 1
-                    
+
+                #Add Connection to P1 Base
+                for lastNodeConnection in last_node_connections:
+                    if lastNodeConnection["ConnectedID"] == curNodeId:
+                        tmp_conn = {}
+                        tmp_conn["ConnectedID"] = size*size + 2
+                        tmp_conn["Distance"] = nodeDistance
+                        connections.append(tmp_conn)
+                        connected_to_base = 1
+                
                 tmp_node["Connections"] = connections
 
                 tmp_node["ID"] = curNodeId
@@ -212,8 +267,10 @@ def GenerateJsonFile(size, map):
                 
                 tmp_node["Resource"] = resource
 
-                #Need to decide how to decide base defense
-                tmp_node["StructureDefense"] = 1
+                if connected_to_base == 1:
+                    tmp_node["StructureDefense"] = 1.5
+                else:
+                    tmp_node["StructureDefense"] = 1.25
 
                 tmp_node["TeamStart"] = -1
                 tmp_node["ControlPoints"] = 100
@@ -221,36 +278,6 @@ def GenerateJsonFile(size, map):
                 nodes.append(tmp_node)
             i = i + 1
         j = j + 1
-
-    last_node = {}
-    last_node_connections = []
-    
-    if map[int(size/2) - 1][size-1] > 0:
-        tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) - 1) + 2
-        tmp_conn1["Distance"] = 1
-        last_node_connections.append(tmp_conn1)
-    if map[int(size/2)][size-1] > 0:
-        tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2)) + 2
-        tmp_conn1["Distance"] = 1
-        last_node_connections.append(tmp_conn1)
-    if size%2 != 0 and map[int(size/2) + 1][size-1] > 0:
-        tmp_conn1 = {}
-        tmp_conn1["ConnectedID"] = ((size-1) * size) + (int(size/2) + 1) + 2
-        tmp_conn1["Distance"] = 1
-        last_node_connections.append(tmp_conn1)
-
-    last_node["Connections"] = last_node_connections
-    last_node["ID"] = size*size + 2
-    last_node["Radius"] = 1
-
-    resource1 = []
-    last_node["Resource"] = resource1
-
-    last_node["StructureDefense"] = 1
-    last_node["TeamStart"] = 1
-    last_node["ControlPoints"] = 500
 
     nodes.append(last_node)
 
