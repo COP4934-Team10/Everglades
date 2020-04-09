@@ -242,7 +242,7 @@ class EvergladesGame:
                         if gid in player_dat[player]['sensor_config']:
                             newUnit.mode = player_dat[player]['sensor_config'][gid][0]
                             newUnit.range = player_dat[player]['sensor_config'][gid][1]
-                            newUnit.definition.speed = 4 - newUnit.definition.range
+                            newUnit.definition.speed = 4 - newUnit.range
                         else:
                             newUnit.mode = "passive"
                             newUnit.range = 1
@@ -272,7 +272,7 @@ class EvergladesGame:
                 mapUnitID = '[{}]'.format(';'.join(map(str, newGroup.mapUnitID)))
                 outcount = '[{}]'.format(';'.join(map(str, out_count)))
 
-                outstr = '{:.6f},{},{},{},{},{},{}, {}'.format(self.current_turn,
+                outstr = '{:.6f},{},{},{},{},{},{},{}'.format(self.current_turn,
                                                                  player,
                                                                  map_gid,
                                                                  start_node_idx,
@@ -1117,7 +1117,7 @@ class EvergladesGame:
         hdr = '0,player,group'
         self.output['GROUP_Disband'] = [hdr]
 
-        hdr = '0,player,group,node,types,start,count'
+        hdr = '0,player,group,node,types,start,count,sensorsettings'
         self.output['GROUP_Initialization'] = [hdr]
 
         hdr = '0,player,unitTypes,unitCount,status,node1,node2'

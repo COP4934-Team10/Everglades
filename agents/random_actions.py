@@ -40,19 +40,19 @@ class random_actions:
             11: [('controller', 10), ('striker', 8), ('tank', 2), ('recon', 10)]# 100
         }
 
-        ## Recon sensor settings
-        #self.sensor_config = {
-        #    0: [],
-        #    1: [],
-        #    3: [],
-        #    4: [],
-        #    5: [],
-        #    6: [],
-        #    7: [],
-        #    8: [],
-        #    9: [],
-        #    11: []
-        #}
+        # Recon sensor settings
+        self.sensor_config = {
+            0: ['active', 3],
+            1: ['active', 3],
+            3: ['active', 3],
+            4: ['active', 2],
+            5: ['active', 3],
+            6: ['active', 3],
+            7: ['active', 1],
+            8: ['active', 3],
+            9: ['active', 3],
+            11: ['passive', 3]
+        }
     # end __init__
 
     def get_action(self, obs):
