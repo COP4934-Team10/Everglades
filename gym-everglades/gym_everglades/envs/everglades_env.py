@@ -85,8 +85,11 @@ class EvergladesEnv(gym.Env):
             else:
                 self.player_dat[i]['unit_config'] = self._build_groups(i)
 
-            # Get sensor settings from agent
-            self.player_dat[i]['sensor_config'] = self.players[i].sensor_config
+            # Get sensor settings from agent if provided
+            if hasattr(self.players[i], 'sensor_config'):
+                self.player_dat[i]['sensor_config'] = self.players[i].sensor_config
+            else:
+                self.player_dat[i]['sensor_config'] = {}
             
 
         # Initialize game

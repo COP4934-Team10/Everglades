@@ -171,16 +171,6 @@ class EvergladesGame:
     def game_init(self, player_dat):
         """ 
         """ 
-
-        # If unit type is Recon, we need to change the speed value to decrease
-        # as the range value increases. An explicit mapping of range to speed would be:
-        # (1, 3), (2, 2), (3, 1). Also, set the mode and range.
-        for i in player_dat.keys():
-            for unit in self.unit_types:
-                if unit.unitType == "Recon":
-                    unit.mode = player_dat[i]['sensor_config']['mode']
-                    unit.range = player_dat[i]['sensor_config']['range']
-                    unit.speed = 4 - unit.range
         
         # Open up connections
         # Wait for two players
@@ -218,6 +208,10 @@ class EvergladesGame:
                         mapGroupID = map_gid
                 )
 
+                # Whether there are Recon units in the group. This value updates as the configuration
+                # file is checked.
+                hasRecon = False
+
                 # Each group has a list of tuples for their unit_type and amount, so check each tuple
                 for pair in player_dat[player]['unit_config'][gid]:
                     in_type, in_count = pair
@@ -238,6 +232,25 @@ class EvergladesGame:
 
                     newGroup.count += in_count
                     newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
+
+                    # If unit type is Recon, we need to change the speed value to decrease
+                    # as the range value increases. An explicit mapping of range to speed would be:
+                    # (1, 3), (2, 2), (3, 1). Also, set the mode and range if provided. Default mode
+                    # is passive, default range is 1, and default speed is 3.
+                    if newUnit.unitType == "recon":
+                        hasRecon = True
+                        if gid in player_dat[player]['sensor_config']:
+                            newUnit.mode = player_dat[player]['sensor_config'][gid][0]
+                            newUnit.range = player_dat[player]['sensor_config'][gid][1]
+                            newUnit.definition.speed = 4 - newUnit.definition.range
+                        else:
+                            newUnit.mode = "passive"
+                            newUnit.range = 1
+
+                        sensorString = '[{};{};{}]'.format(newUnit.mode,
+                                                           str(newUnit.range),
+                                                           str(newUnit.definition.speed))
+
                     newGroup.units.append(newUnit)
 
                     in_type = in_type.capitalize()
@@ -249,20 +262,24 @@ class EvergladesGame:
                     map_units += in_count
                 # End Unit loop
 
+                if not hasRecon:
+                    sensorString = '[;;]'
+
                 # Make group.speed[0] the slowest
                 newGroup.speed.sort()
 
                 outtype = '[{}]'.format(';'.join(map(str, out_type)))
                 mapUnitID = '[{}]'.format(';'.join(map(str, newGroup.mapUnitID)))
                 outcount = '[{}]'.format(';'.join(map(str, out_count)))
-                # BUG - will only work if there is one unit type per group; fine for now
-                outstr = '{:.6f},{},{},{},{},{},{}'.format(self.current_turn,
+
+                outstr = '{:.6f},{},{},{},{},{},{}, {}'.format(self.current_turn,
                                                                  player,
                                                                  map_gid,
                                                                  start_node_idx,
                                                                  outtype,
                                                                  mapUnitID,
-                                                                 outcount
+                                                                 outcount,
+                                                                 sensorString
                 )
                 self.output['GROUP_Initialization'].append(outstr)
                 map_gid += 1
@@ -660,7 +677,7 @@ class EvergladesGame:
                     enemyUnits[self.unit_names[unit.unitType]] = unit.count
                     # While looping, get the mode of the recon unit(s) if any
                     if unit.unitType == 'recon':
-                        enemyMode = unit.definition.mode
+                        enemyMode = unit.mode
 
                 # Find the enemy group's location and destination nodes
                 sourceID = enemyGroup.location
@@ -678,8 +695,8 @@ class EvergladesGame:
                     # Get the group's recon unit's range and mode.
                     for unit in player.groups[groupID].units:
                         if unit.unitType == 'recon':
-                            tempMode = unit.definition.mode
-                            sensorRange = unit.definition.range
+                            tempMode = unit.mode
+                            sensorRange = unit.range
 
                     # Check if the enemy group has recon units in active mode and if they can be sensed
                     if enemyMode == "active" and (player.groups[groupID].location == sourceID or
@@ -757,8 +774,19 @@ class EvergladesGame:
                 state[index + 1] = int( self._vec_convert_node(key[1] ) )
             # Loop through each unit type to access their index in the sensedUnits entry
             for i in range(2, (len(self.unit_types) + 2)):
-                state[index + i] = sensedUnits[key][i - 2] # controller, striker, tank, recon, ...
+                state[index + i] = int(sensedUnits[key][i - 2]) # controller, striker, tank, recon, ...
             index += 6
+
+            # This telemetry output was not necessary, but included to conveniently show sensor
+            # data.
+            outstr = '{:.6f},{},{},{},[{}]'.format(
+                    self.current_turn,
+                    player_num,
+                    key[0],
+                    key[1],
+                    ';'.join(str(int(i)) for i in sensedUnits[key])
+            )
+            self.output['SENSOR_ServerData'].append(outstr)
         
         #print(state)
         return state
@@ -1112,6 +1140,9 @@ class EvergladesGame:
         
         for node in self.p1_node_map:
             self.output['MAP_Nodes'].append(str(node))
+
+        hdr = '0,player,enemysource,enemydestination,enemyunitcounts'
+        self.output['SENSOR_ServerData'] = [hdr]
 
     def build_knowledge_output(self):
         players = np.array( list(self.players.keys()) )
