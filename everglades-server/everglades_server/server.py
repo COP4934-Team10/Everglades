@@ -171,7 +171,7 @@ class EvergladesGame:
     def game_init(self, player_dat):
         """ 
         """ 
-        
+
         # Open up connections
         # Wait for two players
         # Assign player numbers
@@ -200,6 +200,7 @@ class EvergladesGame:
             map_node_idx = np.argwhere(self.map_key1 == start_node_idx)[0][0]
 
             self.players[player] = EvgPlayer(player)
+
             for i, gid in enumerate(player_dat[player]['unit_config']):
 
                 newGroup = EvgGroup(
@@ -222,8 +223,7 @@ class EvergladesGame:
                     assert(in_count <= 100), 'Invalid group size allocation'
                     # TODO: create a cost counter to make sure the total unit allocation is correct
 
-                    # This variable was not used
-                    #unit_id = self.unit_names[in_type]
+                    unit_id = self.unit_names[in_type]
 
                     newUnit = EvgUnit(
                             unitType = in_type,
@@ -231,7 +231,14 @@ class EvergladesGame:
                     )
 
                     newGroup.count += in_count
-                    newUnit.definition = self.unit_types[ self.unit_names[in_type] ]
+                    
+                    # Set each definition field according to unit_types. These are defaults.
+                    newUnit.definition.unitType = self.unit_types[unit_id].unitType
+                    newUnit.definition.health = self.unit_types[unit_id].health
+                    newUnit.definition.damage = self.unit_types[unit_id].damage
+                    newUnit.definition.speed = self.unit_types[unit_id].speed
+                    newUnit.definition.control = self.unit_types[unit_id].control
+                    newUnit.definition.cost = self.unit_types[unit_id].cost
 
                     # If unit type is Recon, we need to change the speed value to decrease
                     # as the range value increases. An explicit mapping of range to speed would be:
@@ -248,8 +255,8 @@ class EvergladesGame:
                             newUnit.range = 1
 
                         sensorString = '[{};{};{}]'.format(newUnit.mode,
-                                                           str(newUnit.range),
-                                                           str(newUnit.definition.speed))
+                                                           newUnit.range,
+                                                           newUnit.definition.speed)
 
                     newGroup.units.append(newUnit)
 
@@ -272,14 +279,17 @@ class EvergladesGame:
                 mapUnitID = '[{}]'.format(';'.join(map(str, newGroup.mapUnitID)))
                 outcount = '[{}]'.format(';'.join(map(str, out_count)))
 
-                outstr = '{:.6f},{},{},{},{},{},{},{}'.format(self.current_turn,
-                                                                 player,
-                                                                 map_gid,
-                                                                 start_node_idx,
-                                                                 outtype,
-                                                                 mapUnitID,
-                                                                 outcount,
-                                                                 sensorString
+                # Sensor lags behind current turn
+                turn = self.current_turn + 1
+
+                outstr = '{:.6f},{},{},{},{},{},{},{}'.format(turn,
+                                                              player,
+                                                              map_gid,
+                                                              start_node_idx,
+                                                              outtype,
+                                                              mapUnitID,
+                                                              outcount,
+                                                              sensorString
                 )
                 self.output['GROUP_Initialization'].append(outstr)
                 map_gid += 1
@@ -299,6 +309,7 @@ class EvergladesGame:
         self.focus = np.random.randint(self.total_groups)
         self.capture()
         self.game_end() # To output initial score for time 0
+
 
         return
 

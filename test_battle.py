@@ -27,7 +27,7 @@ else:
 if len(sys.argv) > 3:
     map_name = sys.argv[3] + '.json'
 else:
-    map_name = 'RandomMap.json'
+    map_name = 'DemoMap.json'
 
 if map_name == 'RandomMap.json':
     generate_map.exec(7)
