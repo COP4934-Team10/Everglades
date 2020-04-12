@@ -639,12 +639,12 @@ class EvergladesGame:
          |    Indices 1-N: sensed units. Repeats for N number of groups
          |        1 : source location as node number (int)
          |        2 : destination location as a node number (int)
-                  Within each group, after the first two elements, the amount of each unit type that was sensed.
-                  Repeats for the amount of unit types. Currently:
-         |            3 : amount of controllers [0-100]
-         |            4 : amount of strikers [0-100]
-         |            5 : amount of tanks [0-100]
-         |            6 : amount of recons [0-100]
+         |        Within each group, after the first two elements, the amount of each unit type that was sensed.
+         |        Currently:
+         |        3 : amount of controllers [0-100]
+         |        4 : amount of strikers [0-100]
+         |        5 : amount of tanks [0-100]
+         |        6 : amount of recons [0-100]
         """ 
         player = self.players[player_num]
 

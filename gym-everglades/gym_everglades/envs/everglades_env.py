@@ -20,9 +20,10 @@ class EvergladesEnv(gym.Env):
         self.num_actions_per_turn = 7
         self.unit_classes = ['controller', 'striker', 'tank', 'recon']
         
+        # Integers are used to represent the unit type (e.g. 0: controller, 1: striker).
         # With 4 types of units, a group containing all 4 would have the maximum value
         # for this part of the observation space. If each unit is designated by index, then
-        # this integer would be 3210
+        # this integer would be 3210.
         self.unit_config_high = 3210
         
 
