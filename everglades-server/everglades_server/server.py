@@ -663,8 +663,14 @@ class EvergladesGame:
         
         # Loop through enemy player's groups
         for enemyGroup in enemyPlayer.groups:
-            # Can only sense enemy groups that are travelling
+            # Can only sense enemy groups that are moving
             if enemyGroup.moving == True:
+                
+                # If group is flagged as moving but only RDY_TO_MOVE, change ready to False and continue
+                if enemyGroup.ready == True:
+                    enemyGroup.ready = False
+                    continue
+
                 # Is the enemyGroup sensed?
                 groupSensed = False
                 # Are the recon units in the group sensed at any distance because they are in active mode?
@@ -939,6 +945,9 @@ class EvergladesGame:
                                     if group.count == 0:
                                         #pdb.set_trace()
                                         self.players[opp_pid].groups[tgt_gid].destroyed = True
+                                        # Making sure that destroyed group is no longer moving nor ready
+                                        self.players[opp_pid].groups[tgt_gid].moving = False
+                                        self.players[opp_pid].groups[tgt_gid].ready = False
                                         pop_idx = node.groups[opp_pid].index(tgt_gid)
                                         node.groups[opp_pid].pop(pop_idx)
 
@@ -983,7 +992,6 @@ class EvergladesGame:
                 if not group.destroyed:
                     if group.ready:
                         # Let a turn pass to make Unreal logic happy
-                        group.ready = False
                         group.moving = True
                     elif group.moving:
                         # Apply amount moved
