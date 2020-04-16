@@ -246,17 +246,21 @@ class EvergladesGame:
                     # is passive, default range is 1, and default speed is 3.
                     if newUnit.unitType == "recon":
                         hasRecon = True
+                        newUnit.wavelength = None
                         if gid in player_dat[player]['sensor_config']:
                             newUnit.mode = player_dat[player]['sensor_config'][gid][0]
                             newUnit.range = player_dat[player]['sensor_config'][gid][1]
                             newUnit.definition.speed = 4 - newUnit.range
+                            if newUnit.mode == 'active':
+                                newUnit.wavelength = player_dat[player]['sensor_config'][gid][2]
                         else:
                             newUnit.mode = "passive"
                             newUnit.range = 1
 
-                        sensorString = '[{};{};{}]'.format(newUnit.mode,
+                        sensorString = '[{};{};{};{}]'.format(newUnit.mode,
                                                            newUnit.range,
-                                                           newUnit.definition.speed)
+                                                           newUnit.definition.speed,
+                                                           newUnit.wavelength)
 
                     newGroup.units.append(newUnit)
 
