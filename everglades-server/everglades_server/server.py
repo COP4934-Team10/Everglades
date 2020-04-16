@@ -246,13 +246,13 @@ class EvergladesGame:
                     # is passive, default range is 1, and default speed is 3.
                     if newUnit.unitType == "recon":
                         hasRecon = True
-                        newUnit.wavelength = None
+                        newUnit.wavelength = ""
                         if gid in player_dat[player]['sensor_config']:
                             newUnit.mode = player_dat[player]['sensor_config'][gid][0]
                             newUnit.range = player_dat[player]['sensor_config'][gid][1]
                             newUnit.definition.speed = 4 - newUnit.range
                             if newUnit.mode == 'active':
-                                newUnit.wavelength = player_dat[player]['sensor_config'][gid][2]
+                                newUnit.wavelength = str(player_dat[player]['sensor_config'][gid][2])
                         else:
                             newUnit.mode = "passive"
                             newUnit.range = 1
@@ -274,7 +274,7 @@ class EvergladesGame:
                 # End Unit loop
 
                 if not hasRecon:
-                    sensorString = '[;;]'
+                    sensorString = '[;;;]'
 
                 # Make group.speed[0] the slowest
                 newGroup.speed.sort()
@@ -366,16 +366,16 @@ class EvergladesGame:
                 if test1 and test2 and test3 and test4:
                     used_swarms.append(gid)
                     #print('good move')
-                    
 
-                    tempMove = MovementTurn()
-                    tempMove.currentTurn = self.current_turn
-                    tempMove.player = player
-                    tempMove.gid = gid
-                    tempMove.location = self.players[player].groups[gid].location
-                    tempMove.nid = nid
-
-                    moves.append(tempMove)
+                    outstr = '{:.6f},{},{},{},{},{}'.format(
+                        self.current_turn,
+                        player,
+                        self.players[player].groups[gid].mapGroupID,
+                        self.players[player].groups[gid].location,
+                        nid,
+                        'RDY_TO_MOVE'
+                    )
+                    self.output['GROUP_MoveUpdate'].append(outstr)
 
                     self.players[player].groups[gid].ready = True
                     self.players[player].groups[gid].moving = False
@@ -385,19 +385,6 @@ class EvergladesGame:
         # end player loop
 
         self.combat()
-        
-        for move in moves:
-            if self.players[move.player].groups[move.gid].destroyed == False:
-                    outstr = '{:.6f},{},{},{},{},{}'.format(
-                        move.currentTurn,
-                        move.player,
-                        self.players[move.player].groups[move.gid].mapGroupID,
-                        move.location,
-                        move.nid,
-                        'RDY_TO_MOVE'
-                    )
-                    self.output['GROUP_MoveUpdate'].append(outstr)
-        
         self.movement()
         self.capture()
         self.build_knowledge_output()
