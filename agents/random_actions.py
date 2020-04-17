@@ -44,18 +44,18 @@ class random_actions:
         # {Group #: [mode, range, wavelength], ...}
         # Mode is 'active' or 'passive'. Range is 
         # an integer of 1, 2, or 3. Wavelength is 
-        # single float between 0.37 and 2.50 inclusive.
-        # Only use two digits to the right of the decimal.
+        # a string of a decimal between 0.37 and 2.50 inclusive.
+        # Wavelength must be of the form 'X.XX'.
         self.sensor_config = {
-            0: ['active', 3, 0.38],
-            1: ['active', 3, 0.45],
-            3: ['active', 3, 1.2],
-            4: ['active', 2, 2.3],
-            5: ['active', 3, 0.4],
-            6: ['active', 3, 2.2],
-            7: ['active', 1, 1.13],
-            8: ['active', 3, 1.08],
-            9: ['active', 3, 0.77],
+            0: ['active', 3, '0.38'],
+            1: ['active', 3, '0.45'],
+            3: ['active', 3, '1.20'],
+            4: ['active', 2, '2.30'],
+            5: ['active', 3, '0.40'],
+            6: ['active', 3, '2.20'],
+            7: ['active', 1, '1.13'],
+            8: ['active', 3, '1.08'],
+            9: ['active', 3, '0.77'],
             11: ['passive', 3]
         }
     # end __init__
