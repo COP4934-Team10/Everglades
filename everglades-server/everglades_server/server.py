@@ -763,7 +763,12 @@ class EvergladesGame:
 
                         # Connection_idxs are one-indexed while the node array is zero-indexed. So account
                         # for that.
+                        print("out")
                         for index, connectionID in enumerate(self.evgMap.nodes[sourceID - 1].connection_idxs):
+                            print(destinationID)
+                            print(connectionID)
+                            print(sourceID)
+                            print(self.evgMap.nodes[sourceID - 1].ID)
                             if connectionID == destinationID:
                                 path1Length = self.evgMap.nodes[sourceID - 1].connections[index].distance
                         for index, connectionID in enumerate(self.evgMap.nodes[destinationID - 1].connection_idxs):
