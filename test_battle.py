@@ -38,7 +38,7 @@ setup_file = config_dir + 'GameSetup.json'
 unit_file = config_dir + 'UnitDefinitions.json'
 output_dir = '/everglades/game_telemetry/'
 
-debug = 0
+debug = 1
 
 ## Specific Imports
 agent0_name, agent0_extension = os.path.splitext(agent0_file)

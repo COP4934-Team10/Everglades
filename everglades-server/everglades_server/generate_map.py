@@ -15,7 +15,7 @@ nodeCreatedWeight = 0.5
 nodeFailedWeight = 0.5
 fortressWeight = 0.2
 watchtowerWeight = 0.8
-nodeDistance = 1
+nodeDistance = 3
 
 directionX = [0, 1, 1, 1, 0, -1, -1, -1]
 directionY = [1, 1, 0, -1, -1, -1, 0, 1]
