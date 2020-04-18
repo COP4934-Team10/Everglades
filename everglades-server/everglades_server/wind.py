@@ -101,34 +101,34 @@ def createWindArray(xsize, ysize, octaves=1, offset=0, mirrored=True):
 
 	return wind
 
-def export(filename, map, conn,w):
+# def export(filename, map, conn,w):
+#
+# 	f = open(filename, "w")
+#
+# 	for x in map:
+# 		for y in x:
+# 			f.write(str(y) + "\t")
+# 		f.write("\n")
+#
+# 	for y in w:
+# 		f.write(str(y) + "\n")
+#
+# 	for x in conn:
+# 		f.write(str(x) + "->" + str(conn[x]) + "\n")
+#
+# 	f.close()
 
-	f = open(filename, "w")
 
-	for x in map:
-		for y in x:
-			f.write(str(y) + "\t")
-		f.write("\n")
-
-	for y in w:
-		f.write(str(y) + "\n")
-
-	for x in conn:
-		f.write(str(x) + "->" + str(conn[x]) + "\n")
-
-	f.close()
-
-
-def genVecMap(w):
-
-	fig, ax = plt.subplots(figsize=(9,7))
-
-	for y in range(7):
-		for x in range(9):
-			(x_dir, y_dir) = w[y][x]
-			ax.quiver(x,y,x_dir,y_dir)
-
-	plt.show()
+# def genVecMap(w):
+#
+# 	fig, ax = plt.subplots(figsize=(9,7))
+#
+# 	for y in range(7):
+# 		for x in range(9):
+# 			(x_dir, y_dir) = w[y][x]
+# 			ax.quiver(x,y,x_dir,y_dir)
+#
+# 	plt.show()
 
 def exec(map, xsize, ysize, seed=0):
 	r.seed(seed)
@@ -138,7 +138,7 @@ def exec(map, xsize, ysize, seed=0):
 	m = map
 	w = createWindArray(xsize,ysize,5,offset,False)
 	genConnMags(xsize, ysize, m, conn, w)
-	export("wind.txt", map, conn, w)
+	#export("wind.txt", map, conn, w)
 	#genVecMap(w)
 
 	return conn;
