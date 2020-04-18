@@ -5,17 +5,20 @@ import datetime
 import pdb
 
 import numpy as np
+import random as r
 
 from everglades_server.definitions import *
+from everglades_server import wind
 
 class EvergladesGame:
-    """ 
-    """ 
+    """
+    """
     def __init__(self, **kwargs):
         # Get configuration locations
         config_path = kwargs.get('config_dir')
         map_file = kwargs.get('map_file')
         unit_file = kwargs.get('unit_file')
+        self.setup_file = config_path + 'GameSetup.json'
         self.debug = kwargs.get('debug', False)
         self.player_names = kwargs.get('pnames')
         self.output_dir = kwargs.get('output_dir')
@@ -52,18 +55,30 @@ class EvergladesGame:
         self.output_init()
 
     def board_init(self,map_file):
-        """ 
-        """ 
+        """
+        """
         ## Game board initialization
         # Load in map json configuration file
         with open(map_file) as fid:
             self.map_dat = json.load(fid)
 
+        with open(self.setup_file) as f:
+            self.setup = json.load(f)
+
         Xsize = self.map_dat['Xsize']
         Ysize = self.map_dat['Ysize']
 
+        seed = self.setup['Stochasticity']
+
+        pos = {}
+
+        for row in range(0, Xsize):
+            for col in range(0, Ysize):
+                pos[(col + 2) + (Ysize * row)] = (row + 1, col)
+
         # Initialize map
         self.evgMap = EvgMap(self.map_dat['MapName'])
+        self.evgMap2d = [[-1 for x in range(Xsize + 2)] for y in range(Ysize)]
 
         self.team_starts = {}
         # Two different types of map keys. Note that they may both be the same
@@ -71,7 +86,7 @@ class EvergladesGame:
         #   2) Array sorted by node id with corresponding index of evgMap node
         self.map_key1 = np.zeros( len(self.map_dat['nodes']), dtype=np.int )
         arrayIDs = []
-        # Create the map nodes 
+        # Create the map nodes
         for i, in_node in enumerate(self.map_dat['nodes']):
             # Initialize node
             node = EvgMapNode(
@@ -102,6 +117,20 @@ class EvergladesGame:
         # end node creation
         self.map_key2 = np.argsort( self.map_key1 )
 
+        node_num = 1
+
+        for n in self.evgMap.nodes:
+            id = n.ID
+            if id != 1 and id != (Xsize * Ysize + 2):
+                (x,y) = pos[id]
+                self.evgMap2d[y][x] = node_num
+                node_num += 1
+
+        self.evgMap2d[int(Ysize/2)][0] = 0
+        self.evgMap2d[int(Ysize/2)][Xsize + 1] = node_num
+
+        self.winds = wind.exec(self.evgMap2d, Xsize + 2, Ysize, seed)
+
         # Convert p0 nodes numbering to p1
         # Need method to do this when boards are not hand-designed
 
@@ -125,10 +154,10 @@ class EvergladesGame:
         print(array)
 
         self.p1_node_map = array
-        
+
         def _convert_node(node_num):
             return self.p1_node_map[list(self.map_key1).index(node_num)]
-        
+
         self._vec_convert_node = np.vectorize(_convert_node)
 
         # Fortress defense multiplier for controlling player's units
@@ -139,8 +168,8 @@ class EvergladesGame:
 
 
     def unitTypes_init(self,unit_file):
-        """ 
-        """ 
+        """
+        """
         ## Unit types initialization
         # Load in unit types json configuration file
         with open(unit_file) as fid:
@@ -169,8 +198,8 @@ class EvergladesGame:
         # end unit type creation
 
     def game_init(self, player_dat):
-        """ 
-        """ 
+        """
+        """
 
         # Open up connections
         # Wait for two players
@@ -231,7 +260,7 @@ class EvergladesGame:
                     )
 
                     newGroup.count += in_count
-                    
+
                     # Set each definition field according to unit_types. These are defaults.
                     newUnit.definition.unitType = self.unit_types[unit_id].unitType
                     newUnit.definition.health = self.unit_types[unit_id].health
@@ -302,7 +331,7 @@ class EvergladesGame:
                 del out_count[:]
                 del out_type[:]
 
-                self.players[player].groups.append(newGroup)                    
+                self.players[player].groups.append(newGroup)
                 self.evgMap.nodes[map_node_idx].groups[player].append(i)
             # end group loop
         # end player loop
@@ -318,8 +347,8 @@ class EvergladesGame:
         return
 
     def game_turn(self, actions):
-        """ 
-        """ 
+        """
+        """
         self.current_turn += 1
 
         ## Apply each player's turn
@@ -395,10 +424,10 @@ class EvergladesGame:
 
         # Game end types
         end_states = {}
-        end_states['InProgress']   = 0 
-        end_states['TimeExpired']  = 1 
-        end_states['BaseCapture']  = 2 
-        end_states['Annihilation'] = 3 
+        end_states['InProgress']   = 0
+        end_states['TimeExpired']  = 1
+        end_states['BaseCapture']  = 2
+        end_states['Annihilation'] = 3
         status = end_states['InProgress']
 
         scores = {i:0 for i in self.team_starts}
@@ -413,7 +442,7 @@ class EvergladesGame:
                (node.controlledBy != -1) and \
                (node.controlledBy != node.teamStart):
                 # Extra bonus for capturing the opponent's base
-                base_captured[node.teamStart] = 1 
+                base_captured[node.teamStart] = 1
                 scores[node.controlledBy] += 1000
             if node.controlState != 0:
                 # Points for controlling or partially controlling a node
@@ -446,7 +475,7 @@ class EvergladesGame:
                     self.player_names[0],
                     self.player_names[1]
             )
-            self.output['PLAYER_Tags'].append(outstr) 
+            self.output['PLAYER_Tags'].append(outstr)
 
         if (self.current_turn % 10 == 0):
             self.focus = np.random.randint(self.total_groups)
@@ -458,7 +487,7 @@ class EvergladesGame:
                 status,
                 self.focus
         )
-        self.output['GAME_Scores'].append(outstr) 
+        self.output['GAME_Scores'].append(outstr)
 
         if status != 0:
             self.write_output()
@@ -488,7 +517,7 @@ class EvergladesGame:
         print()
 
     def board_state(self, player_num):
-        """ 
+        """
          |  Return the state of the game board. Returned shall be a numpy array
          |  with the following index values:
          |    Index 0
@@ -498,7 +527,7 @@ class EvergladesGame:
          |        2 : boolean 'has watchtower bonus'
          |        3 : percent controlled [-100:100] player 0 owned = +, player 1 = -
          |        4 : number of opposing player units
-        """ 
+        """
         assert( isinstance(player_num, (int, float)) ), '"player_num" was not a number'
         assert(player_num in self.team_starts), 'Given player number not included in map configuration file starting locations'
 
@@ -564,7 +593,7 @@ class EvergladesGame:
         return state
 
     def player_state(self, player_num):
-        """ 
+        """
          |  Return the state of the player's groups. Return shall be a numpy array
          |  with the following index values:
          |    Index 0
@@ -575,7 +604,7 @@ class EvergladesGame:
          |        3 : average group health [0-100]
          |        4 : boolean 'is group moving'
          |        5 : number of units alive (int)
-        """ 
+        """
         player = self.players[player_num]
         state = np.zeros( len(player.groups) * 5 + 1, dtype = np.int)
         idx = 0
@@ -622,7 +651,7 @@ class EvergladesGame:
 
 
     def sensor_state(self, player_num):
-        """ 
+        """
          |  Return the state of the player's IR sensors. Return shall be a numpy array
          |  with the following index values:
          |    Index 0
@@ -636,7 +665,7 @@ class EvergladesGame:
          |        4 : amount of strikers [0-100]
          |        5 : amount of tanks [0-100]
          |        6 : amount of recons [0-100]
-        """ 
+        """
         player = self.players[player_num]
 
         # Get enemy player ID. Only works with two players of IDs 0 and 1
@@ -648,7 +677,7 @@ class EvergladesGame:
         enemyPlayer = self.players[enemy_num]
 
         # A dictionary with tuple keys representing source and destination node IDs. The
-        # values are a list of the sensed enemy unit counts [controller, striker, tank, recon] 
+        # values are a list of the sensed enemy unit counts [controller, striker, tank, recon]
         # with those source and destination nodes. This will be used to construct the final output.
         # Note that if a group was sensed, but not the unit, the count for that unit in the list will be zero.
         sensedUnits = {}
@@ -660,12 +689,12 @@ class EvergladesGame:
             for unit in group.units:
                 if unit.unitType == 'recon' and unit.count > 0:
                     groupNodes[group.groupID] = (group.location, group.travel_destination)
-        
+
         # Loop through enemy player's groups
         for enemyGroup in enemyPlayer.groups:
             # Can only sense enemy groups that are moving
             if enemyGroup.moving == True:
-                
+
                 # If group is flagged as moving but only RDY_TO_MOVE, change ready to False and continue
                 if enemyGroup.ready == True:
                     enemyGroup.ready = False
@@ -741,11 +770,11 @@ class EvergladesGame:
                             if connectionID == sourceID:
                                 path2Length = self.evgMap.nodes[destinationID - 1].connections[index].distance
                         avgLength = (path1Length + path2Length)/2
-                        
+
                         if abs(avgLength - (player.groups[groupID].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:
                             groupSensed = True
                             sensorMode = tempMode
-                
+
                 # Decide which unit counts from the enemyUnits array are going to be needed according to the above information
                 # If we sensed anything, add to the sensedUnits dictionary.
                 if groupSensed or reconSensed:
@@ -760,7 +789,7 @@ class EvergladesGame:
                                 sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
                             if index == 3 and reconSensed:
                                 sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
-                        
+
                         # If we are in active mode, all unit types are sensed
                         if sensorMode == "active":
                             sensedUnits[(enemyGroup.location, enemyGroup.travel_destination)][index] = count
@@ -769,7 +798,7 @@ class EvergladesGame:
         state = np.zeros( ((2 + len(self.unit_types)) * len(self.players[enemy_num].groups)) + 1)
         state[0] = self.current_turn
         index = 1
-        
+
         # Parse sensedUnits entries to create state output
         for key in sensedUnits:
             # Player 0 gets nodes as-is.
@@ -795,7 +824,7 @@ class EvergladesGame:
                     ';'.join(str(int(i)) for i in sensedUnits[key])
             )
             self.output['SENSOR_ServerData'].append(outstr)
-        
+
         #print(state)
         return state
 
@@ -847,14 +876,14 @@ class EvergladesGame:
             # Only enter combat if previous conditions hold true
             if len(player_gids) >= 2:
                 #pdb.set_trace()
-                # Build a damage dictionary 
+                # Build a damage dictionary
                 #   keys = player ids
                 #   values = array with the opposing unit id that each unit targeted
                 infliction = {} # damage to other units
                 nulled_ids = {}
                 pids = np.array( list(self.players.keys()) )
 
-                # Build damage 
+                # Build damage
                 for pid in player_gids:
                     # Only works for two players right now
                     opp_pid = np.where( pids != pid )[0][0]
@@ -876,9 +905,9 @@ class EvergladesGame:
                                 infliction[pid][uid] = unittype.definition.damage
                 # end player loop
                 #pdb.set_trace()
-            
+
                 all_dmg[node.ID] = {pid:{'groups':[], 'units':[], 'health':[]} for pid in self.team_starts}
-                
+
                 # Apply damage - separate so units don't die before they get to apply their damage
                 for pid in player_gids:
                     opp_pid = np.where( pids != pid )[0][0]
@@ -902,16 +931,16 @@ class EvergladesGame:
                                 tgt_unit = group.units[tgt_unit_type_idx]
                                 tgt_armor = tgt_unit.definition.health
                                 tgt_cntrl = 1 if node.controlledBy == opp_pid else 0
-            
+
                                 fort_bns = 1 if ('DEFEND' in node.resource) else 0
                                 strct_def = node.defense
                                 node_def = (tgt_cntrl + fort_bns) * strct_def
-                                
-                                # Determine damage. Damage equation: 
+
+                                # Determine damage. Damage equation:
                                 # ( 10 * damage infliction ) / ( (unit armor + fortress bonus) * structure defense )
                                 loss = (10. * tgt_dmg) / (tgt_armor + node_def)
 
-                                # Subtract damage 
+                                # Subtract damage
                                 #pdb.set_trace()
                                 if (len(nulled_ids[opp_pid][tgt_group]) > 0):
                                     #pdb.set_trace()
@@ -921,7 +950,7 @@ class EvergladesGame:
                                     if tgt_idx < np.sum(unit.unitHealth > 0):
                                         break
                                     tgt_idx -= np.sum(unit.unitHealth > 0)
-                                
+
                                 tgt_unit_idx = np.argwhere( tgt_unit.unitHealth > 0 )[tgt_idx]
                                 tgt_unit.unitHealth[tgt_unit_idx] -= loss
 
@@ -956,7 +985,7 @@ class EvergladesGame:
                                                 opp_pid,
                                                 self.players[opp_pid].groups[tgt_gid].mapGroupID
                                         )
-                                        self.output['GROUP_Disband'].append(outstr) 
+                                        self.output['GROUP_Disband'].append(outstr)
                                 else:
                                     outhealth = tgt_armor * (tgt_unit.unitHealth[tgt_unit_idx] / 100.)
                                 outhealthstr = '{:.6f}'.format(float(outhealth))
@@ -978,8 +1007,8 @@ class EvergladesGame:
                             ';'.join(str(i) for i in all_dmg[node.ID][opp_pid]['units']),
                             ';'.join(str(i) for i in all_dmg[node.ID][opp_pid]['health']),
                     )
-                    self.output['GROUP_CombatUpdate'].append(outstr) 
-                            
+                    self.output['GROUP_CombatUpdate'].append(outstr)
+
                 # end player loop
                 #pdb.set_trace()
             # end if combat check
@@ -994,13 +1023,22 @@ class EvergladesGame:
                         # Let a turn pass to make Unreal logic happy
                         group.moving = True
                     elif group.moving:
-                        # Apply amount moved
-                        # BUG - if group consists of different unit types, it won't move properly
-                        group.distance_remaining -= group.speed[0]
 
                         # Get information for adjustments
                         start_idx = int( np.squeeze(np.where(self.map_key1 == group.location)) )
                         end_idx = int( np.squeeze(np.where(self.map_key1 == group.travel_destination)) )
+
+                        wind_value = self.winds[(start_idx, end_idx)]
+
+                        if group.distance_remaining >= .5:
+                            wind_mag = self.winds[(start_idx, end_idx)][0]
+
+                        else:
+                            wind_mag = self.winds[(start_idx, end_idx)][1]
+
+                        # Apply amount moved
+                        # BUG - if group consists of different unit types, it won't move properly
+                        group.distance_remaining -= (group.speed[0] + group.speed[0] * wind_mag)
 
                         # Check for arrival
                         if group.distance_remaining <= 0:
@@ -1014,7 +1052,7 @@ class EvergladesGame:
                                     self.evgMap.nodes[end_idx].ID,
                                     'ARRIVED'
                             )
-                            self.output['GROUP_MoveUpdate'].append(outstr) 
+                            self.output['GROUP_MoveUpdate'].append(outstr)
                             self.evgMap.nodes[start_idx].groups[player].remove(group.groupID)
                             self.evgMap.nodes[end_idx].groups[player].append(group.groupID)
                             group.distance_remaining = 0
@@ -1032,7 +1070,7 @@ class EvergladesGame:
                                     self.evgMap.nodes[end_idx].ID,
                                     'IN_TRANSIT'
                             )
-                            self.output['GROUP_MoveUpdate'].append(outstr) 
+                            self.output['GROUP_MoveUpdate'].append(outstr)
 
                     # end move adjustments
             # end group loop
@@ -1055,7 +1093,7 @@ class EvergladesGame:
                             for unit in self.players[pid].groups[gid].units:
                                 count = unit.count
                                 xer = unit.definition.control
-                                points[pid] += count * xer 
+                                points[pid] += count * xer
                     if ctr >= 1:
                         controllers.append(pid)
 
@@ -1066,8 +1104,8 @@ class EvergladesGame:
                    (controllers[0] != node.controlledBy):
                     # Logistics
                     if controllers[0] == 0:
-                        pxer = 1 
-                        pid = 0 
+                        pxer = 1
+                        pid = 0
                     else:
                         pxer = -1
                         pid = 1
@@ -1092,7 +1130,7 @@ class EvergladesGame:
                                 np.abs(node.controlState),
                                 fullctrl
                         )
-                        self.output['NODE_ControlUpdate'].append(outstr) 
+                        self.output['NODE_ControlUpdate'].append(outstr)
 
                     # Update
                     if np.abs(node.controlState) >= node.controlPoints:
@@ -1147,7 +1185,7 @@ class EvergladesGame:
 
         hdr = 'nodes'
         self.output['MAP_Nodes'] = [hdr]
-        
+
         for node in self.p1_node_map:
             self.output['MAP_Nodes'].append(str(node))
 
@@ -1244,7 +1282,7 @@ class EvergladesGame:
 
                     for opp_gid in node.groups[opp_pid]:
                         opp_group = self.players[opp_pid].groups[opp_gid]
-                        
+
                         for unit in opp_group.units:
                             in_ut = unit.unitType
                             ut = in_ut[0].upper() + in_ut[1:]
@@ -1303,7 +1341,7 @@ class EvergladesGame:
 
         # end player loop
 
-        
+
     def write_output(self):
         for key in self.output.keys():
             #pdb.set_trace()
