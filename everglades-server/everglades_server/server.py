@@ -720,6 +720,14 @@ class EvergladesGame:
                 sourceID = enemyGroup.location
                 destinationID = enemyGroup.travel_destination
 
+                # Get the index of the nodes with the source and destination IDs
+                for index, nodeID in enumerate(self.map_key1):
+                    if nodeID == sourceID:
+                        sourceIndex = index
+                for index, nodeID in enumerate(self.map_key1):
+                    if  nodeID == destinationID:
+                        destIndex = index
+
                 # Default values for player's mode and range. These will be changed if there is a recon
                 # unit that can detect the enemy group.
                 sensorMode = "none"
@@ -763,17 +771,12 @@ class EvergladesGame:
 
                         # Connection_idxs are one-indexed while the node array is zero-indexed. So account
                         # for that.
-                        print("out")
-                        for index, connectionID in enumerate(self.evgMap.nodes[sourceID - 1].connection_idxs):
-                            print(destinationID)
-                            print(connectionID)
-                            print(sourceID)
-                            print(self.evgMap.nodes[sourceID - 1].ID)
+                        for index, connectionID in enumerate(self.evgMap.nodes[sourceIndex].connection_idxs):
                             if connectionID == destinationID:
-                                path1Length = self.evgMap.nodes[sourceID - 1].connections[index].distance
-                        for index, connectionID in enumerate(self.evgMap.nodes[destinationID - 1].connection_idxs):
+                                path1Length = self.evgMap.nodes[sourceIndex].connections[index].distance
+                        for index, connectionID in enumerate(self.evgMap.nodes[destIndex].connection_idxs):
                             if connectionID == sourceID:
-                                path2Length = self.evgMap.nodes[destinationID - 1].connections[index].distance
+                                path2Length = self.evgMap.nodes[destIndex].connections[index].distance
                         avgLength = (path1Length + path2Length)/2
 
                         if abs(avgLength - (player.groups[groupID].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:
