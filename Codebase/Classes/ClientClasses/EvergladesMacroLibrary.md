@@ -1,5 +1,5 @@
 # EvergladesMacroLibrary
-
+A collection of commonly used macros for the Everglades game.
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; Object  

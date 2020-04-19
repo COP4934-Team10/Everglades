@@ -1,5 +1,6 @@
 # EvergladesGameMode
-
+This class is the "main" class of the Everglades client and drives events
+and controls playback of the Everglades match.
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; GameModeBase  

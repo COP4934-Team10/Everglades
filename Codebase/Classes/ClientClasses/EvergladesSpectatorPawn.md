@@ -1,5 +1,5 @@
 # EvergladesSpectatorPawn
-
+The class of the actor representing the user.
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; SpectatorPawn  
