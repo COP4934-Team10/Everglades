@@ -6,6 +6,7 @@ import pdb
 
 import numpy as np
 import random as r
+import re
 
 from everglades_server.definitions import *
 from everglades_server import wind
@@ -230,7 +231,11 @@ class EvergladesGame:
 
             self.players[player] = EvgPlayer(player)
 
+            assert(type(player_dat[player]['unit_config']) is dict), 'Unit configuration must be a dictionary'
+            assert(len(player_dat[player]['unit_config']) == 12), 'A player must have 12 groups'
+
             for i, gid in enumerate(player_dat[player]['unit_config']):
+                assert(re.match('^(1[0-1]|[0-9])$', str(gid))), 'Group IDs must be integers 0-11, inclusive'
 
                 newGroup = EvgGroup(
                         groupID = gid,
@@ -242,18 +247,32 @@ class EvergladesGame:
                 # file is checked.
                 hasRecon = False
 
+                # Cost counter variable
+                counter = 0
+
+                assert(type(player_dat[player]['unit_config'][gid]) is list), 'Group values must be a list'
+
                 # Each group has a list of tuples for their unit_type and amount, so check each tuple
                 for pair in player_dat[player]['unit_config'][gid]:
+                    assert(type(pair) is tuple), 'Group array must contain tuples'
+                    assert(type(pair[0]) is str), 'Unit type must be a string'
+                    assert(type(pair[1]) is int), 'Unit count must be an integer'
+                    
                     in_type, in_count = pair
                     in_type = in_type.lower()
 
                     # Input validation
                     assert(in_type in self.unit_names), 'Group type not in unit type config file'
                     assert(in_count <= 100), 'Invalid group size allocation'
-                    # TODO: create a cost counter to make sure the total unit allocation is correct
 
                     unit_id = self.unit_names[in_type]
 
+                    # Cost counter to make sure the total unit allocation is correct
+                    # Total cost limit was set by multiplying the maximum number of units, 
+                    # 100, by base cost of 1.
+                    counter += (self.unit_types[unit_id].cost * in_count)
+                    assert(counter <= 100), 'Total cost cannot exceed 100'
+                    
                     newUnit = EvgUnit(
                             unitType = in_type,
                             count = in_count
@@ -276,11 +295,26 @@ class EvergladesGame:
                     if newUnit.unitType == "recon":
                         hasRecon = True
                         newUnit.wavelength = ""
+                        assert(type(player_dat[player]['sensor_config']) is dict), 'Sensor configuration must be a dictionary'
+                        
                         if gid in player_dat[player]['sensor_config']:
+                            # Check format and values
+                            assert(type(player_dat[player]['sensor_config'][gid]) is list), 'Group\'s sensor configuration value must be a list'
+                            assert(type(player_dat[player]['sensor_config'][gid][0]) is str), 'Mode must be a string'
+                            assert(player_dat[player]['sensor_config'][gid][0] in ('active', 'passive')), 'Mode must be active or passive'
+                            assert(type(player_dat[player]['sensor_config'][gid][1]) is int), 'Range must be an integer'
+                            assert(1 <= player_dat[player]['sensor_config'][gid][1] <= 3), 'Range must be between 1 and 3, inclusive'
+                            
                             newUnit.mode = player_dat[player]['sensor_config'][gid][0]
                             newUnit.range = player_dat[player]['sensor_config'][gid][1]
                             newUnit.definition.speed = 4 - newUnit.range
+                            
                             if newUnit.mode == 'active':
+                                assert(type(player_dat[player]['sensor_config'][gid][2]) is str), 'Wavelength must be a string'
+                                # Wavelength must be of the form X.XX
+                                assert(re.match('\d[.]\d\d$',player_dat[player]['sensor_config'][gid][2])), 'Wavelength must be of the form X.XX'
+                                assert(0.37 <= float(player_dat[player]['sensor_config'][gid][2]) <= 2.50), 'Wavelength must be between 0.37 and 2.50, inclusive'
+                                
                                 newUnit.wavelength = str(player_dat[player]['sensor_config'][gid][2])
                         else:
                             newUnit.mode = "passive"

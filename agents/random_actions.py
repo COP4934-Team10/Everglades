@@ -28,7 +28,7 @@ class random_actions:
         self.unit_config = {
             0: [('controller',1), ('striker', 4), ('recon', 1)],# 6
             1: [('controller',2), ('striker', 2), ('tank', 3), ('recon', 2)],# 15
-            2: [('tank',5)],# 20
+            2: [('tank', 5)],# 20
             3: [('controller', 2), ('tank', 1), ('recon', 3)],# 26
             4: [('striker', 5), ('recon', 5)],# 36
             5: [('controller', 3), ('striker', 2), ('recon', 1)],# 42
@@ -37,7 +37,7 @@ class random_actions:
             8: [('controller', 1), ('recon', 2)],# 55
             9: [('controller', 1), ('striker', 3), ('recon', 2)],# 61
             10: [('striker', 9)],# 70
-            11: [('controller', 10), ('striker', 8), ('tank', 2), ('recon', 10)]# 100
+            11: [('controller', 10), ('striker', 8), ('tank', 2), ('recon', 10)],# 100
         }
 
         # Recon sensor settings. Format is
