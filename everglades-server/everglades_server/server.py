@@ -6,7 +6,6 @@ import pdb
 
 import numpy as np
 import random as r
-import re
 
 from everglades_server.definitions import *
 from everglades_server import wind
@@ -63,21 +62,25 @@ class EvergladesGame:
         with open(map_file) as fid:
             self.map_dat = json.load(fid)
 
+        # Load in GameSetup.json file
         with open(self.setup_file) as f:
             self.setup = json.load(f)
 
         Xsize = self.map_dat['Xsize']
         Ysize = self.map_dat['Ysize']
 
-        seed = self.setup['Stochasticity']
+        # Seed value used for wind Stochasticity from game setup
+        windSeed = self.setup['Stochasticity']
 
-        pos = {}
+        # Positions of nodes
+        windPos = {}
 
+        #Add positions of every node
         for row in range(0, Xsize):
             for col in range(0, Ysize):
-                pos[(col + 2) + (Ysize * row)] = (row + 1, col)
+                windPos[(col + 2) + (Ysize * row)] = (row + 1, col)
 
-        # Initialize map
+        # Initialize maps
         self.evgMap = EvgMap(self.map_dat['MapName'])
         self.evgMap2d = [[-1 for x in range(Xsize + 2)] for y in range(Ysize)]
 
@@ -118,19 +121,21 @@ class EvergladesGame:
         # end node creation
         self.map_key2 = np.argsort( self.map_key1 )
 
+        # Recreate game board from node numbers
         node_num = 1
 
         for n in self.evgMap.nodes:
             id = n.ID
             if id != 1 and id != (Xsize * Ysize + 2):
-                (x,y) = pos[id]
+                (x,y) = windPos[id]
                 self.evgMap2d[y][x] = node_num
                 node_num += 1
-
+        # Add base nodes
         self.evgMap2d[int(Ysize/2)][0] = 0
         self.evgMap2d[int(Ysize/2)][Xsize + 1] = node_num
 
-        self.winds = wind.exec(self.evgMap2d, Xsize + 2, Ysize, seed)
+        # Create wind magnifiers
+        self.winds = wind.exec(self.evgMap2d, Xsize + 2, Ysize, windSeed)
 
         # Convert p0 nodes numbering to p1
         # Need method to do this when boards are not hand-designed
@@ -231,11 +236,7 @@ class EvergladesGame:
 
             self.players[player] = EvgPlayer(player)
 
-            assert(type(player_dat[player]['unit_config']) is dict), 'Unit configuration must be a dictionary'
-            assert(len(player_dat[player]['unit_config']) == 12), 'A player must have 12 groups'
-
             for i, gid in enumerate(player_dat[player]['unit_config']):
-                assert(re.match('^(1[0-1]|[0-9])$', str(gid))), 'Group IDs must be integers 0-11, inclusive'
 
                 newGroup = EvgGroup(
                         groupID = gid,
@@ -247,32 +248,18 @@ class EvergladesGame:
                 # file is checked.
                 hasRecon = False
 
-                # Cost counter variable
-                counter = 0
-
-                assert(type(player_dat[player]['unit_config'][gid]) is list), 'Group values must be a list'
-
                 # Each group has a list of tuples for their unit_type and amount, so check each tuple
                 for pair in player_dat[player]['unit_config'][gid]:
-                    assert(type(pair) is tuple), 'Group array must contain tuples'
-                    assert(type(pair[0]) is str), 'Unit type must be a string'
-                    assert(type(pair[1]) is int), 'Unit count must be an integer'
-                    
                     in_type, in_count = pair
                     in_type = in_type.lower()
 
                     # Input validation
                     assert(in_type in self.unit_names), 'Group type not in unit type config file'
                     assert(in_count <= 100), 'Invalid group size allocation'
+                    # TODO: create a cost counter to make sure the total unit allocation is correct
 
                     unit_id = self.unit_names[in_type]
 
-                    # Cost counter to make sure the total unit allocation is correct
-                    # Total cost limit was set by multiplying the maximum number of units, 
-                    # 100, by base cost of 1.
-                    counter += (self.unit_types[unit_id].cost * in_count)
-                    assert(counter <= 100), 'Total cost cannot exceed 100'
-                    
                     newUnit = EvgUnit(
                             unitType = in_type,
                             count = in_count
@@ -295,26 +282,11 @@ class EvergladesGame:
                     if newUnit.unitType == "recon":
                         hasRecon = True
                         newUnit.wavelength = ""
-                        assert(type(player_dat[player]['sensor_config']) is dict), 'Sensor configuration must be a dictionary'
-                        
                         if gid in player_dat[player]['sensor_config']:
-                            # Check format and values
-                            assert(type(player_dat[player]['sensor_config'][gid]) is list), 'Group\'s sensor configuration value must be a list'
-                            assert(type(player_dat[player]['sensor_config'][gid][0]) is str), 'Mode must be a string'
-                            assert(player_dat[player]['sensor_config'][gid][0] in ('active', 'passive')), 'Mode must be active or passive'
-                            assert(type(player_dat[player]['sensor_config'][gid][1]) is int), 'Range must be an integer'
-                            assert(1 <= player_dat[player]['sensor_config'][gid][1] <= 3), 'Range must be between 1 and 3, inclusive'
-                            
                             newUnit.mode = player_dat[player]['sensor_config'][gid][0]
                             newUnit.range = player_dat[player]['sensor_config'][gid][1]
                             newUnit.definition.speed = 4 - newUnit.range
-                            
                             if newUnit.mode == 'active':
-                                assert(type(player_dat[player]['sensor_config'][gid][2]) is str), 'Wavelength must be a string'
-                                # Wavelength must be of the form X.XX
-                                assert(re.match('\d[.]\d\d$',player_dat[player]['sensor_config'][gid][2])), 'Wavelength must be of the form X.XX'
-                                assert(0.37 <= float(player_dat[player]['sensor_config'][gid][2]) <= 2.50), 'Wavelength must be between 0.37 and 2.50, inclusive'
-                                
                                 newUnit.wavelength = str(player_dat[player]['sensor_config'][gid][2])
                         else:
                             newUnit.mode = "passive"
@@ -430,14 +402,15 @@ class EvergladesGame:
                     used_swarms.append(gid)
                     #print('good move')
 
-                    tempMove = MovementTurn()
-                    tempMove.currentTurn = self.current_turn
-                    tempMove.player = player
-                    tempMove.gid = gid
-                    tempMove.location = self.players[player].groups[gid].location
-                    tempMove.nid = nid
-
-                    moves.append(tempMove)
+                    outstr = '{:.6f},{},{},{},{},{}'.format(
+                        self.current_turn,
+                        player,
+                        self.players[player].groups[gid].mapGroupID,
+                        self.players[player].groups[gid].location,
+                        nid,
+                        'RDY_TO_MOVE'
+                    )
+                    self.output['GROUP_MoveUpdate'].append(outstr)
 
                     self.players[player].groups[gid].ready = True
                     self.players[player].groups[gid].moving = False
@@ -447,19 +420,6 @@ class EvergladesGame:
         # end player loop
 
         self.combat()
-        
-        for move in moves:
-            if self.players[move.player].groups[move.gid].destroyed == False:
-                    outstr = '{:.6f},{},{},{},{},{}'.format(
-                        move.currentTurn,
-                        move.player,
-                        self.players[move.player].groups[move.gid].mapGroupID,
-                        move.location,
-                        move.nid,
-                        'RDY_TO_MOVE'
-                    )
-                    self.output['GROUP_MoveUpdate'].append(outstr)
-        
         self.movement()
         self.capture()
         self.build_knowledge_output()
@@ -766,14 +726,6 @@ class EvergladesGame:
                 sourceID = enemyGroup.location
                 destinationID = enemyGroup.travel_destination
 
-                # Get the index of the nodes with the source and destination IDs
-                for index, nodeID in enumerate(self.map_key1):
-                    if nodeID == sourceID:
-                        sourceIndex = index
-                for index, nodeID in enumerate(self.map_key1):
-                    if  nodeID == destinationID:
-                        destIndex = index
-
                 # Default values for player's mode and range. These will be changed if there is a recon
                 # unit that can detect the enemy group.
                 sensorMode = "none"
@@ -817,12 +769,12 @@ class EvergladesGame:
 
                         # Connection_idxs are one-indexed while the node array is zero-indexed. So account
                         # for that.
-                        for index, connectionID in enumerate(self.evgMap.nodes[sourceIndex].connection_idxs):
+                        for index, connectionID in enumerate(self.evgMap.nodes[sourceID - 1].connection_idxs):
                             if connectionID == destinationID:
-                                path1Length = self.evgMap.nodes[sourceIndex].connections[index].distance
-                        for index, connectionID in enumerate(self.evgMap.nodes[destIndex].connection_idxs):
+                                path1Length = self.evgMap.nodes[sourceID - 1].connections[index].distance
+                        for index, connectionID in enumerate(self.evgMap.nodes[destinationID - 1].connection_idxs):
                             if connectionID == sourceID:
-                                path2Length = self.evgMap.nodes[destIndex].connections[index].distance
+                                path2Length = self.evgMap.nodes[destinationID - 1].connections[index].distance
                         avgLength = (path1Length + path2Length)/2
 
                         if abs(avgLength - (player.groups[groupID].distance_remaining + enemyGroup.distance_remaining)) <= sensorRange:

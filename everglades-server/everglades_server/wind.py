@@ -1,3 +1,6 @@
+# Michael Fielder
+# Wind Library for Everglades Games
+
 import sys
 from noise import pnoise2, snoise2
 import matplotlib.pyplot as plt
@@ -17,13 +20,15 @@ def genConnMags(xsize, ysize, map, conn, wind):
 	neighbors = [(1,0), (1,1), (0,1), (-1,1), (-1,0), (-1,-1), (0,-1), (1,-1)]
 	diagonals = [(1,1), (-1, 1), (-1,-1), (1,-1)]
 
+	# Iterate through map
 	for y in range(ysize):
 		for x in range(xsize):
-			# Check he neighboring nodes for connections
+			# Check neighboring nodes for connections
 			if map[y][x] != -1:
 				for n in neighbors:
 					(i, j) = n
 
+					# Bounds check
 					xCheck = x + i >= 0 and x + i < xsize
 					yCheck = y + j >= 0 and y + j < ysize
 
@@ -35,6 +40,7 @@ def genConnMags(xsize, ysize, map, conn, wind):
 						node1_wind = wind[y][x]
 						node2_wind = wind[y + j][x + i]
 
+						# Add node as connection after performing scalar multiplier
 						if not ((node1, node2) in conn.keys()):
 							if n in diagonals:
 								node1_mag = dot(node1_wind, (i * 0.7071, j * 0.7071))
@@ -44,7 +50,7 @@ def genConnMags(xsize, ysize, map, conn, wind):
 								node2_mag = dot(node2_wind, n)
 
 							conn[(node1, node2)] = [round(node1_mag * .2,3), round(node2_mag * .2,3)]
-
+						# Add node going in other direction
 						if not ((node2,node1) in conn.keys()):
 							if n in diagonals:
 								node1_mag = dot(node1_wind, (-i * 0.7071, -j * 0.7071))
@@ -63,11 +69,13 @@ def createWindArray(xsize, ysize, octaves=1, offset=0, mirrored=True):
 
 	freq  = 16 * octaves
 
+	# Mirrors the wind vector field
 	if mirrored:
 		xsize_half = int(xsize / 2)
 
 		for y in range(ysize):
 			row = []
+			# Creates vectors using Perlin noise as angle for vector in radians
 			for x in range(xsize):
 				noise = snoise2((x + offset)/freq, (y+offset)/freq, octaves)
 				angle = noise * 2 * math.pi
@@ -76,7 +84,7 @@ def createWindArray(xsize, ysize, octaves=1, offset=0, mirrored=True):
 
 				if x < xsize_half:
 					row.append((round(x_dir,3),round(y_dir,3)))
-
+				# Makes middle row have no vectors to ensure fairness
 				elif x == xsize_half:
 					row.append((0,0))
 
@@ -118,6 +126,7 @@ def createWindArray(xsize, ysize, octaves=1, offset=0, mirrored=True):
 #
 # 	f.close()
 
+# Generates an interpretation of wind vector map using MatPlotLib
 
 # def genVecMap(w):
 #
@@ -130,15 +139,16 @@ def createWindArray(xsize, ysize, octaves=1, offset=0, mirrored=True):
 #
 # 	plt.show()
 
+# Main function that creates vector field
 def exec(map, xsize, ysize, seed=0):
 	r.seed(seed)
 	offset = int(r.random() * 10000)
-	file = open("wind.txt", "w")
+	#file = open("wind.txt", "w")
 	conn = {}
 	m = map
-	w = createWindArray(xsize,ysize,5,offset,False)
+	w = createWindArray(xsize,ysize,5,offset,True)
 	genConnMags(xsize, ysize, m, conn, w)
 	#export("wind.txt", map, conn, w)
-	#genVecMap(w)
+	genVecMap(w)
 
 	return conn;
