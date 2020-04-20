@@ -23,7 +23,5 @@
 [**_build_groups()**](../../Methods/ServerMethods/_build_groups().md)  
 [**_build_observations()**](../../Methods/ServerMethods/_build_observations().md)  
 [**_build_observation_space()**](../../Methods/ServerMethods/_build_observation_space().md)  
-[**close()**](../../Methods/ServerMethods/close().md)  
-[**render()**](../../Methods/ServerMethods/render().md)  
 [**reset()**](../../Methods/ServerMethods/reset().md)  
 [**step()**](../../Methods/ServerMethods/step().md)  

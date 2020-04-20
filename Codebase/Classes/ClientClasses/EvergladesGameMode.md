@@ -103,7 +103,6 @@ and controls playback of the Everglades match.
 [**GetLastIndex**](../../Macros/GetLastIndex.md)  
 [**IDExists**](../../Macros/IDExists.md)  
 [**ImageURLProcessing**](../../Macros/ImageURLProcessing.md)  
-[**Message_CombatEvent**](../../Macros/Message_CombatEvent.md)  
 [**Message_CombatUpdate**](../../Macros/Message_CombatUpdate.md)  
 [**Message_ControlUpdate**](../../Macros/Message_ControlUpdate.md)  
 [**Message_CreateNewGroup**](../../Macros/Message_CreateNewGroup.md)  

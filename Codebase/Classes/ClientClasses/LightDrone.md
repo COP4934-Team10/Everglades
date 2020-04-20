@@ -16,9 +16,6 @@ The blueprint for the **Striker** unit.
 [**ConstructionScript**](../../Methods/ClientMethods/ConstructionScript_LightDrone.md)  
 
 ## Events
-[**Event ActorBeginOverlap**]() *Disabled*  
-[**Event BeginPlay**]() *Disabled*  
-[**Event Tick**]() *Disabled*  
 [**SetTeamColors**](../../Events/SetTeamColors.md)  
 
 

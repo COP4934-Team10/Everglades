@@ -39,7 +39,6 @@ A group of drone units.
 
 ## Events
 [**AddUnit**](../../Events/AddUnit_SwarmGroup.md)  
-[**ArrivedEvent**](../../Events/ArrivedEvent_SwarmGroup.md)  
 [**AttackUnit**](../../Events/AttackUnit.md)  
 [**CalcHealth**](../../Events/CalcHealth.md)  
 [**DestroyUnit**](../../Events/DestroyUnit.md)  
@@ -55,7 +54,6 @@ A group of drone units.
 [**RdyToMove**](../../Events/RdyToMove.md)  
 [**RemoveUnit**](../../Events/RemoveUnit.md)  
 [**SetUnitHealth**](../../Events/SetUnitHealth.md)  
-[**SplitGroup**](../../Events/SplitGroup.md)  
 [**ToggleSwarmVisibility**](../../Events/ToggleSwarmVisibility.md)
 
 ## Event Dispatchers

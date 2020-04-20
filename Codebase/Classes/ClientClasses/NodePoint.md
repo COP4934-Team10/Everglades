@@ -1,5 +1,5 @@
 # NodePoint
-
+Class containing the data related to the node.
 
 **Class Type**&nbsp; &nbsp; &nbsp; &nbsp; Blueprint  
 **Parent Class** &nbsp; &nbsp; Actor  

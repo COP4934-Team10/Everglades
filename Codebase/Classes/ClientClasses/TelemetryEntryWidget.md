@@ -15,9 +15,6 @@ A button for the user to select telemetry files to load.
 **None**
 
 ## Events
-[**Event Construct**]() *Disabled**  
-[**Event Pre Construct**]() *Disabled*  
-[**Event Tick**]() *Disabled*  
 [**On Clicked(FolderButton)**](../../Events/Clicked_FolderButton.md)  
 
 ## Event Dispatchers

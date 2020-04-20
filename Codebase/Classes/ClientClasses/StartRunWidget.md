@@ -39,7 +39,6 @@ This widget allows the user to select inputs for running a match on the server.
 [**Get_LoadingBar_Percent_0**](../../Methods/ClientMethods/Get_LoadingBar_Percent_0.md)  
 
 ## Events
-[**Blah**](../../Events/Blah.md)  
 [**Event Add Results**](../../Events/AddResults.md)  
 [**Event Construct**](../../Events/Construct_StartRunWidget.md)  
 [**Event Tick**](../../Events/Tick_StartRunWidget.md)  

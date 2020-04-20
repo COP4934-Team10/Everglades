@@ -34,7 +34,6 @@ This widget is used for displaying and loading the telemetry files.
 ## Event Dispatchers
 [**CancelClicked**](../../Dispatchers/CancelClicked.md)  
 [**LoadClicked**](../../Dispatchers/LoadClicked.md)  
-[**OpenClicked**](../../Dispatchers/OpenClicked.md)  
 
 ## Macros
 **None**

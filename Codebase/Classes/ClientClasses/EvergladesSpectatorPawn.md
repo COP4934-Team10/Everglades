@@ -21,9 +21,6 @@ The class of the actor representing the user.
 
 ## Events
 [**1**](../../Events/1.md)  
-[**2**](../../Events/2.md)  
-[**3**](../../Events/3.md)  
-[**4**](../../Events/4.md)  
 [**5**](../../Events/5.md)  
 [**ChangeCamMode**](../../Events/ChangeCamMode.md)  
 [**Event BeginPlay**](../../Events/BeginPlay_EvergladesSpectatorPawn.md)  

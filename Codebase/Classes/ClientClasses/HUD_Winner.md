@@ -15,9 +15,7 @@ Display of the winner of the match.
 **None**
 
 ## Events
-[Event PreConstruct]() *Disabled*  
-[Event Construct]() *Disabled*  
-[Event Tick]() *Disabled*  
+**None**
 
 ## Event Dispatchers
 **None**

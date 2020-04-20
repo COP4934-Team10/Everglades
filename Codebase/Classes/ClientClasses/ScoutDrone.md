@@ -13,10 +13,10 @@ The blueprint for the **Controller** unit.
 |**ScoutDrone**         |*SkeletalMeshComponent*|The drone's mesh.          |
 
 ## Functions
-[**ConstructionScript](../../Methods/ClientMethods/ConstructionScript_ScoutDrone.md)  
+[**ConstructionScript**](../../Methods/ClientMethods/ConstructionScript_ScoutDrone.md)  
 
 ## Events
-[SetTeamColors](../../Events/SetTeamColors.md)  
+[**SetTeamColors**](../../Events/SetTeamColors.md)  
 
 
 ## Event Dispatchers

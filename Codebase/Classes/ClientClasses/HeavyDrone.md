@@ -17,9 +17,6 @@ The blueprint for the **Tank** unit.
 [**ConstructionScript**](../../Methods/ClientMethods/ConstructionScript_HeavyDrone.md)  
 
 ## Events
-[**Event ActorBeginOverlap**]() *Disabled*  
-[**Event BeginPlay**]() *Disabled*  
-[**Event Tick**]() *Disabled*  
 [**SetTeamColors**](../../Events/SetTeamColors.md)  
 
 

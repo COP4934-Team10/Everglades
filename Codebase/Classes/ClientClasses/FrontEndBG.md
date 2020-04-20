@@ -23,9 +23,7 @@ The background of the Everglades Menu.
 **None**
 
 ## Events
-**Event Pre Construct** *Disabled*  
-**Event Construct** *Disabled*  
-**Event Tick** *Disabled*  
+**None**
 
 ## Event Dispatchers
 **None**

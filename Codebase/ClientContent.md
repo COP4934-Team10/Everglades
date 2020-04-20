@@ -14,12 +14,10 @@ An alphabetical listing of Everglades C++ classes.
 ## Blueprints
 An alphabetical listing of Everglades Blueprint classes.  
 
-[**ArenaCam**](./Classes/ClientClasses/ArenaCam.md)  
 [**ConnectionSpline**](./Classes/ClientClasses/ConnectionSpline.md)  
 [**EvergladesGameInstance**](./Classes/ClientClasses/EvergladesGameInstance.md)  
 [**EvergladesGameMode**](./Classes/ClientClasses/EvergladesGameMode.md)  
 [**EvergladesGameState**](./Classes/ClientClasses/EvergladesGameState.md)  
-[**EvergladesHUD**](./Classes/ClientClasses/EvergladesHUD.md)  
 [**EvergladesMacroLibrary**](./Classes/ClientClasses/EvergladesMacroLibrary.md)  
 [**EvergladesSpectatorPawn**](./Classes/ClientClasses/EvergladesSpectatorPawn.md)  
 [**FrontEndBG**](./Classes/ClientClasses/FrontEndBG.md)  
@@ -639,7 +637,6 @@ An alphabetical listing of class and blueprint methods.
 [**GetUnit**](./Methods/ClientMethods/GetUnit_GameMode.md) (EvergladesGameMode)  
 [**GetUnit**](./Methods/ClientMethods/GetUnit_SwarmGroup.md) (SwarmGroup)  
 [**GetWinText**](./Methods/ClientMethods/GetWinText.md)  
-[**IsActorInView**](./Methods/ClientMethods/IsActorInView.md) may not work  
 [**LoadEvents()**](./Methods/ClientMethods/LoadEvents().md)  
 [**LogMapData**](./Methods/ClientMethods/LogMapData.md)  
 [**NativeTick()**](./Methods/ClientMethods/NativeTick().md)  
@@ -662,9 +659,6 @@ An alphabetical listing of class and blueprint methods.
 An alphabetical listing of blueprint events.  
 
 [**1**](./Events/1.md)  
-[**2**](./Events/2.md)  
-[**3**](./Events/3.md)  
-[**4**](./Events/4.md)  
 [**5**](./Events/5.md)  
 [**AddedToViewport**](./Events/AddedToViewport.md)  
 [**AddGroup**](./Events/AddGroup.md)  
@@ -672,10 +666,8 @@ An alphabetical listing of blueprint events.
 [**AddUnit**](./Events/AddUnit_GameMode.md) (EvergladesGameMode)  
 [**AddUnit**](./Events/AddUnit_SwarmGroup.md) (SwarmGroup)  
 [**ArrivedEvent**](./Events/ArrivedEvent_EvergladesGameMode.md) (EvergladesGameMode)  
-[**ArrivedEvent**](./Events/ArrivedEvent_SwarmGroup.md) (SwarmGroup)  
 [**AttackUnit**](./Events/AttackUnit.md)  
 [**BackToMainMenu**](./Events/BackToMainMenu.md)  
-[**Blah**](./Events/Blah.md)  
 [**CalcHealth**](./Events/CalcHealth.md)  
 [**ChangeCamMode**](./Events/ChangeCamMode.md)  
 [**ChangeParent**](./Events/ChangeParent.md)  
@@ -733,7 +725,6 @@ An alphabetical listing of blueprint events.
 [**MoveOrder**](./Events/MoveOrder.md)  
 [**NodeControlUpdate**](./Events/NodeControlUpdate.md)  
 [**On Check State Changed(SimplifiedMapCheck)**](./Events/CheckStateChanged_SimplifiedMapCheck.md)  
-[**On Clicked(Arenas_Btn)**](./Events/Clicked_Arenas_Btn.md)  
 [**On Clicked(Btn_Close)**](./Events/Clicked_Btn_Close.md)  
 [**On Clicked(Btn_Maximize)**](./Events/Clicked_Btn_Maximize.md)  
 [**On Clicked(Btn_Pause)**](./Events/Clicked_Btn_Pause.md)  
@@ -744,7 +735,6 @@ An alphabetical listing of blueprint events.
 [**On Clicked(ExitButton)**](./Events/Clicked_ExitButton_SpectatorHUD.md) (SpectatorHUD)  
 [**On Clicked(ExitButton)**](./Events/Clicked_ExitButton_SpectatorHUD.md) (SpectatorHUD_Random)  
 [**On Clicked(FolderButton)**](./Events/Clicked_FolderButton.md)  
-[**On Clicked(Groups_Btn)**](./Events/Clicked_Groups_Btn.md)   
 [**On Clicked(LoadButton)**](./Events/Clicked_LoadButton.md)  
 [**On Clicked(LoadTelemetry_Button)**](./Events/Clicked_LoadTelemetry_Button.md)  
 [**On Clicked(MV_Toggle)**](./Events/Clicked_MV_Toggle.md)  
@@ -787,7 +777,6 @@ An alphabetical listing of blueprint events.
 [**SetUnitHealth**](./Events/SetUnitHealth.md)  
 [**SetUnitLoss**](./Events/SetUnitLoss.md)  
 [**ShowControlNodes**](./Events/ShowControlNodes.md)  
-[**SplitGroup**](./Events/SplitGroup.md)  
 [**StartCamAI**](./Events/StartCamAI.md)  
 [**StopCamAI**](./Events/StopCamAI.md)  
 [**TickCam**](./Events/TickCam.md)  
@@ -825,7 +814,6 @@ An alphabetical listing of blueprint event dispatchers.
 [**LoadClicked**](./Dispatchers/LoadClicked.md)  
 [**LoadFolder**](./Dispatchers/LoadFolder.md)  
 [**OnCloseMap**](./Dispatchers/OnCloseMap.md)  
-[**OpenClicked**](./Dispatchers/OpenClicked.md)  
 [**RunClicked**](./Dispatchers/RunClicked.md)  
 [**ServersFinished**](./Dispatchers/ServersFinished.md)  
 
@@ -854,7 +842,6 @@ An alphabetical listing of Everglades macros used by Unreal blueprints.
 [**ImageURLProcessing**](./Macros/ImageURLProcessing.md)  
 [**IncrementalMove**](./Macros/IncrementalMove.md)  
 [**LookAtTarget**](./Macros/LookAtTarget.md)  
-[**Message_CombatEvent**](./Macros/Message_CombatEvent.md)  
 [**Message_CombatUpdate**](./Macros/Message_CombatUpdate.md)  
 [**Message_ControlUpdate**](./Macros/Message_ControlUpdate.md)  
 [**Message_CreateNewGroup**](./Macros/Message_CreateNewGroup.md)  
