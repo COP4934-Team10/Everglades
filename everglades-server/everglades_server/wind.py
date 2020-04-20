@@ -3,7 +3,7 @@
 
 import sys
 from noise import pnoise2, snoise2
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 import math
 import random as r
@@ -149,6 +149,6 @@ def exec(map, xsize, ysize, seed=0):
 	w = createWindArray(xsize,ysize,5,offset,True)
 	genConnMags(xsize, ysize, m, conn, w)
 	#export("wind.txt", map, conn, w)
-	genVecMap(w)
+	#genVecMap(w)
 
 	return conn;
